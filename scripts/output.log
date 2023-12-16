@@ -1,0 +1,4 @@
+Optimal parameters for KNN -- one-hot-encoding: {'n_neighbors': 4.0}
+4-fold CV RMSE, MAE and R^2  for k-NN one-hot-encoding: 1.2976888674677225 0.9123514087352436 0.3474757531437185
+Optimal parameters for RF -- one-hot-encoding: {'max_features': 0.1, 'min_samples_leaf': 1, 'n_estimators': 50}
+4-fold CV RMSE, MAE and R^2  for RF -- one-hot-encoding: 1.160598094147921 0.8681631600574713 0.468528569867276
