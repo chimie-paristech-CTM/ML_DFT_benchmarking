@@ -1,7 +1,9 @@
 import os
 import pandas as pd
-import matplotlib.pyplot as plt
 import re
+from glob import glob
+from rdkit import Chem
+from rdkit.Chem import rdDetermineBonds
 
 def preprocess_dat_file(dat_file_path):
     # Read the content of the file
@@ -88,6 +90,44 @@ def combine_and_compute_std(folder_path):
     print(len(merged_df))
     merged_df.to_csv('../final_overview_data.csv')
 
+
+def generate_file_fps(csv_file):
+
+    df = pd.read_csv(csv_file, index_col=0)
+    df['rxn_smiles'] = df['Name'].apply(lambda x: generate_rxn_smiles(x, 'XYZ_files'))
+    df.to_csv('data_smiles.csv')
+
+
+def generate_rxn_smiles(idx, directory):
+
+    products = glob(f"{directory}/{idx}P*")
+    product_smi = [generate_smiles_from_xyz(product) for product in products]
+    reactants = glob(f"{directory}/{idx}R*")
+    reactants_smi = [generate_smiles_from_xyz(reactant) for reactant in reactants]
+    reactants_smi = ".".join(reactants_smi)
+    products_smi = ".".join(product_smi)
+    rxn_smi = f"{reactants_smi}>>{products_smi}"
+
+    return rxn_smi
+
+
+def generate_smiles_from_xyz(xyz_file):
+
+    raw_mol = Chem.MolFromXYZFile(xyz_file)
+    mol = Chem.Mol(raw_mol)
+
+    try:
+        rdDetermineBonds.DetermineBonds(mol, charge=0)
+    except ValueError:
+        return "ERROR"
+
+    mol = Chem.RemoveHs(mol)
+    smi = Chem.MolToSmiles(mol)
+
+    return smi
+
+
 if __name__ == '__main__':
     read_dat_files_to_dataframes('../raw_data')
     combine_and_compute_std('../raw_data')
+    generate_file_fps('../final_overview_data.csv')
