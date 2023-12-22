@@ -1,6 +1,12 @@
-Optimal parameters for KNN -- one-hot-encoding: {'n_neighbors': 10.0}
-4-fold CV RMSE, MAE and R^2  for k-NN one-hot-encoding: 1.2378369094774353 0.876525532721446 0.4137074089810883
-Optimal parameters for RF -- one-hot-encoding: {'max_features': 1.0, 'min_samples_leaf': 2, 'n_estimators': 400}
-4-fold CV RMSE, MAE and R^2  for RF -- one-hot-encoding: 1.1865246728452206 0.912711323099585 0.440869824647247
-Optimal parameters for xgboost -- one-hot-encoding: {'gamma': 2.0, 'learning_rate': 0.2, 'max_depth': 7.0, 'min_child_weight': 4.0, 'n_estimators': 300.0}
-4-fold CV RMSE, MAE and R^2 for xgboost -- one-hot-encoding: 1.3514689279669887 1.03866114683128 0.31322750597141824
+fps radius = 2
+4-fold CV RMSE, MAE and R^2  for k-NN one-hot-encoding: 1.2384354942759288 0.8835533339945186 0.4154050021218527
+Optimal parameters for KNN -- fingerprints: {'n_neighbors': 4.0}
+4-fold CV RMSE, MAE and R^2  for k-NN fingerprints: 1.0315569555544533 0.7774665128281494 0.5792967700029277
+Optimal parameters for RF -- one-hot-encoding: {'max_features': 0.30000000000000004, 'min_samples_leaf': 1, 'n_estimators': 50}
+4-fold CV RMSE, MAE and R^2  for RF -- one-hot-encoding: 1.2164840020399943 0.9010701944150045 0.4270590547254978
+Optimal parameters for RF -- fingerprints: {'max_features': 1.0, 'min_samples_leaf': 1, 'n_estimators': 100}
+4-fold CV RMSE, MAE and R^2  for RF -- fingerprints: 0.9166811887701717 0.6654905362778413 0.6672746115982554
+Optimal parameters for xgboost -- one-hot-encoding: {'gamma': 2.0, 'learning_rate': 0.15000000000000002, 'max_depth': 8.0, 'min_child_weight': 4.0, 'n_estimators': 300.0}
+4-fold CV RMSE, MAE and R^2 for xgboost -- one-hot-encoding: 1.371066486708005 1.0508570065912464 0.29550280861387507
+Optimal parameters for xgboost -- fingerprints: {'gamma': 2.0, 'learning_rate': 0.2, 'max_depth': 8.0, 'min_child_weight': 2.0, 'n_estimators': 300.0}
+4-fold CV RMSE, MAE and R^2 for xgboost -- fingerprints: 1.0401639334513033 0.8518515762212604 0.5789402781152908

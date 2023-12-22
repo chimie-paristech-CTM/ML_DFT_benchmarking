@@ -104,7 +104,7 @@ def cross_val(df, model, n_folds, target_column='Std_DFT_forward', sample=None, 
 
 
 
-def cross_val_fp(df_fp, model, n_folds, target_column='DG_TS', split_dir=None):
+def cross_val_fp(df_fp, model, n_folds, target_column='Std_DFT_forward', split_dir=None):
     """
     Function to perform cross-validation with fingerprints
 
