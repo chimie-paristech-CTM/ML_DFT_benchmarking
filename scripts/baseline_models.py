@@ -56,9 +56,9 @@ if __name__ == '__main__':
     # optimal_parameters_rf_fps = get_optimal_parameters_rf_fp(df_fps, logger, max_eval=64)
     # get_cross_val_accuracy_rf_fps(df_fps, logger, n_fold, optimal_parameters_rf_fps, split_dir)
 
-    # XGboost descriptors
-    # optimal_parameters_xgboost = get_optimal_parameters_xgboost(df, logger, max_eval=128)
-    # get_cross_val_accuracy_xgboost(df, logger, n_fold, optimal_parameters_xgboost, split_dir)
+    # XGboost
+    optimal_parameters_xgboost = get_optimal_parameters_xgboost(df, logger, max_eval=128)
+    get_cross_val_accuracy_xgboost(df, logger, n_fold, optimal_parameters_xgboost, split_dir)
 
     # XGboost fingerprints
     # optimal_parameters_xgboost_fp = get_optimal_parameters_xgboost_fp(df_fps, logger, max_eval=128)

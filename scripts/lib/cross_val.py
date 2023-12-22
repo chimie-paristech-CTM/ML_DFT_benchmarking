@@ -4,6 +4,7 @@ import numpy as np
 import pandas as pd
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 from sklearn.preprocessing import StandardScaler
+import re
 
 
 def create_k_folder(df, n_folds, split_dir) -> None:
@@ -53,7 +54,6 @@ def cross_val(df, model, n_folds, target_column='Std_DFT_forward', sample=None, 
         int: the obtained RMSE and MAE
     """
     rmse_list, mae_list, r2_list = [], [], []
-    # feature_names = [column for column in df.columns if column not in['rxn_id', 'DG_TS', 'G_r', 'DG_TS_tunn']]
     df, encode_columns = one_hot_encoding(df)
 
     if split_dir == None:
@@ -200,6 +200,9 @@ def one_hot_encoding(df, encoding_column='Type'):
 
     # df[encoding_column].unique() # 10 elements
     df = pd.get_dummies(df, columns=[encoding_column])
+    regex = re.compile(r"\[|\]|<", re.IGNORECASE)
+    df.columns = [regex.sub("_", col) if any(x in str(col) for x in set(('[', ']', '<'))) else col for col in
+                  df.columns.values]
     encode_columns = [column for column in df.columns if 'Type_' in column]
 
     return df, encode_columns

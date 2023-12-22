@@ -1,4 +1,6 @@
-Optimal parameters for KNN -- one-hot-encoding: {'n_neighbors': 4.0}
-4-fold CV RMSE, MAE and R^2  for k-NN one-hot-encoding: 1.2976888674677225 0.9123514087352436 0.3474757531437185
-Optimal parameters for RF -- one-hot-encoding: {'max_features': 0.1, 'min_samples_leaf': 1, 'n_estimators': 50}
-4-fold CV RMSE, MAE and R^2  for RF -- one-hot-encoding: 1.160598094147921 0.8681631600574713 0.468528569867276
+Optimal parameters for KNN -- one-hot-encoding: {'n_neighbors': 10.0}
+4-fold CV RMSE, MAE and R^2  for k-NN one-hot-encoding: 1.2378369094774353 0.876525532721446 0.4137074089810883
+Optimal parameters for RF -- one-hot-encoding: {'max_features': 1.0, 'min_samples_leaf': 2, 'n_estimators': 400}
+4-fold CV RMSE, MAE and R^2  for RF -- one-hot-encoding: 1.1865246728452206 0.912711323099585 0.440869824647247
+Optimal parameters for xgboost -- one-hot-encoding: {'gamma': 2.0, 'learning_rate': 0.2, 'max_depth': 7.0, 'min_child_weight': 4.0, 'n_estimators': 300.0}
+4-fold CV RMSE, MAE and R^2 for xgboost -- one-hot-encoding: 1.3514689279669887 1.03866114683128 0.31322750597141824
