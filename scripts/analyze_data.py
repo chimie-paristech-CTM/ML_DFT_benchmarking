@@ -119,7 +119,10 @@ def generate_smiles_from_xyz(xyz_file):
     try:
         rdDetermineBonds.DetermineBonds(mol, charge=0)
     except ValueError:
-        return "ERROR"
+        try:
+            rdDetermineBonds.DetermineBonds(mol, charge=1)
+        except ValueError:
+            return "ERROR"
 
     mol = Chem.RemoveHs(mol)
     smi = Chem.MolToSmiles(mol)
