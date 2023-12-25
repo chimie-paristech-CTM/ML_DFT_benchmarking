@@ -1,7 +1,7 @@
 #!/usr/bin/python
 import pandas as pd
 import numpy as np
-from sklearn.linear_model import LinearRegression, Lasso
+from sklearn.linear_model import LinearRegression
 from sklearn.ensemble import RandomForestRegressor
 from lib.cross_val import cross_val, cross_val_fp
 from hyperopt import hp
@@ -27,23 +27,6 @@ def prepare_df(input_file, features):
     df = data.drop(columns=columns_remove)
 
     return df
-
-
-def get_cross_val_accuracy_linear_regression(df, logger, n_fold, split_dir=None):
-    """
-    Get the linear regression accuracy in cross-validation.
-
-    Args:
-        df (pd.DataFrame): input dataframe
-        logger (logging.Logger): logger-object
-        n_fold (int): number of folds to use during cross-validation
-        split_dir (str, optional): path to the directory containing the splits. Defaults to None.
-    """
-
-    model = LinearRegression()
-    rmse, mae, r2 = cross_val(df, model, n_fold, split_dir=split_dir)
-
-    logger.info(f'{n_fold}-fold CV RMSE, MAE and R^2 for linear regression: {rmse} {mae} {r2}')
 
 
 def get_optimal_parameters_knn(df, logger, max_eval=32):
@@ -295,3 +278,4 @@ def get_cross_val_accuracy_xgboost_fps(df_fp, logger, n_fold, parameters, split_
                         min_child_weight=parameters['min_child_weight'])
     rmse, mae, r2 = cross_val_fp(df_fp, model, n_fold, split_dir=split_dir)
     logger.info(f'{n_fold}-fold CV RMSE, MAE and R^2 for xgboost -- fingerprints: {rmse} {mae} {r2}')
+

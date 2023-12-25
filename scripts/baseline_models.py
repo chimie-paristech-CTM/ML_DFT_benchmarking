@@ -3,13 +3,13 @@ import pandas as pd
 from argparse import ArgumentParser
 from lib.utils import create_logger
 from lib.final_functions import get_optimal_parameters_knn_fp, get_optimal_parameters_knn
-from lib.final_functions import get_cross_val_accuracy_linear_regression
 from lib.final_functions import get_cross_val_accuracy_knn_fp, get_cross_val_accuracy_knn
 from lib.final_functions import get_optimal_parameters_rf, get_optimal_parameters_rf_fp
 from lib.final_functions import get_cross_val_accuracy_rf, get_cross_val_accuracy_rf_fps
 from lib.final_functions import get_optimal_parameters_xgboost, get_optimal_parameters_xgboost_fp
 from lib.final_functions import get_cross_val_accuracy_xgboost, get_cross_val_accuracy_xgboost_fps
 from lib.fingerprints import get_fingerprints_DRFP, get_fingerprints_Morgan
+
 
 
 parser = ArgumentParser()
@@ -33,50 +33,56 @@ if __name__ == '__main__':
     logger = create_logger()
     df = pd.read_csv(args.input_file)
     df_rxn_smiles = pd.read_csv(args.csv_file, sep=';')
-    df_fps_drfp = get_fingerprints_DRFP(df_rxn_smiles)
-    df_fps_morgan = get_fingerprints_Morgan(df_rxn_smiles, rad=2, nbits=2048)
     n_fold = args.n_fold
     split_dir = args.split_dir
 
-    # linear regression
-    # get_cross_val_accuracy_linear_regression(df, logger, n_fold, split_dir)
-
-    # KNN desc
+    # one-hot encoding
+    # KNN
     optimal_parameters_knn = get_optimal_parameters_knn(df, logger, max_eval=64)
     get_cross_val_accuracy_knn(df, logger, n_fold, optimal_parameters_knn, split_dir)
 
-    # KNN fingerprints
-    logger.info("Fingerprint: DRFP (radius = 2)")
-    optimal_parameters_knn_fps = get_optimal_parameters_knn_fp(df_fps_drfp, logger, max_eval=64)
-    get_cross_val_accuracy_knn_fp(df_fps_drfp, logger, n_fold, optimal_parameters_knn_fps, split_dir)
-
-    logger.info("Fingerprint: Morgan (radius = 2)")
-    optimal_parameters_knn_fps = get_optimal_parameters_knn_fp(df_fps_morgan, logger, max_eval=64)
-    get_cross_val_accuracy_knn_fp(df_fps_morgan, logger, n_fold, optimal_parameters_knn_fps, split_dir)
-
-    # RF descriptors
+    ## RF
     optimal_parameters_rf = get_optimal_parameters_rf(df, logger, max_eval=64)
     get_cross_val_accuracy_rf(df, logger, n_fold, optimal_parameters_rf, split_dir)
 
-    # RF fingerprints
-    logger.info("Fingerprint: DRFP (radius = 2)")
-    optimal_parameters_rf_fps = get_optimal_parameters_rf_fp(df_fps_drfp, logger, max_eval=64)
-    get_cross_val_accuracy_rf_fps(df_fps_drfp, logger, n_fold, optimal_parameters_rf_fps, split_dir)
-
-    logger.info("Fingerprint: Morgan (radius = 2)")
-    optimal_parameters_rf_fps = get_optimal_parameters_rf_fp(df_fps_morgan, logger, max_eval=64)
-    get_cross_val_accuracy_rf_fps(df_fps_morgan, logger, n_fold, optimal_parameters_rf_fps, split_dir)
-
-    # XGboost
+    ## XGboost
     optimal_parameters_xgboost = get_optimal_parameters_xgboost(df, logger, max_eval=128)
     get_cross_val_accuracy_xgboost(df, logger, n_fold, optimal_parameters_xgboost, split_dir)
 
-    # XGboost fingerprints
-    logger.info("Fingerprint: DRFP (radius = 2)")
-    optimal_parameters_xgboost_fp = get_optimal_parameters_xgboost_fp(df_fps_drfp, logger, max_eval=128)
-    get_cross_val_accuracy_xgboost_fps(df_fps_drfp, logger, n_fold, optimal_parameters_xgboost_fp, split_dir)
+    # fingerprints
+    logger.info(f"Fingerprints")
+    nbits = [16, 32, 64, 128, 256, 512, 1024, 2048]
+    rads = [1, 2, 3]
+    for nbit in nbits:
+        for rad in rads:
+            df_fps_drfp = get_fingerprints_DRFP(df_rxn_smiles, rad=rad, nbits=nbit)
+            df_fps_morgan = get_fingerprints_Morgan(df_rxn_smiles, rad=rad, nbits=nbit)
 
-    logger.info("Fingerprint: Morgan (radius = 2)")
-    optimal_parameters_xgboost_fp = get_optimal_parameters_xgboost_fp(df_fps_morgan, logger, max_eval=128)
-    get_cross_val_accuracy_xgboost_fps(df_fps_morgan, logger, n_fold, optimal_parameters_xgboost_fp, split_dir)
+            # KNN fingerprints
+            logger.info(f"Fingerprint: DRFP (radius={rad}, nbits={nbit})")
+            optimal_parameters_knn_fps = get_optimal_parameters_knn_fp(df_fps_drfp, logger, max_eval=64)
+            get_cross_val_accuracy_knn_fp(df_fps_drfp, logger, n_fold, optimal_parameters_knn_fps, split_dir)
+
+            logger.info(f"Fingerprint: Morgan (radius={rad}, nbits={nbit})")
+            optimal_parameters_knn_fps = get_optimal_parameters_knn_fp(df_fps_morgan, logger, max_eval=64)
+            get_cross_val_accuracy_knn_fp(df_fps_morgan, logger, n_fold, optimal_parameters_knn_fps, split_dir)
+
+            # RF fingerprints
+            logger.info(f"Fingerprint: DRFP (radius={rad}, nbits={nbit})")
+            optimal_parameters_rf_fps = get_optimal_parameters_rf_fp(df_fps_drfp, logger, max_eval=64)
+            get_cross_val_accuracy_rf_fps(df_fps_drfp, logger, n_fold, optimal_parameters_rf_fps, split_dir)
+
+            logger.info(f"Fingerprint: Morgan (radius={rad}, nbits={nbit})")
+            optimal_parameters_rf_fps = get_optimal_parameters_rf_fp(df_fps_morgan, logger, max_eval=64)
+            get_cross_val_accuracy_rf_fps(df_fps_morgan, logger, n_fold, optimal_parameters_rf_fps, split_dir)
+
+            # XGboost fingerprints
+            logger.info(f"Fingerprint: DRFP (radius={rad}, nbits={nbit})")
+            optimal_parameters_xgboost_fp = get_optimal_parameters_xgboost_fp(df_fps_drfp, logger, max_eval=128)
+            get_cross_val_accuracy_xgboost_fps(df_fps_drfp, logger, n_fold, optimal_parameters_xgboost_fp, split_dir)
+
+            logger.info(f"Fingerprint: Morgan (radius={rad}, nbits={nbit})")
+            optimal_parameters_xgboost_fp = get_optimal_parameters_xgboost_fp(df_fps_morgan, logger, max_eval=128)
+            get_cross_val_accuracy_xgboost_fps(df_fps_morgan, logger, n_fold, optimal_parameters_xgboost_fp, split_dir)
+
 

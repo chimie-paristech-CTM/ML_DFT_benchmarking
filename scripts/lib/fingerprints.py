@@ -6,19 +6,19 @@ from rdkit.Chem import AllChem
 import numpy as np
 
 
-def encode(smile_reaction, mapping_bool=False):
+def encode(smile_reaction, rad, nbits):
     """ Encode a smile reaction """
 
-    return DrfpEncoder.encode(smile_reaction, mapping=mapping_bool, radius=2)
+    return DrfpEncoder.encode(smile_reaction, radius=rad, n_folded_length=nbits)
 
 
-def get_fingerprints_DRFP(df):
+def get_fingerprints_DRFP(df, rad=3, nbits=2048):
 
     rxns = df.rxn_smiles.tolist()
     all_rxn_fps = []
 
     for rxn in rxns:
-        fps = encode(rxn)
+        fps = encode(rxn, rad=rad, nbits=nbits)
         all_rxn_fps.append(fps)
     
     dr = pd.DataFrame([s for s in all_rxn_fps], columns=['Fingerprints'])
