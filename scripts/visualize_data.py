@@ -148,7 +148,6 @@ def line_plot(log_file):
     plt.savefig('drfp_fps.png')
 
 
-
 if __name__ == '__main__':
     # Example usage:
     # Replace 'your_file.csv' with the actual CSV file name and 'your_column' with the column you want to plot
