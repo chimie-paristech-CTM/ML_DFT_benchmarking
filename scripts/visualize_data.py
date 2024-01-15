@@ -3,7 +3,6 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 
-
 def plot_energy_distribution(csv_file, energy_column):
     # Read the CSV file into a pandas DataFrame
     try:
@@ -47,6 +46,7 @@ def scatter_plot(csv_file_path, x_column, y_column):
 
     # Show the plot
     plt.show()
+    plt.savefig('scatter_plot.png')
 
 
 def line_plot(log_file):
@@ -107,7 +107,8 @@ def line_plot(log_file):
     axes[0, 1].set_title('model = RF', fontsize=12)
     axes[0, 2].set_title('model = XGBoost', fontsize=12)
 
-    plt.suptitle('Morgan Fingerprints')
+    plt.suptitle('Morgan Fingerprints', fontsize=16)
+    plt.tight_layout()
     plt.savefig('morgan_fps.png')
 
     fig, axes = plt.subplots(3, 3, figsize=(18, 10))
@@ -144,8 +145,52 @@ def line_plot(log_file):
     axes[0, 1].set_title('model = RF', fontsize=12)
     axes[0, 2].set_title('model = XGBoost', fontsize=12)
 
-    plt.suptitle('DRFP Fingerprints')
+    plt.suptitle('DRFP Fingerprints', fontsize=16)
+    plt.tight_layout()
     plt.savefig('drfp_fps.png')
+
+    df_summary = pd.concat([df.nsmallest(3, 'mae'), df.nsmallest(3, 'rmse'), df.nlargest(3, 'r2')], axis=0)
+    df_summary.to_csv('summary.csv')
+
+
+def histogram(csv_file_path):
+
+    df_rxn_smiles = pd.read_csv(csv_file_path, sep=';')
+    df_rxn_smiles['number_reacs'] = df_rxn_smiles['rxn_smiles'].apply(lambda x: len(x.split(">>")[0].split('.')))
+
+    fig, axs = plt.subplots(nrows=1, ncols=1, figsize=(10, 10))
+    sns.histplot(data=df_rxn_smiles, x="Type", hue="number_reacs")
+    axs.margins(x=0)
+    axs.set_ylabel('Frequency', fontsize=16)
+    axs.set_xlabel('Reaction Type', fontsize=16)
+    axs.set_xticklabels(axs.get_xticklabels(), rotation=45, horizontalalignment='right')
+    axs.set_title("Frequency of Reaction Type", fontsize=20)
+    plt.tight_layout()
+    plt.show()
+    plt.savefig('reaction_type.png')
+
+    plt.clf()
+    color = sns.cubehelix_palette()[1]
+    fig, axs = plt.subplots(nrows=2, ncols=1, figsize=(8, 8))
+    sns.histplot(data=df_rxn_smiles, x="Std_DFT_forward", ax=axs[0], kde=True, color=color)
+    sns.histplot(data=df_rxn_smiles, x="Std_DFT_reverse", ax=axs[1], kde=True, color=color)
+
+    for ax in axs:
+        ax.set_ylabel('Frequency', fontsize=14)
+        ax.margins(x=0)
+
+    axs[0].set_xlabel('Std $\Delta$G$^{\ddag}$ forward (kcal/mol)', fontsize=14)
+    axs[1].set_xlabel('Std $\Delta$G$^{\ddag}$ reverse (kcal/mol)', fontsize=14)
+
+    axs[0].text(0.85, 0.9,
+                f"mean: {df_rxn_smiles['Std_DFT_forward'].mean():.3f}\nstd:     {df_rxn_smiles['Std_DFT_forward'].std():.3f}",
+                transform=axs[0].transAxes, fontsize=12)
+    axs[1].text(0.85, 0.9,
+                f"mean: {df_rxn_smiles['Std_DFT_reverse'].mean():.3f}\nstd:     {df_rxn_smiles['Std_DFT_reverse'].std():.3f}",
+                transform=axs[1].transAxes, fontsize=12)
+
+    plt.tight_layout()
+    plt.savefig('histogram_std')
 
 
 if __name__ == '__main__':
@@ -154,3 +199,4 @@ if __name__ == '__main__':
     plot_energy_distribution('../final_overview_data.csv', 'Std_DFT_forward')
     scatter_plot('../final_overview_data.csv', 'Std_DFT_forward', 'Std_DFT_reverse')
     line_plot('output.log')
+    histogram('../data_smiles_curated.csv')
