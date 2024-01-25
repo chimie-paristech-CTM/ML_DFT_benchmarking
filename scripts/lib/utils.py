@@ -1,7 +1,7 @@
 #!/usr/bin/python
 import logging
 
-def create_logger() -> logging.Logger:
+def create_logger(name='output') -> logging.Logger:
     """
     Creates a logger with a stream handler and two file handlers.
 
@@ -17,7 +17,7 @@ def create_logger() -> logging.Logger:
     logger.propagate = False
 
     # create file handler which logs even debug messages
-    fh = logging.FileHandler('output.log')
+    fh = logging.FileHandler(f'{name}.log')
     fh.setLevel(logging.DEBUG)
     # create console handler with a higher log level
     ch = logging.StreamHandler()

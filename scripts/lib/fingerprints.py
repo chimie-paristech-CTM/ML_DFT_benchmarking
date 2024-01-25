@@ -48,8 +48,11 @@ def get_difference_fingerprint(rxn_smiles, rad, nbits):
     return reactants_fp - products_fp
 
 
-def get_fingerprints_Morgan(df, rad, nbits):
+def get_fingerprints_Morgan(df, rad, nbits, labeled=True):
 
     df['Fingerprints'] = df['rxn_smiles'].apply(lambda x: get_difference_fingerprint(x, rad, nbits))
 
-    return df[['Name', 'Fingerprints', 'Std_DFT_forward']]
+    if labeled:
+        return df[['Name', 'Fingerprints', 'Std_DFT_forward']]
+    else:
+        return df[['Fingerprints']]
