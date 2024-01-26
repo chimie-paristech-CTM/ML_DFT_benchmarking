@@ -193,7 +193,7 @@ def histogram(csv_file_path):
     plt.savefig('histogram_std')
 
 
-def histogram_iteration(csv_old, csv_new):
+def histogram_iteration(csv_old, csv_new, iteration):
 
     df_old = pd.read_csv(csv_old, sep=';')
     df_new = pd.read_csv(csv_new, sep=';')
@@ -208,12 +208,10 @@ def histogram_iteration(csv_old, csv_new):
     axs.set_ylabel('Density', fontsize=16)
     axs.set_xlabel('Activation energy', fontsize=16)
     plt.legend(loc='upper left')
+    plt.title(f"Iteration {iteration}", fontsize=20)
     plt.tight_layout()
     plt.show()
-    plt.savefig('new_distribution.png')
-
-
-    return 3
+    plt.savefig(f"new_distribution_{iteration}.png")
 
 
 if __name__ == '__main__':
@@ -223,3 +221,4 @@ if __name__ == '__main__':
     scatter_plot('../final_overview_data.csv', 'Std_DFT_forward', 'Std_DFT_reverse')
     line_plot('output.log')
     histogram('../data_smiles_curated.csv')
+    histogram_iteration('../data_smiles_curated.csv', 'Prediction_iter_1.csv', 1)
