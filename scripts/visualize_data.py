@@ -193,6 +193,29 @@ def histogram(csv_file_path):
     plt.savefig('histogram_std')
 
 
+def histogram_iteration(csv_old, csv_new):
+
+    df_old = pd.read_csv(csv_old, sep=';')
+    df_new = pd.read_csv(csv_new, sep=';')
+
+    fig, axs = plt.subplots(nrows=1, ncols=1, figsize=(5, 5))
+    color_1 = sns.cubehelix_palette()[1]
+    color_2 = sns.cubehelix_palette()[4]
+    sns.kdeplot(data=df_old, x="Std_DFT_forward", label="original data", fill=True, color=color_1)
+    sns.kdeplot(data=df_new, x='Std_DFT_forward', label="new predictions", fill=True, color=color_2)
+
+    axs.margins(x=0)
+    axs.set_ylabel('Density', fontsize=16)
+    axs.set_xlabel('Activation energy', fontsize=16)
+    plt.legend(loc='upper left')
+    plt.tight_layout()
+    plt.show()
+    plt.savefig('new_distribution.png')
+
+
+    return 3
+
+
 if __name__ == '__main__':
     # Example usage:
     # Replace 'your_file.csv' with the actual CSV file name and 'your_column' with the column you want to plot

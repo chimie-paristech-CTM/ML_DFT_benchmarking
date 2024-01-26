@@ -42,7 +42,7 @@ if __name__ == "__main__":
     logger.info(f"reaction smiles: {df_pool.iloc[idx].rxn_smiles}")
 
     df_preds = pd.DataFrame()
-    df_preds['Pred'] = preds.reshape(-1)
+    df_preds['Std_DFT_forward'] = preds.reshape(-1)
     df_preds['Vars'] = vars.reshape(-1)
-    df_preds.to_csv(f'Prediction_iter_{args.iteration}.csv')
+    df_preds.to_csv(f'Prediction_iter_{args.iteration}.csv', sep=';')
 
