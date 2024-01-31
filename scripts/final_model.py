@@ -31,7 +31,7 @@ if __name__ == "__main__":
     df_train_fps = get_fingerprints_Morgan(df_train, rad=2, nbits=2048)
     df_pool_fps = get_fingerprints_Morgan(df_pool, rad=2, nbits=2048, labeled=False)
 
-    model = RForest(n_estimators=30, max_features=0.5, min_sample_leaf=1)
+    model = RForest(n_estimators=100, max_features=0.5, min_sample_leaf=1)
     model.train(train=df_train_fps)
     preds, vars = model.get_means_and_vars(df_pool_fps)
     ucb = upper_confidence_bound(preds, vars, args.beta)
