@@ -93,10 +93,10 @@ def combine_and_compute_std(folder_path):
     merged_df.to_csv('../final_overview_data.csv')
 
 
-def generate_file_fps(csv_file):
+def generate_file_fps(csv_file, xyz_files):
 
     df = pd.read_csv(csv_file, index_col=0)
-    df['rxn_smiles'] = df['Name'].apply(lambda x: generate_rxn_smiles(x, 'XYZ_files'))
+    df['rxn_smiles'] = df['Name'].apply(lambda x: generate_rxn_smiles(x, xyz_files))
     df.to_csv('data_smiles.csv')
 
 
@@ -132,4 +132,4 @@ def generate_smiles_from_xyz(xyz_file):
 if __name__ == '__main__':
     read_dat_files_to_dataframes('../raw_data')
     combine_and_compute_std('../raw_data')
-    generate_file_fps('../final_overview_data.csv')
+    generate_file_fps('../final_overview_data.csv', '../XYZ_files')

@@ -163,10 +163,10 @@ def histogram(csv_file_path):
     axs.margins(x=0)
     axs.set_ylabel('Frequency', fontsize=16)
     axs.set_xlabel('Reaction Type', fontsize=16)
-    axs.set_xticklabels(axs.get_xticklabels(), rotation=45, horizontalalignment='right')
+    axs.set_xticks(range(len(df_rxn_smiles['Type'].unique())))
+    axs.set_xticklabels(df_rxn_smiles['Type'].unique(), rotation=45, ha='right')
     axs.set_title("Frequency of Reaction Type", fontsize=20)
     plt.tight_layout()
-    plt.show()
     plt.savefig('reaction_type.png')
 
     plt.clf()
@@ -179,8 +179,8 @@ def histogram(csv_file_path):
         ax.set_ylabel('Frequency', fontsize=14)
         ax.margins(x=0)
 
-    axs[0].set_xlabel('Std $\Delta$G$^{\ddag}$ forward (kcal/mol)', fontsize=14)
-    axs[1].set_xlabel('Std $\Delta$G$^{\ddag}$ reverse (kcal/mol)', fontsize=14)
+    axs[0].set_xlabel('Std $\Delta$$\Delta$G$^{\ddag}$ forward (kcal/mol)', fontsize=14)
+    axs[1].set_xlabel('Std $\Delta$$\Delta$G$^{\ddag}$ reverse (kcal/mol)', fontsize=14)
 
     axs[0].text(0.85, 0.9,
                 f"mean: {df_rxn_smiles['Std_DFT_forward'].mean():.3f}\nstd:     {df_rxn_smiles['Std_DFT_forward'].std():.3f}",
@@ -202,11 +202,11 @@ def histogram_iteration(csv_old, csv_new, iteration):
     color_1 = sns.cubehelix_palette()[1]
     color_2 = sns.cubehelix_palette()[4]
     sns.kdeplot(data=df_old, x="Std_DFT_forward", label="original data", fill=True, color=color_1)
-    sns.kdeplot(data=df_new, x='Std_DFT_forward', label="new predictions", fill=True, color=color_2)
+    sns.kdeplot(data=df_new, x='Std_DFT_forward', label="new chemical space", fill=True, color=color_2)
 
     axs.margins(x=0)
     axs.set_ylabel('Density', fontsize=16)
-    axs.set_xlabel('Activation energy', fontsize=16)
+    axs.set_xlabel('$\Delta$$\Delta$G$^{\ddag}$ (kcal/mol)', fontsize=16)
     plt.legend(loc='upper left')
     plt.title(f"Iteration {iteration}", fontsize=20)
     plt.tight_layout()
@@ -217,8 +217,8 @@ def histogram_iteration(csv_old, csv_new, iteration):
 if __name__ == '__main__':
     # Example usage:
     # Replace 'your_file.csv' with the actual CSV file name and 'your_column' with the column you want to plot
-    plot_energy_distribution('../final_overview_data.csv', 'Std_DFT_forward')
-    scatter_plot('../final_overview_data.csv', 'Std_DFT_forward', 'Std_DFT_reverse')
-    line_plot('output.log')
+    #plot_energy_distribution('../final_overview_data.csv', 'Std_DFT_forward')
+    #scatter_plot('../final_overview_data.csv', 'Std_DFT_forward', 'Std_DFT_reverse')
+    #line_plot('output.log')
     histogram('../data_smiles_curated.csv')
-    histogram_iteration('../data_smiles_curated.csv', 'Prediction_iter_1.csv', 1)
+    #histogram_iteration('../data_smiles_curated.csv', 'Prediction_iter_1.csv', 1)
