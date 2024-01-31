@@ -210,7 +210,6 @@ def histogram_iteration(csv_old, csv_new, iteration):
     plt.legend(loc='upper left')
     plt.title(f"Iteration {iteration}", fontsize=20)
     plt.tight_layout()
-    plt.show()
     plt.savefig(f"new_distribution_{iteration}.png")
 
 
@@ -220,5 +219,5 @@ if __name__ == '__main__':
     #plot_energy_distribution('../final_overview_data.csv', 'Std_DFT_forward')
     #scatter_plot('../final_overview_data.csv', 'Std_DFT_forward', 'Std_DFT_reverse')
     #line_plot('output.log')
-    histogram('../data_smiles_curated.csv')
-    #histogram_iteration('../data_smiles_curated.csv', 'Prediction_iter_1.csv', 1)
+    #histogram('../data_smiles_curated.csv')
+    histogram_iteration('../data_smiles_curated.csv', 'Prediction_iter_1.csv', 1)
