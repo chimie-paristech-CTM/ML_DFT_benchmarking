@@ -51,6 +51,8 @@ def read_dat_files_to_dataframes(folder_path):
                 for column in df.columns:
                     df[column] = df[column].apply(lambda x: remove_vert_line(x))
 
+                df.to_csv(f"{folder_path}/{filename[:-4]}.csv")
+
             except pd.errors.ParserError:
                 print(f"Warning: Skipping file '{filename}' due to a parsing error.")
 
