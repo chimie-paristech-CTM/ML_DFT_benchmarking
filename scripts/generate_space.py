@@ -74,5 +74,5 @@ if __name__ == '__main__':
     df = pd.read_csv('../hypothetical_space_core.csv', sep=';')
     df_space = pd.DataFrame(columns=['Type', 'rxn_smiles'])
     for row in df.itertuples():
-        df_space = pd.concat([df_space, create_combination(row.rxn_smiles, row.Type)], axis=0)
+        df_space = pd.concat([df_space, create_combination(row.rxn_smiles, row.Type)], axis=0, ignore_index=True)
     df_space.to_csv('../hypothetical_chemical_space.csv')
