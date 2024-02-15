@@ -216,8 +216,8 @@ def histogram_iteration(csv_old, csv_new, iteration):
 if __name__ == '__main__':
     # Example usage:
     # Replace 'your_file.csv' with the actual CSV file name and 'your_column' with the column you want to plot
-    #plot_energy_distribution('../final_overview_data.csv', 'Std_DFT_forward')
-    #scatter_plot('../final_overview_data.csv', 'Std_DFT_forward', 'Std_DFT_reverse')
-    #line_plot('output.log')
-    #histogram('../data_smiles_curated.csv')
-    histogram_iteration('../data_smiles_curated.csv', 'Prediction_iter_1.csv', 1)
+    plot_energy_distribution('../data/final_overview_data.csv', 'Std_DFT_forward')
+    scatter_plot('../data/final_overview_data.csv', 'Std_DFT_forward', 'Std_DFT_reverse')
+    line_plot('output.log')
+    histogram('../data/data_smiles_curated.csv')
+    histogram_iteration('../data/data_smiles_curated.csv', '../data/Prediction_iter_1.csv', 1)

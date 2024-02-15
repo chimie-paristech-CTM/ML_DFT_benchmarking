@@ -130,6 +130,6 @@ def generate_smiles_from_xyz(xyz_file):
 
 
 if __name__ == '__main__':
-    read_dat_files_to_dataframes('../raw_data')
-    combine_and_compute_std('../raw_data')
-    generate_file_fps('../final_overview_data.csv', '../XYZ_files')
+    read_dat_files_to_dataframes('../data/raw_data')
+    combine_and_compute_std('../data/raw_data')
+    generate_file_fps('../data/final_overview_data.csv', '../data/XYZ_files')

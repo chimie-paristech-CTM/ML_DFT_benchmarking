@@ -6,17 +6,12 @@ from lib.RForest import RForest
 from lib.utils import create_logger
 
 parser = ArgumentParser()
-parser.add_argument('--train_file', type=str, default='../data_smiles_curated.csv',
+parser.add_argument('--train_file', type=str, default='../data/data_smiles_curated.csv',
                     help='path to file containing the rxn-smiles')
-parser.add_argument('--pool_file', type=str, default='../hypothetical_chemical_space.csv',
+parser.add_argument('--pool_file', type=str, default='../data/hypothetical_chemical_space.csv',
                     help='path to the input file')
 parser.add_argument('--iteration', type=int, help='iteration')
 parser.add_argument('--beta', type=float, default=1.2, help='beta value for UCB acquisition function')
-
-# interactive way
-parser.add_argument("--mode", default='client', action="store", type=str)
-parser.add_argument("--host", default='127.0.0.1', action="store", type=str)
-parser.add_argument("--port", default=57546, action="store", type=int)
 
 
 if __name__ == "__main__":
