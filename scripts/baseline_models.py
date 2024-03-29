@@ -13,13 +13,13 @@ from lib.fingerprints import get_fingerprints_DRFP, get_fingerprints_Morgan
 
 
 parser = ArgumentParser()
-parser.add_argument('--csv-file', type=str, default='../data_smiles_curated.csv',
+parser.add_argument('--csv_file', type=str, default='../data/data_smiles_curated.csv',
                     help='path to file containing the rxn-smiles')
-parser.add_argument('--input-file', type=str, default='../final_overview_data.csv',
+parser.add_argument('--input_file', type=str, default='../data/final_overview_data.csv',
                     help='path to the input file')
 parser.add_argument('--split_dir', type=str, default=None,
                     help='path to the folder containing the requested splits for the cross validation')
-parser.add_argument('--n-fold', type=int, default=4,
+parser.add_argument('--n_fold', type=int, default=4,
                     help='the number of folds to use during cross validation')
 # interactive way
 parser.add_argument("--mode", default='client', action="store", type=str)
@@ -35,6 +35,9 @@ if __name__ == '__main__':
     df_rxn_smiles = pd.read_csv(args.csv_file, sep=';')
     n_fold = args.n_fold
     split_dir = args.split_dir
+
+    for arg, value in sorted(vars(args).items()):
+        logger.info("Argument %s: %r", arg, value)
 
     # one-hot encoding
     # KNN
