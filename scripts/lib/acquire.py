@@ -1,6 +1,12 @@
 #!/usr/bin/python
 import pandas as pd
 from scipy.spatial.distance import cosine as cosine_distance
+import random
+
+
+def get_seeds(seed=7, k=5):
+    random.seed(seed)
+    return random.sample(range(1000, 9999), k=k)
 
 
 def upper_confidence_bound(predictions, variance, beta=2):
@@ -9,10 +15,10 @@ def upper_confidence_bound(predictions, variance, beta=2):
     return predictions + beta * variance
 
 
-def iterative_sampling(df_pool, logger, initial_sample=10, cutoff=0.5):
+def iterative_sampling(df_pool, logger, column='ucb', initial_sample=10, cutoff=0.5):
     """ This function takes a random samples of rxns and filters until all the rxns are above a specific treshold """
 
-    df_pool_sorted = df_pool.sort_values(by=['ucb'], ascending=False)
+    df_pool_sorted = df_pool.sort_values(by=[column], ascending=False)
 
     # create the final dataset of reactions, the temporal dataset of reactions and the final dataset with the fingerprints.
     rxns = pd.DataFrame()

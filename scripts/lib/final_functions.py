@@ -144,7 +144,7 @@ def get_cross_val_accuracy_rf(df, logger, n_fold, parameters, split_dir=None):
         parameters (Dict): a dictionary containing the parameters to be used
         split_dir (str, optional): path to the directory containing the splits. Defaults to None.
     """
-    model = RandomForestRegressor(n_estimators=int(parameters['n_estimators']), 
+    model = RandomForestRegressor(n_estimators=int(parameters['n_estimators']),
             max_features=parameters['max_features'], min_samples_leaf=int(parameters['min_samples_leaf']))
     rmse, mae, r2 = cross_val(df, model, n_fold, split_dir=split_dir)
     logger.info(f'{n_fold}-fold CV RMSE, MAE and R^2  for RF -- one-hot-encoding: {rmse} {mae} {r2}')
@@ -186,7 +186,7 @@ def get_cross_val_accuracy_rf_fps(df_fp, logger, n_fold, parameters, split_dir=N
         parameters (Dict): a dictionary containing the parameters to be used
         split_dir (str, optional): path to the directory containing the splits. Defaults to None.
     """
-    model = RandomForestRegressor(n_estimators=int(parameters['n_estimators']), 
+    model = RandomForestRegressor(n_estimators=int(parameters['n_estimators']),
                                 max_features=parameters['max_features'], 
                                 min_samples_leaf=int(parameters['min_samples_leaf']))
     rmse, mae, r2 = cross_val_fp(df_fp, model, n_fold, split_dir=split_dir)
