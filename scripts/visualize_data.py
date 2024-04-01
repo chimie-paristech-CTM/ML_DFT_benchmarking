@@ -213,6 +213,14 @@ def histogram_iteration(csv_old, csv_new, iteration):
     plt.savefig(f"new_distribution_{iteration}.png")
 
 
+def rxn_range_scatter_plot(csv_file_path):
+
+    df_rxn_smiles = pd.read_csv(csv_file_path, sep=';')
+    df_rxn_smiles = df_rxn_smiles.drop(index=[33, 34, 35, 36])
+    res = df_rxn_smiles.loc[df_rxn_smiles['Type'] == 'Diels-Alder'].plot(kind='scatter', x='Range_DFT_forward', y='REF-reaction').get_figure()
+    res.savefig('plot.pdf')
+
+
 if __name__ == '__main__':
     # Example usage:
     # Replace 'your_file.csv' with the actual CSV file name and 'your_column' with the column you want to plot
