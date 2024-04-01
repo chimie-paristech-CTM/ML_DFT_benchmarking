@@ -10,13 +10,13 @@ class RForest:
             self,
             n_estimators=30,
             max_features=0.5,
-            min_sample_leaf=1,
+            min_samples_leaf=1,
             seed=3,
     ):
 
         self.model = RandomForestRegressor(n_estimators=n_estimators,
                                            max_features=max_features,
-                                           min_samples_leaf=min_sample_leaf,
+                                           min_samples_leaf=min_samples_leaf,
                                            random_state=seed)
         self.target_scaler = StandardScaler()
 
@@ -34,6 +34,7 @@ class RForest:
 
         # fit and compute rmse
         self.model.fit(X_train, y_train.ravel())
+
 
     def get_means_and_vars(self, test):
 
