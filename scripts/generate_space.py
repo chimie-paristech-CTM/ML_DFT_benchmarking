@@ -4,11 +4,11 @@ from lib.chemical_space import create_combination, bicyclic_core, tricyclic_core
 
 if __name__ == '__main__':
 
-    bi_cores_list = [('Diels-Alder','C=CMgC([Os])=CC=C[Os]>>C1MgC([Os])2C=CCC([Os])1'),
+    bi_cores_list = [('Diels-Alder','C=CMgC=C([Os])C([Os])=C>>C1MgC2C([Os])=C([Os])CC1'),
                      ('[3+2]cycloaddition','[Os]C=CMgC([Ir])=[N+]([O-])\C>>[Os][C@@H]1CMg[C@@]2([Ir])N(C)O1'),
                      ('[3+2]cycloaddition','[Os]C(Mg/C(C(C)C)=[N+]([O-])\[Ir])=C=O>>[Os]CMg=C1O[C@]2(C(C)C)N([Ir])O1'),
                      ('[3+2]cycloaddition','[Os]/C(MgC([Ir])=C/[Ir])=[N+]1N[C@H]2CC[C@@H]/1C2>>[Os][C@@]1MgN3[NH+]([C@@H]([C@]12[Ir])[Ir])[C@H]4CC[C@@H]3C4')]
-    tri_cores_list = ['C([Os])1=CC=C([Os])MgC=CMg1>>C([Os])12C=CC([Os])3MgC3C1Mg2',]
+    tri_cores_list = ['C1=C([Os])C([Os])=CMgC=CMg1>>C12C([Os])=C([Os])C3MgC3C1Mg2',]
 
     rxns = []
     for sub in ['C', 'C([Os])C', 'CC([Os])', 'C(=O)C(=O)', 'CC(=O)O', 'C([Os])CCCC', 'C([Os])CCCCC']:
