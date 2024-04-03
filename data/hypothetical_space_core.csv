@@ -1,0 +1,8 @@
+Type;rxn_smiles
+Diels-Alder;O=C1C=CC(c2c1cccc2O)=O.[Os]/C=C/C=C/[Ir]>>[Os][C@@H]3C=C[C@@H]([C@@H]4C(c5c(C([C@@H]43)=O)c(O)ccc5)=O)[Ir]
+Diels-Alder;[Os]c1nnc([Os])nn1.c2(C#Cc3c4cccc3)c(CC4)cccc2>>[Os][C@]56N=N[C@](N=N5)(C7=C6c8c(CCc9c7cccc9)cccc8)[Os]
+Diels-Alder;[Ir]c1cocc1.[Os]/C=C([Os])/[Ir]>>[Os][C@@H]2[C@@H]3C=C([Ir])[C@H]([C@@]2([Os])[Ir])O3
+Diels-Alder;CC(C)(C1=CC(C(C=C1)=O)=O)C.C=C[Os]>>CC(C)(C2=C[C@@H]3C[C@@H]([C@H]2C(C3=O)=O)[Os])C
+[3+2]cycloaddition;C=C[Os].C/[N+]([O-])=C/[Ir]>>[Os][C@@H]1C[C@H](N(O1)C)[Ir]
+[3+2]cycloaddition;CC([Os])=C=O.CC(/C=[N+]([Ir])\[O-])C>>C/C([Os])=C1O[C@H](N(O/1)[Ir])C(C)C
+[3+2]cycloaddition;[Os]/C=[N+]1N[C@H]2CC[C@@H]/1C2.[Ir]/C=C\[Ir]>>[Os][C@H]3N4[NH+]([C@H]5CC[C@@H]4C5)[C@H]([Ir])[C@@H]3[Ir]
