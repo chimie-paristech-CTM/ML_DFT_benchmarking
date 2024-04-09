@@ -7,7 +7,7 @@ import itertools
 
 
 # substituent list
-subs_list_LR = ['C=O', 'O', 'C#N', 'C(=O)OC', 'OC(=O)C', 'C(C)(C)C', None]
+subs_list_LR = ['c1ccccc1', 'C=O', 'O', 'C#N', 'C(=O)OC', 'OC(=O)C', 'C(C)(C)C', None]
 
 # make easy the replacement
 labels = ['[Os]', '[Ir]', '[Pt]', '[Au]']
