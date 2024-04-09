@@ -3,9 +3,7 @@ import numpy as np
 import pandas as pd
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 from sklearn.preprocessing import StandardScaler
-import re
 from lib.bayesian_opt import bayesian_opt
-from lib.cross_val import one_hot_encoding
 from sklearn.ensemble import RandomForestRegressor
 from xgboost import XGBRegressor
 from sklearn.neighbors import KNeighborsRegressor
@@ -15,7 +13,7 @@ min_samples_leaf_dict = {0: 1, 1: 2, 2: 5, 3: 10, 4: 20, 5: 50}
 
 
 
-def nested_cross_val(df, n_folds, space, objective, model_class, max_eval, logger,
+def nested_cross_val(df, n_folds, space, objective, model_class, max_eval, logger, encode_columns,
                      target_column='Std_DFT_forward', sample=None, split_dir=None):
     """
     Function to perform nested cross-validation
@@ -32,7 +30,6 @@ def nested_cross_val(df, n_folds, space, objective, model_class, max_eval, logge
         int: the obtained RMSE and MAE
     """
     rmse_list, mae_list, r2_list = [], [], []
-    df, encode_columns = one_hot_encoding(df)
 
     if split_dir == None:
         df = df.sample(frac=1, random_state=0)
@@ -55,9 +52,11 @@ def nested_cross_val(df, n_folds, space, objective, model_class, max_eval, logge
         X_train, y_train = df_train[encode_columns], df_train[[target_column]]
         X_test, y_test = df_test[encode_columns], df_test[[target_column]]
 
-        optimal_parameters = bayesian_opt(df_train, space, objective, model_class, max_eval=max_eval)
+        optimal_parameters = bayesian_opt(df_train, space, objective, model_class, max_eval=max_eval, encode_columns=encode_columns)
         match model_class.__name__:
             case 'RandomForestRegressor':
+                optimal_parameters['n_estimators'] = n_estimator_dict[optimal_parameters['n_estimators']]
+                optimal_parameters['min_samples_leaf'] = min_samples_leaf_dict[optimal_parameters['min_samples_leaf']]
                 model = RandomForestRegressor(n_estimators=int(optimal_parameters['n_estimators']),
                                               max_features=optimal_parameters['max_features'],
                                               min_samples_leaf=int(optimal_parameters['min_samples_leaf']))
@@ -70,7 +69,7 @@ def nested_cross_val(df, n_folds, space, objective, model_class, max_eval, logge
                                      learning_rate=optimal_parameters['learning_rate'],
                                      min_child_weight=optimal_parameters['min_child_weight'])
 
-        logger.info(f'Optimal parameters for {model_class.__name__} -- one-hot-encoding: {optimal_parameters}')
+        #logger.info(f'Optimal parameters for {model_class.__name__} -- one-hot-encoding: {optimal_parameters}')
 
         target_scaler = StandardScaler()
         target_scaler.fit(y_train)

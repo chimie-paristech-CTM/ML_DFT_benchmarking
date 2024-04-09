@@ -38,15 +38,15 @@ def create_k_folder(df, n_folds, split_dir) -> None:
     return None
 
 
-def cross_val(df, model, n_folds, target_column='Std_DFT_forward', sample=None, split_dir=None):
+def cross_val(df, n_folds, target_column='Std_DFT_forward', type_column='Type', sample=None, split_dir=None):
     """
     Function to perform cross-validation
 
     Args:
         df (pd.DataFrame): the DataFrame containing features and targets
-        model (sklearn.Regressor): An initialized sklearn model
         n_folds (int): the number of folds
         target_column (str): target column
+        type_column (str): column with the reaction type
         sample(int): the size of the subsample for the training set (default = None)
         split_dir (str): the path to a directory containing data splits. If None, random splitting is performed.
 
@@ -54,7 +54,12 @@ def cross_val(df, model, n_folds, target_column='Std_DFT_forward', sample=None, 
         int: the obtained RMSE and MAE
     """
     rmse_list, mae_list, r2_list = [], [], []
-    df, encode_columns = one_hot_encoding(df)
+    types = df[type_column].unique().tolist()
+    mean_values = []
+    for type in types:
+        mean_values.append(df.loc[df[type_column] == type].Std_DFT_forward.mean())
+
+    means_type = dict(zip(types, mean_values))
 
     if split_dir == None:
         df = df.sample(frac=1, random_state=0)
@@ -74,26 +79,15 @@ def cross_val(df, model, n_folds, target_column='Std_DFT_forward', sample=None, 
             df_train = df[df['train'] == True]
             df_test = df[df['train'] == False]
 
-        X_train, y_train = df_train[encode_columns], df_train[[target_column]]
-        X_test, y_test = df_test[encode_columns], df_test[[target_column]]
+        df_test['means_type'] = df_test[type_column].apply(lambda x: means_type[x])
 
-        target_scaler = StandardScaler()
-        target_scaler.fit(y_train)
-        y_train = target_scaler.transform(y_train)
-        y_test = target_scaler.transform(y_test)
-
-        # fit and compute rmse and mae
-        model.fit(X_train, y_train.ravel())
-        predictions = model.predict(X_test)
-        predictions = predictions.reshape(-1,1)
-
-        rmse_fold = np.sqrt(mean_squared_error(target_scaler.inverse_transform(predictions), target_scaler.inverse_transform(y_test)))
+        rmse_fold = np.sqrt(mean_squared_error(df_test['means_type'], df_test[target_column]))
         rmse_list.append(rmse_fold)
 
-        mae_fold = mean_absolute_error(target_scaler.inverse_transform(predictions), target_scaler.inverse_transform(y_test))
+        mae_fold = mean_absolute_error(df_test['means_type'], df_test[target_column])
         mae_list.append(mae_fold)
 
-        r2_fold = r2_score(target_scaler.inverse_transform(y_test), target_scaler.inverse_transform(predictions))
+        r2_fold = r2_score(df_test['means_type'], df_test[target_column])
         r2_list.append(r2_fold)
 
     rmse = np.mean(np.array(rmse_list))
@@ -101,7 +95,6 @@ def cross_val(df, model, n_folds, target_column='Std_DFT_forward', sample=None, 
     r2 = np.mean(np.array(r2_list))
 
     return rmse, mae, r2
-
 
 
 def cross_val_fp(df_fp, model, n_folds, target_column='Std_DFT_forward', split_dir=None):
