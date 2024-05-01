@@ -1,10 +1,13 @@
 #!/usr/bin/python
+import numpy as np
 import pandas as pd
 from scipy.spatial.distance import cosine as cosine_distance
 import random
 
 
 def get_seeds(seed=7, k=5):
+    """ Take a few of random numbers"""
+
     random.seed(seed)
     return random.sample(range(1000, 9999), k=k)
 
@@ -12,7 +15,7 @@ def get_seeds(seed=7, k=5):
 def upper_confidence_bound(predictions, variance, beta=2):
     """ Upper Confidence Bound acquisition function"""
 
-    return predictions + beta * variance
+    return predictions + beta * np.sqrt(variance)
 
 
 def iterative_sampling(df_pool, logger, column='ucb', initial_sample=10, cutoff=0.5):
