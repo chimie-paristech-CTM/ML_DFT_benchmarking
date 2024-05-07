@@ -34,7 +34,7 @@ def iterative_sampling(df_pool, logger, column='ucb', initial_sample=10, cutoff=
 
     while True:
 
-        # Drop the temporal_reactions from the initial dataset of 1 million
+        # Drop the temporal_reactions from the initial dataset
         rxns_temp_idx = [df_pool_sorted[df_pool_sorted.rxn_smiles == row.rxn_smiles].index[0] for row in rxns_temp.itertuples()]
         df_pool_sorted = df_pool_sorted.drop(labels=rxns_temp_idx)
 
@@ -71,7 +71,7 @@ def iterative_sampling(df_pool, logger, column='ucb', initial_sample=10, cutoff=
         if next_samples == 0:
             logger.info(f"All the reactions are above {cutoff}.")
             break
-        if next_samples > len(df_pool):
+        if next_samples > len(df_pool_sorted):
             logger.info(f"Just could find {len(rxns)} that are above {cutoff}.")
             break
 
