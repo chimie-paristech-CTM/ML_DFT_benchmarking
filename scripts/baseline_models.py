@@ -22,7 +22,7 @@ parser.add_argument('--input_file', type=str, default='../data/final_overview_da
                     help='path to the input file')
 parser.add_argument('--n_fold', type=int, default=6,
                     help='the number of folds to use during cross validation')
-parser.add_argument('--final_cv')
+parser.add_argument('--final_cv', default=False, action="store_true", help='final cross validation')
 
 
 if __name__ == '__main__':
@@ -36,39 +36,42 @@ if __name__ == '__main__':
     for arg, value in sorted(vars(args).items()):
         logger.info("Argument %s: %r", arg, value)
 
-    get_cross_val_accuracy_means_values(df, logger, n_fold)
+    if args.final_cv:
+        df_fps_morgan = get_fingerprints_Morgan(df_rxn_smiles, rad=2, nbits=2048)
+        optimal_parameters_rf_fps = get_optimal_parameters_rf_fp(df_fps_morgan, logger, max_eval=64)
+        get_cross_val_accuracy_rf_fps(df_fps_morgan, logger, n_fold, optimal_parameters_rf_fps,)
+    else:
+        get_cross_val_accuracy_means_values(df, logger, n_fold)
 
-    # # fingerprints
-    logger.info(f"Fingerprints")
-    nbits = [16, 32, 64, 128, 256, 512, 1024, 2048]
-    rads = [1, 2, 3]
-    for nbit in nbits:
-        for rad in rads:
-            df_fps_drfp = get_fingerprints_DRFP(df_rxn_smiles, rad=rad, nbits=nbit)
-            df_fps_morgan = get_fingerprints_Morgan(df_rxn_smiles, rad=rad, nbits=nbit)
+        # # fingerprints
+        logger.info(f"Fingerprints")
+        nbits = [16, 32, 64, 128, 256, 512, 1024, 2048]
+        rads = [1, 2, 3]
+        for nbit in nbits:
+            for rad in rads:
+                df_fps_drfp = get_fingerprints_DRFP(df_rxn_smiles, rad=rad, nbits=nbit)
+                df_fps_morgan = get_fingerprints_Morgan(df_rxn_smiles, rad=rad, nbits=nbit)
 
-            # KNN fingerprints
-            logger.info(f"Fingerprint: DRFP (radius={rad}, nbits={nbit})")
-            get_nested_cross_val_accuracy_knn_fps(df_fps_drfp, logger, n_fold)
+                # KNN fingerprints
+                logger.info(f"Fingerprint: DRFP (radius={rad}, nbits={nbit})")
+                get_nested_cross_val_accuracy_knn_fps(df_fps_drfp, logger, n_fold)
 
-            logger.info(f"Fingerprint: Morgan (radius={rad}, nbits={nbit})")
-            get_nested_cross_val_accuracy_knn_fps(df_fps_morgan, logger, n_fold)
+                logger.info(f"Fingerprint: Morgan (radius={rad}, nbits={nbit})")
+                get_nested_cross_val_accuracy_knn_fps(df_fps_morgan, logger, n_fold)
 
-            # RF fingerprints
-            logger.info(f"Fingerprint: DRFP (radius={rad}, nbits={nbit})")
-            get_nested_cross_val_accuracy_rf_fps(df_fps_drfp, logger, n_fold)
+                # RF fingerprints
+                logger.info(f"Fingerprint: DRFP (radius={rad}, nbits={nbit})")
+                get_nested_cross_val_accuracy_rf_fps(df_fps_drfp, logger, n_fold)
 
-            logger.info(f"Fingerprint: Morgan (radius={rad}, nbits={nbit})")
-            get_nested_cross_val_accuracy_rf_fps(df_fps_morgan, logger, n_fold)
+                logger.info(f"Fingerprint: Morgan (radius={rad}, nbits={nbit})")
+                get_nested_cross_val_accuracy_rf_fps(df_fps_morgan, logger, n_fold)
 
-            # XGboost fingerprints
-            logger.info(f"Fingerprint: DRFP (radius={rad}, nbits={nbit})")
-            get_nested_cross_val_accuracy_xgboost_fps(df_fps_drfp, logger, n_fold)
+                # XGboost fingerprints
+                logger.info(f"Fingerprint: DRFP (radius={rad}, nbits={nbit})")
+                get_nested_cross_val_accuracy_xgboost_fps(df_fps_drfp, logger, n_fold)
 
-            logger.info(f"Fingerprint: Morgan (radius={rad}, nbits={nbit})")
-            get_nested_cross_val_accuracy_xgboost_fps(df_fps_morgan, logger, n_fold)
+                logger.info(f"Fingerprint: Morgan (radius={rad}, nbits={nbit})")
+                get_nested_cross_val_accuracy_xgboost_fps(df_fps_morgan, logger, n_fold)
 
 
-    #df_fps_morgan = get_fingerprints_Morgan(df_rxn_smiles, rad=1, nbits=1024)
-    #optimal_parameters_rf_fps = get_optimal_parameters_rf_fp(df_fps_morgan, logger, max_eval=64)
-    #get_cross_val_accuracy_rf_fps(df_fps_morgan, logger, n_fold, optimal_parameters_rf_fps,)
+
