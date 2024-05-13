@@ -170,7 +170,7 @@ if __name__ == "__main__":
     #df_1['Alpha_aromatic'] = df_1['r_groups'].apply(lambda x: alpha_aromatic(x))
     #df_1['Alpha_carbonyl'] = df_1['r_groups'].apply(lambda x: alpha_carbonyl(x))
     #df_1['Alpha_double_bond'] = df_1['r_groups'].apply(lambda x: alpha_double_bond(x))
-    df_1.to_csv('aa.csv')
+    df_1.to_csv('r_groups.csv')
 
     df_1.groupby(['main_core'])['std_DFT_forward'].std()
     df_1.groupby(['main_core'])['Range_DFT_forward'].std()

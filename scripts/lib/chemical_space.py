@@ -7,7 +7,7 @@ import itertools
 
 
 # substituent list
-subs_list_LR = ['c1ccccc1', 'C=O', 'O', 'C#N', 'C(=O)OC', 'OC(=O)C', 'C(C)(C)C', None]
+subs_list_LR = ['c1ccccc1', 'C=O', 'O', 'C#N', 'C(=O)OC', 'OC(=O)C', 'C(C)(C)C', 'F', None]
 
 # make easy the replacement
 labels = ['[Os]', '[Ir]', '[Pt]', '[Au]']
@@ -50,11 +50,11 @@ def create_combination(rxn_smiles, type):
 
     new_reacs, new_prods = [], []
     for subs_comb in substituent_combs:
-        if r_groups > 2:
-            if len(set(subs_comb)) == 1:
-                continue
-            if subs_comb.count(None) < r_groups - 2:   # to avoid a combinatorial explosion
-                continue
+        #if r_groups > 2:
+        #    if len(set(subs_comb)) == 1:
+        #        continue
+        #    if subs_comb.count(None) < r_groups - 2:   # to avoid a combinatorial explosion
+        #        continue
         new_reacs.append(modify_mol(reacs, subs_comb, labels))
         new_prods.append(modify_mol(prods, subs_comb, labels))
 
