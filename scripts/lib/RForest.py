@@ -12,12 +12,14 @@ class RForest:
             max_features=0.5,
             min_samples_leaf=1,
             seed=3,
+            n_jobs=None
     ):
 
         self.model = RandomForestRegressor(n_estimators=n_estimators,
                                            max_features=max_features,
                                            min_samples_leaf=min_samples_leaf,
-                                           random_state=seed)
+                                           random_state=seed,
+                                           n_jobs=n_jobs)
         self.target_scaler = StandardScaler()
 
     def train(self, train, target_column='Std_DFT_forward'):
