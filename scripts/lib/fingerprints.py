@@ -3,9 +3,9 @@ from drfp import DrfpEncoder
 import pandas as pd
 from rdkit import Chem
 from rdkit.Chem import AllChem
-import numpy as np
 from collections import Counter
 import numpy as np
+
 
 def encode(smile_reaction, rad, nbits):
     """ Encode a smile reaction """
