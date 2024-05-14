@@ -2,6 +2,7 @@
 import os
 import pandas as pd
 from argparse import ArgumentParser
+import shutil
 
 parser = ArgumentParser()
 parser.add_argument('--final_dir', type=str, default='../data/autodE_input',
@@ -11,27 +12,25 @@ parser.add_argument('--conda_env', type=str, default='autodE',
 parser.add_argument('--input', type=str, default=None,
                     help='path to txt file containing reactions')
 
-
 def compare_workflow():
 
-    df = pd.read_csv('../data/data_smiles_curated.csv', sep=';', index_col=0)
+    df = pd.read_csv('../../data/data_smiles_curated.csv', sep=';', index_col=0)
     rxn_benchmarked = df.sample(n=7, random_state=7) # 5%
     rxn_benchmarked.to_csv('../data/rxns_benchmarked.csv')
 
-def create_input_autodE(final_dir, input_file, conda_env="autodE"):
+def create_input_autodE(final_dir, data, conda_env="autodE"):
 
-    create_input(input_file, final_dir, conda_env)
+    create_input(data, final_dir, conda_env)
 
     return None
 
 
-def create_input(input_file, final_dir, conda_env, hmet_confor=r"True"):
+def create_input(data, final_dir, conda_env, hmet_confor=r"True"):
     """ Create the input for autoDE"""
 
-    with open(input_file, 'r') as file:
-        lines = file.readlines()
-
     current_dir = os.getcwd()
+    aux_script = 'scripts/lib/check_stereochemistry.py'
+    aux_script_dir = os.path.join(current_dir, aux_script)
 
     # checking directory
     if os.path.isdir(final_dir):
@@ -40,15 +39,17 @@ def create_input(input_file, final_dir, conda_env, hmet_confor=r"True"):
         os.mkdir(final_dir)
         os.chdir(final_dir)
 
-    for line in lines:
+    for row in data.itertuples():
 
-        idx, rxn_smile = line.split()
+        idx = row.Index
+        rxn_smile = row.rxn_smiles
 
         directory = f"rxn_{idx}"
         os.mkdir(directory)
 
         create_ade_input(rxn_smile, idx, directory, hmet_confor=hmet_confor)
         create_slurm(idx, directory, conda_env)
+        shutil.copy(aux_script_dir, directory)
 
         with open(f"{directory}/rxn_smile.txt", 'w') as rxn_file:
             rxn_file.write(rxn_smile)
@@ -69,29 +70,36 @@ def create_ade_input(rxn_smile, idx, dir, hmet_confor=r"True"):
     cores = 24
     mem = 4000
     num_conf = 1000
-    rmsd = 0.3
+    rmsd = 0.1
 
     file_name = f"ade_{idx}.py"
 
     with open(f"{dir}/{file_name}", 'w') as in_ade:
         in_ade.write('import autode as ade\n')
-        in_ade.write(f"ade.Config.n_cores={cores}\n")
-        in_ade.write(f"ade.Config.max_core={mem}\n")
-        in_ade.write(f"ade.Config.hcode=\"G16\"\n")
-        in_ade.write(f"ade.Config.lcode =\"xtb\"\n")
-        in_ade.write(f"rxn=ade.Reaction(r\"{rxn_smile}\")\n")
-        in_ade.write(f"ade.Config.G16.keywords.set_functional('{functional}')\n")
-        in_ade.write(f"ade.Config.G16.keywords.opt.basis_set = '{basis_set}' \n")
-        in_ade.write("ade.Config.G16.keywords.opt.append('tight') \n")
-        #in_ade.write(f"ade.Config.G16.keywords.sp.basis_set = '{final_basis_set}' \n")
-        in_ade.write(f"ade.Config.G16.keywords.opt_ts.basis_set = '{basis_set}' \n")
-        in_ade.write(f"ade.Config.G16.keywords.hess.basis_set = '{basis_set}' \n")
-        in_ade.write(f"ade.Config.G16.keywords.low_opt.basis_set = '{conf_basis_set}' \n")
-        in_ade.write(f"ade.Config.G16.keywords.low_opt.max_opt_cycles = 20\n")
-        in_ade.write(f"ade.Config.num_conformers={num_conf}\n")
-        in_ade.write(f"ade.Config.rmsd_threshold={rmsd}\n")
-        in_ade.write(f"ade.Config.hmethod_conformers={hmet_confor}\n")
-        in_ade.write('rxn.calculate_reaction_profile(free_energy=True)\n')
+        in_ade.write('from check_stereochemistry import check_TS_stereochemistry\n')
+        in_ade.write("if __name__ == \"__main__\":  \n")
+        in_ade.write(f"\tade.Config.n_cores={cores}\n")
+        in_ade.write(f"\tade.Config.max_core={mem}\n")
+        in_ade.write(f"\tade.Config.hcode=\"G16\"\n")
+        in_ade.write(f"\tade.Config.lcode =\"xtb\"\n")
+        in_ade.write(f"\trxn=ade.Reaction(r\"{rxn_smile}\")\n")
+        in_ade.write(f"\tade.Config.G16.keywords.set_functional('{functional}')\n")
+        in_ade.write(f"\tade.Config.G16.keywords.opt.basis_set = '{basis_set}' \n")
+        in_ade.write(f"\tade.Config.G16.keywords.opt_ts.basis_set = '{basis_set}' \n")
+        in_ade.write(f"\tade.Config.G16.keywords.hess.basis_set = '{basis_set}' \n")
+        in_ade.write(f"\tade.Config.G16.keywords.low_opt.basis_set = '{conf_basis_set}' \n")
+        in_ade.write(f"\tade.Config.G16.keywords.low_opt.max_opt_cycles = 20\n")
+        in_ade.write(f"\tade.Config.num_conformers={num_conf}\n")
+        in_ade.write(f"\tade.Config.rmsd_threshold={rmsd}\n")
+        in_ade.write(f"\tade.Config.hmethod_conformers={hmet_confor}\n")
+        in_ade.write('\trxn.calculate_reaction_profile(free_energy=True)\n')
+        in_ade.write('\tfor reac in rxn.reacs:\n')
+        in_ade.write('\t\tif reac.imaginary_frequencies != None:\n')
+        in_ade.write('\t\t\tprint(f"{reac.name} has an imaginary frequency")\n')
+        in_ade.write('\tfor prod in rxn.prods:\n')
+        in_ade.write('\t\tif prod.imaginary_frequencies != None:\n')
+        in_ade.write('\t\t\tprint(f"{prod.name} has an imaginary frequency")\n')
+        in_ade.write('\tcheck_TS_stereochemistry()')
 
     return None
 
