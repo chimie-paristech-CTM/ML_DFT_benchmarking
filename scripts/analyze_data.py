@@ -5,6 +5,7 @@ from glob import glob
 from rdkit import Chem
 from rdkit.Chem import rdDetermineBonds
 
+
 def preprocess_dat_file(dat_file_path):
     # Read the content of the file
     with open(dat_file_path, 'r') as file:
@@ -21,6 +22,7 @@ def preprocess_dat_file(dat_file_path):
     # Write the modified content back to the file
     with open(dat_file_path, 'w') as file:
         file.writelines(modified_lines)
+
 
 def remove_vert_line(entry):
     if str(entry)[-1] == '|':
@@ -57,7 +59,29 @@ def read_dat_files_to_dataframes(folder_path):
                 print(f"Warning: Skipping file '{filename}' due to a parsing error.")
 
 
-def combine_and_compute_std(folder_path):
+def read_dat_files_to_dataframes_iter(folder_path):
+    # Loop through all .dat files in the folder
+    for filename in os.listdir(folder_path):
+        if filename.endswith('.dat'):
+            dat_file_path = os.path.join(folder_path, filename)
+
+            functional = filename[:-4]
+
+            # Read the .dat file into a DataFrame using regex to handle varying spaces
+            try:
+                df = pd.read_csv(dat_file_path, delim_whitespace=True, skiprows=1, engine='python',
+                                 names=['Name', f'{functional}-DFT-forward', f'{functional}-DFT-reverse',
+                                        f'{functional}-DFT-reaction'])
+                for column in df.columns:
+                    df[column] = df[column].apply(lambda x: remove_vert_line(x))
+
+                df.to_csv(f"{folder_path}/{filename[:-4]}.csv")
+
+            except pd.errors.ParserError:
+                print(f"Warning: Skipping file '{filename}' due to a parsing error.")
+
+
+def combine_and_compute_std(folder_path, iter):
     all_dfs = []
     # Loop through all .csv files in the folder
     for filename in os.listdir(folder_path):
@@ -69,8 +93,13 @@ def combine_and_compute_std(folder_path):
             all_dfs.append(df)
 
     merged_df = all_dfs[0]
-    for df in all_dfs[1:]:
-        merged_df = pd.merge(merged_df, df, on=['Name', 'Type', 'REF-forward', 'REF-reverse', 'REF-reaction'])
+    if ['Type', 'REF-forward', 'REF-reverse', 'REF-reaction'] in merged_df.columns.tolist():
+        for df in all_dfs[1:]:
+            merged_df = pd.merge(merged_df, df, on=['Name', 'Type', 'REF-forward', 'REF-reverse', 'REF-reaction'])
+    else:
+        for df in all_dfs[1:]:
+            merged_df = pd.merge(merged_df, df, on=['Name'])
+
     
     dft_forward_columns = merged_df.filter(like='DFT-forward')
     dft_reverse_columns = merged_df.filter(like='DFT-reverse')
@@ -87,10 +116,9 @@ def combine_and_compute_std(folder_path):
 
     for column in ['Range_DFT_forward', 'Std_DFT_forward', 'Range_DFT_reverse',
                    'Std_DFT_reverse', 'Range_DFT_reaction', 'Std_DFT_reaction']:
-        merged_df = merged_df.loc[abs(merged_df[column]) <= 1000] # TODO: fix this so that you don't lose these datapoints?
+        merged_df = merged_df.loc[abs(merged_df[column]) <= 1000]
 
-    print(len(merged_df))
-    merged_df.to_csv('../final_overview_data.csv')
+    merged_df.to_csv(f'{folder_path}/final_overview_data_{iter}.csv')
 
 
 def generate_file_fps(csv_file, xyz_files):
@@ -129,7 +157,19 @@ def generate_smiles_from_xyz(xyz_file):
     return smi
 
 
+def add_rxn_smiles_iter(csv_file, pool_file):
+
+    df_pool = pd.read_csv(pool_file, index_col=0)
+    df_new_rxns = pd.read_csv(csv_file, index_col=0)
+    rxns_smiles_list = []
+    for row in df_new_rxns.itertuples():
+        idx = int(row.Name.split('_')[-1])
+        rxns_smiles_list.append(df_pool.loc[idx].rxn_smiles)
+    df_new_rxns['rxn_smiles'] = rxns_smiles_list
+    df_new_rxns.to_csv('../data/data_augmentation.csv')
+
+
 if __name__ == '__main__':
     read_dat_files_to_dataframes('../data/raw_data')
-    combine_and_compute_std('../data/raw_data')
+    combine_and_compute_std('../data/raw_data', 'initial')
     generate_file_fps('../data/final_overview_data.csv', '../data/XYZ_files')
