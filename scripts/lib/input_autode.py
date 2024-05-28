@@ -7,7 +7,7 @@ import shutil
 parser = ArgumentParser()
 parser.add_argument('--final_dir', type=str, default='../data/autodE_input',
                     help='path to the folder with the autodE input')
-parser.add_argument('--conda_env', type=str, default='autodE',
+parser.add_argument('--conda_env', type=str, default='autode',
                     help='conda environment of autodE package')
 parser.add_argument('--input', type=str, default=None,
                     help='path to txt file containing reactions')
@@ -29,7 +29,7 @@ def create_input(data, final_dir, conda_env, hmet_confor=r"True"):
     """ Create the input for autoDE"""
 
     current_dir = os.getcwd()
-    aux_script = 'scripts/lib/check_stereochemistry.py'
+    aux_script = 'lib/irc_validation.py'
     aux_script_dir = os.path.join(current_dir, aux_script)
 
     # checking directory
@@ -99,7 +99,6 @@ def create_ade_input(rxn_smile, idx, dir, hmet_confor=r"True"):
         in_ade.write('\tfor prod in rxn.prods:\n')
         in_ade.write('\t\tif prod.imaginary_frequencies != None:\n')
         in_ade.write('\t\t\tprint(f"{prod.name} has an imaginary frequency")\n')
-        in_ade.write('\tcheck_TS_stereochemistry()')
 
     return None
 
