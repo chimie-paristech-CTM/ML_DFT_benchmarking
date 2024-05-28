@@ -1,6 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+import numpy as np
 
 
 def plot_energy_distribution(csv_file, energy_column):
@@ -62,7 +63,7 @@ def line_plot(log_file):
             rad = int(rad[-2])
             nbits = int(nbits[6: -1])
             append_line = True
-        if '4-fold CV' in line and append_line:
+        if '6-fold nested-cv' in line and append_line:
             splitted_line = line.split()
             model, rmse, mae, r2 = splitted_line[7], float(splitted_line[-3]), float(splitted_line[-2]), float(
                 splitted_line[-1])
@@ -78,21 +79,21 @@ def line_plot(log_file):
                  markers=True, ax=axes[0, 0])
     sns.lineplot(data=df_morgan.loc[df_morgan['model'] == 'RF'], y='rmse', x='nbits', hue="radius", style='radius',
                  markers=True, ax=axes[0, 1])
-    sns.lineplot(data=df_morgan.loc[df_morgan['model'] == 'xgboost'], y='rmse', x='nbits', hue="radius", style='radius',
+    sns.lineplot(data=df_morgan.loc[df_morgan['model'] == 'XGBoost'], y='rmse', x='nbits', hue="radius", style='radius',
                  markers=True, ax=axes[0, 2])
 
     sns.lineplot(data=df_morgan.loc[df_morgan['model'] == 'k-NN'], y='mae', x='nbits', hue="radius", style='radius',
                  markers=True, ax=axes[1, 0])
     sns.lineplot(data=df_morgan.loc[df_morgan['model'] == 'RF'], y='mae', x='nbits', hue="radius", style='radius',
                  markers=True, ax=axes[1, 1])
-    sns.lineplot(data=df_morgan.loc[df_morgan['model'] == 'xgboost'], y='mae', x='nbits', hue="radius", style='radius',
+    sns.lineplot(data=df_morgan.loc[df_morgan['model'] == 'XGBoost'], y='mae', x='nbits', hue="radius", style='radius',
                  markers=True, ax=axes[1, 2])
 
     sns.lineplot(data=df_morgan.loc[df_morgan['model'] == 'k-NN'], y='r2', x='nbits', hue="radius", style='radius',
                  markers=True, ax=axes[2, 0])
     sns.lineplot(data=df_morgan.loc[df_morgan['model'] == 'RF'], y='r2', x='nbits', hue="radius", style='radius',
                  markers=True, ax=axes[2, 1])
-    sns.lineplot(data=df_morgan.loc[df_morgan['model'] == 'xgboost'], y='r2', x='nbits', hue="radius", style='radius',
+    sns.lineplot(data=df_morgan.loc[df_morgan['model'] == 'XGBoost'], y='r2', x='nbits', hue="radius", style='radius',
                  markers=True, ax=axes[2, 2])
 
     [axes[i, j].set_xlabel("") for i in range(3) for j in range(3)]
@@ -116,21 +117,21 @@ def line_plot(log_file):
                  markers=True, ax=axes[0, 0])
     sns.lineplot(data=df_drfp.loc[df_drfp['model'] == 'RF'], y='rmse', x='nbits', hue="radius", style='radius',
                  markers=True, ax=axes[0, 1])
-    sns.lineplot(data=df_drfp.loc[df_drfp['model'] == 'xgboost'], y='rmse', x='nbits', hue="radius", style='radius',
+    sns.lineplot(data=df_drfp.loc[df_drfp['model'] == 'XGBoost'], y='rmse', x='nbits', hue="radius", style='radius',
                  markers=True, ax=axes[0, 2])
 
     sns.lineplot(data=df_drfp.loc[df_drfp['model'] == 'k-NN'], y='mae', x='nbits', hue="radius", style='radius',
                  markers=True, ax=axes[1, 0])
     sns.lineplot(data=df_drfp.loc[df_drfp['model'] == 'RF'], y='mae', x='nbits', hue="radius", style='radius',
                  markers=True, ax=axes[1, 1])
-    sns.lineplot(data=df_drfp.loc[df_drfp['model'] == 'xgboost'], y='mae', x='nbits', hue="radius", style='radius',
+    sns.lineplot(data=df_drfp.loc[df_drfp['model'] == 'XGBoost'], y='mae', x='nbits', hue="radius", style='radius',
                  markers=True, ax=axes[1, 2])
 
     sns.lineplot(data=df_drfp.loc[df_drfp['model'] == 'k-NN'], y='r2', x='nbits', hue="radius", style='radius',
                  markers=True, ax=axes[2, 0])
     sns.lineplot(data=df_drfp.loc[df_drfp['model'] == 'RF'], y='r2', x='nbits', hue="radius", style='radius',
                  markers=True, ax=axes[2, 1])
-    sns.lineplot(data=df_drfp.loc[df_drfp['model'] == 'xgboost'], y='r2', x='nbits', hue="radius", style='radius',
+    sns.lineplot(data=df_drfp.loc[df_drfp['model'] == 'XGBoost'], y='r2', x='nbits', hue="radius", style='radius',
                  markers=True, ax=axes[2, 2])
 
     [axes[i, j].set_xlabel("") for i in range(3) for j in range(3)]
@@ -196,6 +197,7 @@ def histogram(csv_file_path):
 def histogram_iteration(csv_old, csv_new, iteration):
 
     df_old = pd.read_csv(csv_old, sep=';')
+    df_old = df_old.loc[df_old['Type'].isin(['Diels-Alder', '[3+2]cycloaddition'])]
     df_new = pd.read_csv(csv_new, sep=';')
 
     fig, axs = plt.subplots(nrows=1, ncols=1, figsize=(5, 5))
@@ -210,7 +212,7 @@ def histogram_iteration(csv_old, csv_new, iteration):
     plt.legend(loc='upper left')
     plt.title(f"Iteration {iteration}", fontsize=20)
     plt.tight_layout()
-    plt.savefig(f"new_distribution_{iteration}.png")
+    plt.savefig(f"new_distribution_{iteration}.pdf")
 
 
 def rxn_range_scatter_plot(csv_file_path):
@@ -221,11 +223,74 @@ def rxn_range_scatter_plot(csv_file_path):
     res.savefig('plot.pdf')
 
 
+def corr_plot_ucb_var_pred(csv_file_path):
+
+    df_pred = pd.read_csv(csv_file_path, sep=';')
+    corr = df_pred.corr(numeric_only=True)
+    fig, axs = plt.subplots(nrows=1, ncols=3, figsize=(12, 4))
+    sns.kdeplot(data=df_pred, x='Std_DFT_forward', y='UCB', ax=axs[0], fill=True)
+    sns.kdeplot(data=df_pred, x='Vars', y='UCB', ax=axs[1], fill=True)
+    sns.kdeplot(data=df_pred, x='Std_DFT_forward', y='Vars', ax=axs[2], fill=True)
+
+    axs[0].text(0.02, 0.9, f"Pearson correlation: {corr['UCB']['Std_DFT_forward']:.3f}", transform=axs[0].transAxes, fontsize=12)
+    axs[1].text(0.02, 0.9, f"Pearson correlation: {corr['UCB']['Vars']:.3f}", transform=axs[1].transAxes, fontsize=12)
+    axs[2].text(0.02, 0.9, f"Pearson correlation: {corr['Vars']['Std_DFT_forward']:.3f}", transform=axs[2].transAxes, fontsize=12)
+
+    axs[0].set_ylabel('UCB', fontsize=16)
+    axs[1].set_ylabel(None)
+    axs[2].set_ylabel('Variance (kcal/mol)$^2$', fontsize=16)
+    axs[0].set_xlabel('Prediction (kcal/mol)', fontsize=16)
+    axs[1].set_xlabel('Variance (kcal/mol)$^2$', fontsize=16)
+    axs[2].set_xlabel('Prediction (kcal/mol)', fontsize=16)
+
+    plt.tight_layout()
+    plt.savefig(f"ucb_correlation.pdf")
+
+
+def heatmap_functional(csv_file_path):
+
+    df_pred = pd.read_csv(csv_file_path, sep=';')
+    dft_forward_columns = df_pred.filter(like='DFT-forward')
+    dft_forward_columns.columns = dft_forward_columns.columns.str.replace('-DFT-forward', '')
+
+    mask=np.triu(np.ones_like(dft_forward_columns.corr()))
+    plt.figure(figsize=(16, 6))
+    heatmap = sns.heatmap(dft_forward_columns.corr(), annot=True, mask=mask, vmin=0.5, vmax=1)
+    heatmap.set_title('Correlation Functionals', fontdict={'fontsize': 12}, pad=12)
+
+
+def line_plot_1(log_file):
+
+    with open(log_file, 'r') as file:
+        lines = file.readlines()
+
+    data = []
+    append_line = False
+    for line in lines:
+        if 'Fingerprint:' in line:
+            _, fps, rad, nbits = line.split()
+            rad = int(rad[-2])
+            nbits = int(nbits[6: -1])
+            append_line = True
+        if '6-fold nested-cv' in line and append_line:
+            splitted_line = line.split()
+            model, rmse, mae, r2 = splitted_line[7], float(splitted_line[-3]), float(splitted_line[-2]), float(
+                splitted_line[-1])
+            append_line = False
+            data.append((model, fps, rad, nbits, rmse, mae, r2))
+
+    df = pd.DataFrame(data, columns=['model', 'fingerprint_type', 'radius', 'nbits', 'rmse', 'mae', 'r2'])
+
+    df_summary = pd.concat([df.nsmallest(3, 'mae'), df.nsmallest(3, 'rmse'), df.nlargest(3, 'r2')], axis=0)
+    df_summary.to_csv('summary.csv')
+
+
 if __name__ == '__main__':
     # Example usage:
     # Replace 'your_file.csv' with the actual CSV file name and 'your_column' with the column you want to plot
-    plot_energy_distribution('../data/final_overview_data.csv', 'Std_DFT_forward')
-    scatter_plot('../data/final_overview_data.csv', 'Std_DFT_forward', 'Std_DFT_reverse')
-    line_plot('output.log')
-    histogram('../data/data_smiles_curated.csv')
-    histogram_iteration('../data/data_smiles_curated.csv', '../data/Prediction_iter_1.csv', 1)
+    #plot_energy_distribution('../data/final_overview_data.csv', 'Std_DFT_forward')
+    #scatter_plot('../data/final_overview_data.csv', 'Std_DFT_forward', 'Std_DFT_reverse')
+    #line_plot('output.log')
+    #histogram('../data/data_smiles_curated.csv')
+    histogram_iteration('../data/data_smiles_curated.csv', 'Prediction_iter_1.csv', 1)
+    corr_plot_ucb_var_pred('Prediction_iter_1.csv')
