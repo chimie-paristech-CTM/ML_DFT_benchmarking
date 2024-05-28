@@ -18,8 +18,8 @@ if __name__ == '__main__':
             rxn = bicyclic_core(bi_core[1], sub)
             rxns.append((bi_core[0], rxn))
 
-    rxns = list(set(rxns))
     df_fused_cycles = pd.DataFrame(rxns, columns=['Type', 'rxn_smiles'])
+    df_fused_cycles.drop_duplicates(inplace=True, subset=['rxn_smiles'])
 
     df = pd.read_csv('../data/hypothetical_space_core.csv', sep=';')
 
@@ -28,4 +28,4 @@ if __name__ == '__main__':
     df_space = pd.DataFrame(columns=['Type', 'rxn_smiles'])
     for row in df.itertuples():
         df_space = pd.concat([df_space, create_combination(row.rxn_smiles, row.Type)], axis=0, ignore_index=True)
-    df_space.to_csv('../data/hypothetical_chemical_space.csv')
+    df_space.to_csv('../data/hypothetical_chemical_space_set_sanitize.csv')

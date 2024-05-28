@@ -17,15 +17,19 @@ def single_edit_mol(mol, label, subs):
     if subs != None:
         mod_mol = Chem.ReplaceSubstructs(mol, Chem.MolFromSmiles(label), Chem.MolFromSmiles(subs), replaceAll=True)[0]
     else:
-        mod_mol = Chem.DeleteSubstructs(mol, Chem.MolFromSmiles(label))
+        #mod_mol = Chem.DeleteSubstructs(mol, Chem.MolFromSmiles(label))
+        mod_mol = Chem.ReplaceSubstructs(mol, Chem.MolFromSmiles(label), Chem.MolFromSmiles('[H]'), replaceAll=True)[0]
+        params = Chem.RemoveHsParameters()
+        params.removeDegreeZero = True
+        mod_mol = Chem.RemoveHs(mod_mol, params)
     return mod_mol
 
 
-def modify_mol(dipole, subs_comb_LR, labels):
-    mol = Chem.MolFromSmiles(dipole)
+def modify_mol(smiles, subs_comb_LR, labels):
+    mol = Chem.MolFromSmiles(smiles)
     for i, subs in enumerate(subs_comb_LR):
         mol = single_edit_mol(mol, labels[i], subs)
-
+    Chem.SanitizeMol(mol)
     return Chem.MolFromSmiles(Chem.MolToSmiles(mol))
 
 
@@ -64,9 +68,11 @@ def create_combination(rxn_smiles, type):
         prod_smi = Chem.MolToSmiles(prod)
         new_rxns.append(f"{reac_smi}>>{prod_smi}")
 
+    new_rxns = list(set(new_rxns))
     df_rxns = pd.DataFrame()
     df_rxns['Type'] = len(new_rxns) * [type]
     df_rxns['rxn_smiles'] = new_rxns
+    df_rxns.drop_duplicates(inplace=True, subset=['rxn_smiles'])
 
     return df_rxns
 
