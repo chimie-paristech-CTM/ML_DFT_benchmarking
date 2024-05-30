@@ -40,13 +40,18 @@ def create_irc_input_file(name, geom):
             Create input file for IRC
         """
 
-    route_link = "# cam-b3lyp 6-311++G**  IRC=(calcfc, maxpoints=15, recalc=3) nosymm EmpiricalDispersion=GD3BJ"
-    with open(f"{name}.com", 'w') as file:
-        file.write(f"{route_link}\n\n")
-        file.write("IRC validation\n\n")
-        for coordinate in geom:
-            file.write(f"{coordinate}")
-        file.write('\n\n')
+    directions = ['forward', 'reverse']
+
+    for direction in directions:
+
+        route_link = f"# cam-b3lyp 6-311++G**  IRC=(calcfc, maxpoints=25, recalc=3, {direction}) nosymm EmpiricalDispersion=GD3BJ"
+        with open(f"{name}_{direction}.com", 'w') as file:
+            file.write(f"%chk={name}_{direction}.chk\n")
+            file.write(f"{route_link}\n\n")
+            file.write("IRC validation\n\n")
+            for coordinate in geom:
+                file.write(f"{coordinate}")
+            file.write('\n\n')
 
 
 def main_function():
