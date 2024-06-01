@@ -4,6 +4,15 @@ import re
 from glob import glob
 from rdkit import Chem
 from rdkit.Chem import rdDetermineBonds
+from argparse import ArgumentParser
+
+parser = ArgumentParser()
+parser.add_argument('--raw_data', type=str, default='../data/raw_data',
+                    help='path to folder containing the .dat files')
+parser.add_argument('--iter', type=str, help='initial round, first, second ...')
+parser.add_argument('--generate_initial_data', default=False, action="store_true", help='From XYZ to fingerprints')
+parser.add_argument('--pool_file', type=str, default=None,
+                    help='path to the input file')
 
 
 def preprocess_dat_file(dat_file_path):
@@ -81,7 +90,7 @@ def read_dat_files_to_dataframes_iter(folder_path):
                 print(f"Warning: Skipping file '{filename}' due to a parsing error.")
 
 
-def combine_and_compute_std(folder_path, iter):
+def combine_and_compute_std(folder_path, iter, pool_file = None):
     all_dfs = []
     # Loop through all .csv files in the folder
     for filename in os.listdir(folder_path):
@@ -119,6 +128,10 @@ def combine_and_compute_std(folder_path, iter):
         merged_df = merged_df.loc[abs(merged_df[column]) <= 1000]
 
     merged_df.to_csv(f'{folder_path}/final_overview_data_{iter}.csv')
+
+    if iter != 'initial' and pool_file is not None:
+        print('1')
+        add_rxn_smiles_iter(f'{folder_path}/final_overview_data_{iter}.csv', pool_file)
 
 
 def generate_file_fps(csv_file, xyz_files):
@@ -170,6 +183,15 @@ def add_rxn_smiles_iter(csv_file, pool_file):
 
 
 if __name__ == '__main__':
-    read_dat_files_to_dataframes('../data/raw_data')
-    combine_and_compute_std('../data/raw_data', 'initial')
-    generate_file_fps('../data/final_overview_data.csv', '../data/XYZ_files')
+
+    args = parser.parse_args()
+
+    if args.iter == 'initial':
+        read_dat_files_to_dataframes(args.raw_data)
+    else:
+        read_dat_files_to_dataframes_iter(args.raw_data)
+
+    combine_and_compute_std(args.raw_data, args.iter, args.pool_file)
+
+    if args.generate_initial_data:
+        generate_file_fps('../data/final_overview_data.csv', '../data/XYZ_files')
