@@ -2,12 +2,8 @@
 import pandas as pd
 from argparse import ArgumentParser
 from lib.utils import create_logger
-from lib.final_functions import get_optimal_parameters_knn_fp, get_optimal_parameters_knn
-from lib.final_functions import get_cross_val_accuracy_knn_fp, get_cross_val_accuracy_knn
 from lib.final_functions import get_optimal_parameters_rf, get_optimal_parameters_rf_fp
 from lib.final_functions import get_cross_val_accuracy_rf, get_cross_val_accuracy_rf_fps
-from lib.final_functions import get_optimal_parameters_xgboost, get_optimal_parameters_xgboost_fp
-from lib.final_functions import get_cross_val_accuracy_xgboost, get_cross_val_accuracy_xgboost_fps
 from lib.fingerprints import get_fingerprints_DRFP, get_fingerprints_Morgan
 from lib.final_functions import get_nested_cross_val_accuracy_knn_fps
 from lib.final_functions import get_nested_cross_val_accuracy_rf_fps

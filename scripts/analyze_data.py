@@ -130,7 +130,6 @@ def combine_and_compute_std(folder_path, iter, pool_file = None):
     merged_df.to_csv(f'{folder_path}/final_overview_data_{iter}.csv')
 
     if iter != 'initial' and pool_file is not None:
-        print('1')
         add_rxn_smiles_iter(f'{folder_path}/final_overview_data_{iter}.csv', pool_file)
 
 

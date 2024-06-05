@@ -67,7 +67,7 @@ def create_ade_input(rxn_smile, idx, dir, hmet_confor=r"True"):
     functional = 'cam-b3lyp'
     conf_basis_set = '6-31G*'
     basis_set = '6-311++G**'
-    cores = 24
+    cores = 32
     mem = 4000
     num_conf = 1000
     rmsd = 0.1
@@ -76,7 +76,6 @@ def create_ade_input(rxn_smile, idx, dir, hmet_confor=r"True"):
 
     with open(f"{dir}/{file_name}", 'w') as in_ade:
         in_ade.write('import autode as ade\n')
-        in_ade.write('from check_stereochemistry import check_TS_stereochemistry\n')
         in_ade.write("if __name__ == \"__main__\":  \n")
         in_ade.write(f"\tade.Config.n_cores={cores}\n")
         in_ade.write(f"\tade.Config.max_core={mem}\n")
@@ -88,7 +87,7 @@ def create_ade_input(rxn_smile, idx, dir, hmet_confor=r"True"):
         in_ade.write(f"\tade.Config.G16.keywords.opt_ts.basis_set = '{basis_set}' \n")
         in_ade.write(f"\tade.Config.G16.keywords.hess.basis_set = '{basis_set}' \n")
         in_ade.write(f"\tade.Config.G16.keywords.low_opt.basis_set = '{conf_basis_set}' \n")
-        in_ade.write(f"\tade.Config.G16.keywords.low_opt.max_opt_cycles = 20\n")
+        in_ade.write(f"\tade.Config.G16.keywords.low_opt.max_opt_cycles = 15\n")
         in_ade.write(f"\tade.Config.num_conformers={num_conf}\n")
         in_ade.write(f"\tade.Config.rmsd_threshold={rmsd}\n")
         in_ade.write(f"\tade.Config.hmethod_conformers={hmet_confor}\n")
