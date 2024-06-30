@@ -54,6 +54,15 @@ An example of the input file is included in the `data` directory: `data_smiles_c
 ## Active learning procedure
 
 
+## Reproducibility
+
+To reproduce the acquired reaction each round as well the mean absolute error of each set, a bash script is provided. 
+Execution as follows:
+
+````
+bash reproducibility.sh
+````
+
 ## References
 
 If (parts of) this workflow are used as part of a publication please cite the associated paper:
