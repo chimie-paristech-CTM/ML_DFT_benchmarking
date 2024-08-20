@@ -1,3 +1,5 @@
+import sys
+import time
 import pandas as pd
 from argparse import ArgumentParser
 from lib.fingerprints import get_fingerprints_Morgan
@@ -21,9 +23,9 @@ parser.add_argument('--final_dir', type=str, default='../data/autodE_input',
                     help='path to the folder with the autodE input')
 parser.add_argument('--cutoff', type=float, default=0.75,
                     help='cutoff of similarity')
-parser.add_argument('--conda_env', type=str, default='autodE',
+parser.add_argument('--conda_env', type=str, default='autode',
                     help='conda environment of autodE package')
-parser.add_argument('--new_data', type=int, default = 10,
+parser.add_argument('--new_data', type=int, default=10,
                     help='Next data')
 parser.add_argument('--selective_sampling', type=str, default=None,
                     help='Sample one kind of reaction')
@@ -33,6 +35,7 @@ parser.add_argument('--selective_sampling_data', type=int, default=5,
 
 if __name__ == "__main__":
 
+    t0 = time.time()
     args = parser.parse_args()
     logger = create_logger(name='next_data')
     df_train = pd.read_csv(args.train_file, sep=';', index_col=0)
@@ -40,7 +43,8 @@ if __name__ == "__main__":
     if args.iteration > 1:
         df_additional = pd.read_csv(args.new_data_file, index_col=0)
         df_train = pd.concat([df_train, df_additional], ignore_index=True)
-        df_train.to_csv(f'../data/data_smiles_curated_{args.iteration}.csv')
+        df_train.to_csv(f'../data/data_smiles_curated_{args.iteration}.csv', sep=';')
+
     df_train_fps = get_fingerprints_Morgan(df_train, rad=2, nbits=2048)
     df_pool_fps = get_fingerprints_Morgan(df_pool, rad=2, nbits=2048, labeled=False)
 
@@ -48,8 +52,7 @@ if __name__ == "__main__":
     for arg, value in sorted(vars(args).items()):
         logger.info("Argument %s: %r", arg, value)
 
-    seeds = get_seeds(args.seed, 1)
-
+    seeds = get_seeds(args.seed, 5)
     logger.info(f"seeds: {seeds}")
 
     seed_max_value = [0, 0]
@@ -65,18 +68,18 @@ if __name__ == "__main__":
             seed_max_value[0] = seed
             seed_max_value[1] = ucb.max()
 
-    df_pool.to_csv(f'chemical_space_ucb_{args.iteration}.csv')
+    df_pool.to_csv(f'../data/chemical_space_ucb_{args.iteration}.csv')
 
     if args.selective_sampling:
         if args.selective_sampling_data >= args.new_data:
-            df_pool = df_pool.loc[df_pool.Type == args.selective_sampling]
-            next_rxns = iterative_sampling(df_pool, logger, column=f"ucb {seed_max_value[0]}", initial_sample=args.new_data, cutoff=args.cutoff)
+            df_pool_selective = df_pool.loc[df_pool.Type == args.selective_sampling]
+            next_rxns = iterative_sampling(df_pool_selective, logger, column=f"ucb {seed_max_value[0]}", initial_sample=args.new_data, cutoff=args.cutoff)
         else:
             df_pool_selective = df_pool.loc[df_pool.Type == args.selective_sampling]
-            df_pool = df_pool.loc[df_pool.Type != args.selective_sampling]
+            df_pool_pool = df_pool.loc[df_pool.Type != args.selective_sampling]
             next_rxns_selective = iterative_sampling(df_pool_selective, logger, column=f"ucb {seed_max_value[0]}",
                                                      initial_sample=args.selective_sampling_data, cutoff=args.cutoff)
-            next_rxns = iterative_sampling(df_pool, logger, column=f"ucb {seed_max_value[0]}", initial_sample= (args.new_data - args.selective_sampling_data), cutoff=args.cutoff)
+            next_rxns = iterative_sampling(df_pool_pool, logger, column=f"ucb {seed_max_value[0]}", initial_sample= (args.new_data - args.selective_sampling_data), cutoff=args.cutoff)
             next_rxns = pd.concat([next_rxns_selective, next_rxns])
     else:
         next_rxns = iterative_sampling(df_pool, logger, column=f"ucb {seed_max_value[0]}", initial_sample=args.new_data, cutoff=args.cutoff)
@@ -87,11 +90,16 @@ if __name__ == "__main__":
     create_input(next_rxns, args.final_dir, args.conda_env)
 
     df_pool.drop(index=next_rxns.index, inplace=True)
-    df_pool.to_csv(f'../data/hypothetical_chemical_space_iter_{args.iteration}.csv')
 
     df_preds = pd.DataFrame()
     df_preds['Std_DFT_forward'] = df_pool[f'prediction {seed_max_value[0]}']
     df_preds['Vars'] = df_pool[f'variance {seed_max_value[0]}']
     df_preds['UCB'] = df_pool[f'ucb {seed_max_value[0]}']
+
+    columns_drop = [column for column in df_pool.columns if column not in ['Type', 'rxn_smiles']]
+    df_pool.drop(columns=columns_drop, inplace=True)
+    df_pool.to_csv(f'../data/hypothetical_chemical_space_iter_{args.iteration}.csv')
     df_preds.to_csv(f'Prediction_iter_{args.iteration}.csv', sep=';')
+    t1 = time.time()
+    logger.info(f"time of execution: {t1 - t0} seconds")
 
