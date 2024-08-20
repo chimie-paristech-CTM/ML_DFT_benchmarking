@@ -1,9 +1,9 @@
 [![license](https://img.shields.io/github/license/DAVFoundation/captain-n3m0.svg?style=flat-square)](https://github.com/chimie-paristech-CTM/ML_DFT_benchmarking/master/LICENSE)
 
 # ML_DFT_benchmarking
-This repository contains the code and auxiliary data associated with the "ML guided development of new benchmarking 
-dataset" project. Code is provided "as-is". Minor edits may be required to tailor the scripts for different 
-computational systems.
+This repository contains the code and auxiliary data associated with the "Improving the reliability of, and confidence 
+in, DFT functional benchmarking through active learning" project. Code is provided "as-is". Minor edits may be required 
+to tailor the scripts for different computational systems.
 
 ### Conda environment
 To set up the conda environment:
@@ -51,7 +51,15 @@ evaluation of the model you should use the option `--final_cv`
 
 An example of the input file is included in the `data` directory: `data_smiles_curated.csv`. 
 
-## Active learning procedure
+## Bayesian optimization campaign
+
+Each iteration of the bayesian optimization campaign is launched with the help of the `final_model.py` script. Execution as follows: 
+
+````
+final_model.py [-h] [--train_file TRAIN_FILE] [--pool_file POOL_FILE] [--new_data_file NEW_DATA_FILE] [--iteration ITERATION] [--seed SEED] [--beta BETA]
+                      [--final_dir FINAL_DIR] [--cutoff CUTOFF] [--conda_env CONDA_ENV] [--new_data NEW_DATA] [--selective_sampling SELECTIVE_SAMPLING]
+                      [--selective_sampling_data SELECTIVE_SAMPLING_DATA]
+````
 
 
 ## Reproducibility
@@ -67,7 +75,12 @@ bash reproducibility.sh
 
 If (parts of) this workflow are used as part of a publication please cite the associated paper:
 ```
-
+@article{ml_functional,
+  year = {2024},
+  author = {Javier E. Alfonso Ramos and Carlo Adamo and Eric Bremond and Thijs Stuyver},
+  title = {Improving the reliability of, and confidence in, DFT functional benchmarking through active learning},
+  journal = {ChemRxiv}
+}
 ```
 
 Additionally, since the workflow makes heavy use of autodE, please also cite the paper in which this code was originally
