@@ -16,11 +16,11 @@ In order to execute the autodE high-throughput reaction profile computation work
 needs to be accessible.
 
 ## Curating the dataset
-The scripts used for transforming the xyz-coordinates in reaction SMILES is `scripts/analize_data.py`. Execution as 
+The scripts used for transforming the xyz-coordinates in reaction SMILES is `scripts/analyze_data.py`. Execution as 
 follows:
 
 ```
-python scripts/analize_data.py --raw_data data/raw_data --iter initial --generate_initial_data
+python scripts/analyze_data.py --raw_data data/raw_data --iter initial --generate_initial_data
 ```
 
 The `xyz` files should be in the directory `data/XYZ_files`. A `data_smiles.csv` file will be generated in the `data`
