@@ -67,7 +67,7 @@ def create_ade_input(rxn_smile, idx, dir, hmet_confor=r"True"):
     functional = 'cam-b3lyp'
     conf_basis_set = '6-31G*'
     basis_set = '6-311++G**'
-    cores = 32
+    cores = 16
     mem = 4000
     num_conf = 1000
     rmsd = 0.1
@@ -109,7 +109,7 @@ def create_slurm(idx, dir, conda_env):
 
     nodes = 1
     tasks_per_node = 1
-    cpus_per_task = 24
+    cpus_per_task = 16
     log_level = 'INFO' # {DEBUG, INFO, WARNING, ERROR}
 
     file_name = f"slurm_{idx}.sh"
@@ -121,8 +121,8 @@ def create_slurm(idx, dir, conda_env):
         in_slurm.write(f"#SBATCH --nodes={nodes}\n")    
         in_slurm.write(f"#SBATCH --ntasks-per-node={tasks_per_node}\n")
         in_slurm.write(f"#SBATCH --cpus-per-task={cpus_per_task}\n")  
-        in_slurm.write('#SBATCH --qos=qos_cpu-t3\n')   
-        in_slurm.write('#SBATCH --time=20:00:00\n')
+        in_slurm.write('#SBATCH --qos=qos_cpu-t4\n')
+        in_slurm.write('#SBATCH --time=100:00:00\n')
         in_slurm.write('#SBATCH --hint=nomultithread  # Disable hyperthreading\n')
         in_slurm.write(f"#SBATCH --output=ade_{ade_idx}_%j.out\n")   
         in_slurm.write(f"#SBATCH --error=ade_{ade_idx}_%j.err\n") 
@@ -137,6 +137,7 @@ def create_slurm(idx, dir, conda_env):
         in_slurm.write(f"export AUTODE_LOG_LEVEL={log_level}\n")
         in_slurm.write(f"export AUTODE_LOG_FILE=ade_{ade_idx}.log\n")
         in_slurm.write(f"python3 ade_{ade_idx}.py \n")
+        in_slurm.write(f"python3 irc_validation.py \n")
 
     return None
 
