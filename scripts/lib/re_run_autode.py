@@ -8,8 +8,9 @@ parser.add_argument('--conda_env', type=str, default='autode',
                     help='conda environment of autodE package')
 parser.add_argument('--idx', type=str,
                     help='index of the reaction')
+parser.add_argument('--ind', type=str, help='r0, r1 or p0')
 
-def create_ade_input(smiles, idx, dir, hmet_confor=r"True"):
+def create_ade_input(smiles, idx, dir, ind, hmet_confor=r"True"):
     """ Create the ade input """
 
     # Setting the calculation
@@ -22,7 +23,7 @@ def create_ade_input(smiles, idx, dir, hmet_confor=r"True"):
     num_conf = 1000
     rmsd = 0.1
 
-    file_name = f"p0_alt_{idx}.py"
+    file_name = f"{ind}_alt_{idx}.py"
 
     with open(f"{dir}/{file_name}", 'w') as in_ade:
         in_ade.write('import autode as ade\n')
@@ -40,17 +41,16 @@ def create_ade_input(smiles, idx, dir, hmet_confor=r"True"):
         in_ade.write(f"\tade.Config.num_conformers={num_conf}\n")
         in_ade.write(f"\tade.Config.rmsd_threshold={rmsd}\n")
         in_ade.write(f"\tade.Config.hmethod_conformers={hmet_confor}\n")
-        in_ade.write(f"\tproduct = ade.Molecule(name='p1_{idx:07}', smiles=r\"{smiles}\")\n")
+        in_ade.write(f"\tproduct = ade.Molecule(name='{ind}_{idx:07}', smiles=r\"{smiles}\")\n")
         in_ade.write('\tproduct.find_lowest_energy_conformer(hmethod=g16)\n')
         in_ade.write('\tproduct.optimise(method=g16)\n')
         in_ade.write('\tproduct.calc_thermo(method=g16)\n')
-        in_ade.write('\tproduct.single_point(method=g16)\n')
         in_ade.write('\tproduct.print_xyz_file()\n')
 
     return None
 
 
-def create_slurm(idx, dir, conda_env):
+def create_slurm(idx, dir, ind, conda_env):
     """ Create the slurm input """
 
     # Setting the calculation
@@ -84,7 +84,7 @@ def create_slurm(idx, dir, conda_env):
         in_slurm.write(f"conda activate {conda_env}\n")
         in_slurm.write(f"export AUTODE_LOG_LEVEL={log_level}\n")
         in_slurm.write(f"export AUTODE_LOG_FILE=ade_{ade_idx}.log\n")
-        in_slurm.write(f"python3 p0_alt_{ade_idx}.py \n")
+        in_slurm.write(f"python3 {ind}_alt_{ade_idx}.py \n")
 
     return None
 
@@ -92,7 +92,7 @@ def create_slurm(idx, dir, conda_env):
 if __name__ == "__main__":
     # set up
     args = parser.parse_args()
-    new_path = os.path.join(os.getcwd(), f"p0_alt_{args.idx}")
+    new_path = os.path.join(os.getcwd(), f"{args.ind}_alt_{args.idx}")
     os.mkdir(new_path)
-    create_ade_input(args.smiles, args.idx, new_path)
-    create_slurm(args.idx,  new_path, args.conda_env)
+    create_ade_input(args.smiles, args.idx, new_path, args.ind)
+    create_slurm(args.idx,  new_path, args.ind, args.conda_env)
