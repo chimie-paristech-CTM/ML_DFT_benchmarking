@@ -1,9 +1,11 @@
 [![license](https://img.shields.io/github/license/DAVFoundation/captain-n3m0.svg?style=flat-square)](https://github.com/chimie-paristech-CTM/ML_DFT_benchmarking/master/LICENSE)
 
-# ML_DFT_benchmarking
+# Improving the reliability of, and confidence in, DFT functional benchmarking through active learning
 This repository contains the code and auxiliary data associated with the "Improving the reliability of, and confidence 
 in, DFT functional benchmarking through active learning" project. Code is provided "as-is". Minor edits may be required 
 to tailor the scripts for different computational systems.
+
+![](toc.png)
 
 ### Conda environment
 To set up the conda environment:
