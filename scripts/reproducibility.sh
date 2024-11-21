@@ -26,6 +26,17 @@ python analyze_data.py --iter 5 --raw_data ../data/raw_data_round_5  --pool_file
 python baseline_models.py --final_cv --input_file ../data/final_overview_data.csv --csv_file ../data/data_smiles_curated_5.csv
 
 # ITERATION 6
-python final_model.py --iteration 6 --beta 1 --seed 18 --cutoff 0.7 --final_dir ../data/autode_input_6 --new_data 50 --pool_file ../data/hypothetical_chemical_space_iter_5.csv --train_file ../data/data_smiles_curated.csv --new_data_file ../data/data_augmentation.csv
+python final_model.py --iteration 6 --beta 1.8 --seed 5 --cutoff 0.75 --final_dir ../data/autode_input_6 --new_data 15 --pool_file ../data/hypothetical_chemical_space_iter_5.csv --train_file ../data/data_smiles_curated.csv --new_data_file ../data/data_augmentation.csv
 python analyze_data.py --iter 6 --raw_data ../data/raw_data_round_6  --pool_file ../data/hypothetical_chemical_space.csv
 python baseline_models.py --final_cv --input_file ../data/final_overview_data.csv --csv_file ../data/data_smiles_curated_6.csv
+
+# ITERATION 7
+python final_model.py --iteration 7 --beta 1.8 --seed 11 --cutoff 0.8 --final_dir ../data/autode_input_7 --new_data 15 --pool_file ../data/hypothetical_chemical_space_iter_6.csv --train_file ../data/data_smiles_curated.csv --new_data_file ../data/data_augmentation.csv
+python analyze_data.py --iter 7 --raw_data ../data/raw_data_round_7  --pool_file ../data/hypothetical_chemical_space.csv
+python baseline_models.py --final_cv --input_file ../data/final_overview_data.csv --csv_file ../data/data_smiles_curated_7.csv
+
+
+# Exploitation round
+python final_model.py --iteration 8 --beta 1 --seed 18 --cutoff 0.75 --final_dir ../data/autode_input_8 --new_data 30 --pool_file ../data/hypothetical_chemical_space_iter_7.csv --train_file ../data/data_smiles_curated.csv --new_data_file ../data/data_augmentation.csv
+python analyze_data.py --iter 8 --raw_data ../data/raw_data_round_8  --pool_file ../data/hypothetical_chemical_space.csv
+python baseline_models.py --final_cv --input_file ../data/final_overview_data.csv --csv_file ../data/data_smiles_curated_8.csv
