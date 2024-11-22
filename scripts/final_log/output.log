@@ -1,0 +1,293 @@
+Argument csv_file: '../data/data_smiles_curated.csv'
+Argument input_file: '../data/final_overview_data.csv'
+Argument n_fold: 6
+6-fold cv RMSE, MAE and R^2 for simplest model 0.9649 0.7543 0.0928
+Fingerprints
+Fingerprint: DRFP (radius=1, nbits=16)
+6-fold nested-cv RMSE, MAE and R^2 for k-NN fingerprints 0.9080 0.6545 0.5988
+Fingerprint: Morgan (radius=1, nbits=16)
+6-fold nested-cv RMSE, MAE and R^2 for k-NN fingerprints 1.0583 0.7617 0.4302
+Fingerprint: DRFP (radius=1, nbits=16)
+6-fold nested-cv RMSE, MAE and R^2 for RF fingerprints 0.8906 0.6523 0.6191
+Fingerprint: Morgan (radius=1, nbits=16)
+6-fold nested-cv RMSE, MAE and R^2 for RF fingerprints 1.0149 0.7828 0.4674
+Fingerprint: DRFP (radius=1, nbits=16)
+6-fold nested-cv RMSE, MAE and R^2 for XGBoost fingerprints 1.2254 0.9888 0.2764
+Fingerprint: Morgan (radius=1, nbits=16)
+6-fold nested-cv RMSE, MAE and R^2 for XGBoost fingerprints 1.1381 0.9372 0.3775
+Fingerprint: DRFP (radius=2, nbits=16)
+6-fold nested-cv RMSE, MAE and R^2 for k-NN fingerprints 1.1931 0.8717 0.2975
+Fingerprint: Morgan (radius=2, nbits=16)
+6-fold nested-cv RMSE, MAE and R^2 for k-NN fingerprints 1.1924 0.8970 0.2967
+Fingerprint: DRFP (radius=2, nbits=16)
+6-fold nested-cv RMSE, MAE and R^2 for RF fingerprints 1.1210 0.8593 0.3855
+Fingerprint: Morgan (radius=2, nbits=16)
+6-fold nested-cv RMSE, MAE and R^2 for RF fingerprints 1.1355 0.8699 0.3637
+Fingerprint: DRFP (radius=2, nbits=16)
+6-fold nested-cv RMSE, MAE and R^2 for XGBoost fingerprints 1.2604 1.0136 0.2290
+Fingerprint: Morgan (radius=2, nbits=16)
+6-fold nested-cv RMSE, MAE and R^2 for XGBoost fingerprints 1.2892 1.0476 0.1963
+Fingerprint: DRFP (radius=3, nbits=16)
+6-fold nested-cv RMSE, MAE and R^2 for k-NN fingerprints 1.4607 1.1691 -0.0439
+Fingerprint: Morgan (radius=3, nbits=16)
+6-fold nested-cv RMSE, MAE and R^2 for k-NN fingerprints 1.1783 0.8821 0.3222
+Fingerprint: DRFP (radius=3, nbits=16)
+6-fold nested-cv RMSE, MAE and R^2 for RF fingerprints 1.3365 1.0955 0.1187
+Fingerprint: Morgan (radius=3, nbits=16)
+6-fold nested-cv RMSE, MAE and R^2 for RF fingerprints 1.1222 0.9173 0.3868
+Fingerprint: DRFP (radius=3, nbits=16)
+6-fold nested-cv RMSE, MAE and R^2 for XGBoost fingerprints 1.3359 1.0987 0.1291
+Fingerprint: Morgan (radius=3, nbits=16)
+6-fold nested-cv RMSE, MAE and R^2 for XGBoost fingerprints 1.2754 1.0761 0.2073
+Fingerprint: DRFP (radius=1, nbits=32)
+6-fold nested-cv RMSE, MAE and R^2 for k-NN fingerprints 0.8446 0.6150 0.6529
+Fingerprint: Morgan (radius=1, nbits=32)
+6-fold nested-cv RMSE, MAE and R^2 for k-NN fingerprints 0.8685 0.6120 0.6086
+Fingerprint: DRFP (radius=1, nbits=32)
+6-fold nested-cv RMSE, MAE and R^2 for RF fingerprints 0.8137 0.6306 0.6789
+Fingerprint: Morgan (radius=1, nbits=32)
+6-fold nested-cv RMSE, MAE and R^2 for RF fingerprints 0.7717 0.6077 0.7042
+Fingerprint: DRFP (radius=1, nbits=32)
+6-fold nested-cv RMSE, MAE and R^2 for XGBoost fingerprints 1.0749 0.8704 0.4449
+Fingerprint: Morgan (radius=1, nbits=32)
+6-fold nested-cv RMSE, MAE and R^2 for XGBoost fingerprints 0.9957 0.8367 0.5136
+Fingerprint: DRFP (radius=2, nbits=32)
+6-fold nested-cv RMSE, MAE and R^2 for k-NN fingerprints 0.9827 0.7347 0.5330
+Fingerprint: Morgan (radius=2, nbits=32)
+6-fold nested-cv RMSE, MAE and R^2 for k-NN fingerprints 0.9705 0.7055 0.5308
+Fingerprint: DRFP (radius=2, nbits=32)
+6-fold nested-cv RMSE, MAE and R^2 for RF fingerprints 1.0016 0.7818 0.5113
+Fingerprint: Morgan (radius=2, nbits=32)
+6-fold nested-cv RMSE, MAE and R^2 for RF fingerprints 0.9114 0.7113 0.6012
+Fingerprint: DRFP (radius=2, nbits=32)
+6-fold nested-cv RMSE, MAE and R^2 for XGBoost fingerprints 1.1731 0.9701 0.3369
+Fingerprint: Morgan (radius=2, nbits=32)
+6-fold nested-cv RMSE, MAE and R^2 for XGBoost fingerprints 1.0363 0.8681 0.4848
+Fingerprint: DRFP (radius=3, nbits=32)
+6-fold nested-cv RMSE, MAE and R^2 for k-NN fingerprints 1.1585 0.9165 0.3404
+Fingerprint: Morgan (radius=3, nbits=32)
+6-fold nested-cv RMSE, MAE and R^2 for k-NN fingerprints 0.9908 0.7366 0.5202
+Fingerprint: DRFP (radius=3, nbits=32)
+6-fold nested-cv RMSE, MAE and R^2 for RF fingerprints 1.1082 0.8879 0.4054
+Fingerprint: Morgan (radius=3, nbits=32)
+6-fold nested-cv RMSE, MAE and R^2 for RF fingerprints 0.9367 0.7509 0.5752
+Fingerprint: DRFP (radius=3, nbits=32)
+6-fold nested-cv RMSE, MAE and R^2 for XGBoost fingerprints 1.2313 0.9914 0.2667
+Fingerprint: Morgan (radius=3, nbits=32)
+6-fold nested-cv RMSE, MAE and R^2 for XGBoost fingerprints 1.1356 0.9184 0.3759
+Fingerprint: DRFP (radius=1, nbits=64)
+6-fold nested-cv RMSE, MAE and R^2 for k-NN fingerprints 0.9147 0.6690 0.5955
+Fingerprint: Morgan (radius=1, nbits=64)
+6-fold nested-cv RMSE, MAE and R^2 for k-NN fingerprints 0.8933 0.6469 0.5945
+Fingerprint: DRFP (radius=1, nbits=64)
+6-fold nested-cv RMSE, MAE and R^2 for RF fingerprints 0.8250 0.6303 0.6655
+Fingerprint: Morgan (radius=1, nbits=64)
+6-fold nested-cv RMSE, MAE and R^2 for RF fingerprints 0.7769 0.5970 0.7035
+Fingerprint: DRFP (radius=1, nbits=64)
+6-fold nested-cv RMSE, MAE and R^2 for XGBoost fingerprints 1.0860 0.8971 0.4277
+Fingerprint: Morgan (radius=1, nbits=64)
+6-fold nested-cv RMSE, MAE and R^2 for XGBoost fingerprints 1.0229 0.8463 0.4847
+Fingerprint: DRFP (radius=2, nbits=64)
+6-fold nested-cv RMSE, MAE and R^2 for k-NN fingerprints 1.0119 0.7182 0.5117
+Fingerprint: Morgan (radius=2, nbits=64)
+6-fold nested-cv RMSE, MAE and R^2 for k-NN fingerprints 0.9614 0.6867 0.5428
+Fingerprint: DRFP (radius=2, nbits=64)
+6-fold nested-cv RMSE, MAE and R^2 for RF fingerprints 0.9093 0.6973 0.6012
+Fingerprint: Morgan (radius=2, nbits=64)
+6-fold nested-cv RMSE, MAE and R^2 for RF fingerprints 0.8304 0.6483 0.6587
+Fingerprint: DRFP (radius=2, nbits=64)
+6-fold nested-cv RMSE, MAE and R^2 for XGBoost fingerprints 1.1222 0.8971 0.3902
+Fingerprint: Morgan (radius=2, nbits=64)
+6-fold nested-cv RMSE, MAE and R^2 for XGBoost fingerprints 0.9498 0.7838 0.5594
+Fingerprint: DRFP (radius=3, nbits=64)
+6-fold nested-cv RMSE, MAE and R^2 for k-NN fingerprints 0.9644 0.7106 0.5503
+Fingerprint: Morgan (radius=3, nbits=64)
+6-fold nested-cv RMSE, MAE and R^2 for k-NN fingerprints 0.7996 0.5599 0.6863
+Fingerprint: DRFP (radius=3, nbits=64)
+6-fold nested-cv RMSE, MAE and R^2 for RF fingerprints 1.0650 0.8348 0.4551
+Fingerprint: Morgan (radius=3, nbits=64)
+6-fold nested-cv RMSE, MAE and R^2 for RF fingerprints 0.8670 0.6798 0.6391
+Fingerprint: DRFP (radius=3, nbits=64)
+6-fold nested-cv RMSE, MAE and R^2 for XGBoost fingerprints 1.2778 1.0071 0.2185
+Fingerprint: Morgan (radius=3, nbits=64)
+6-fold nested-cv RMSE, MAE and R^2 for XGBoost fingerprints 1.0090 0.8046 0.5078
+Fingerprint: DRFP (radius=1, nbits=128)
+6-fold nested-cv RMSE, MAE and R^2 for k-NN fingerprints 0.8522 0.6120 0.6498
+Fingerprint: Morgan (radius=1, nbits=128)
+6-fold nested-cv RMSE, MAE and R^2 for k-NN fingerprints 0.8572 0.5959 0.6089
+Fingerprint: DRFP (radius=1, nbits=128)
+6-fold nested-cv RMSE, MAE and R^2 for RF fingerprints 0.8174 0.6169 0.6743
+Fingerprint: Morgan (radius=1, nbits=128)
+6-fold nested-cv RMSE, MAE and R^2 for RF fingerprints 0.7417 0.5681 0.7307
+Fingerprint: DRFP (radius=1, nbits=128)
+6-fold nested-cv RMSE, MAE and R^2 for XGBoost fingerprints 1.0388 0.8481 0.4733
+Fingerprint: Morgan (radius=1, nbits=128)
+6-fold nested-cv RMSE, MAE and R^2 for XGBoost fingerprints 0.9498 0.8070 0.5617
+Fingerprint: DRFP (radius=2, nbits=128)
+6-fold nested-cv RMSE, MAE and R^2 for k-NN fingerprints 0.9823 0.7211 0.5184
+Fingerprint: Morgan (radius=2, nbits=128)
+6-fold nested-cv RMSE, MAE and R^2 for k-NN fingerprints 0.9049 0.6267 0.5865
+Fingerprint: DRFP (radius=2, nbits=128)
+6-fold nested-cv RMSE, MAE and R^2 for RF fingerprints 0.8826 0.6733 0.6246
+Fingerprint: Morgan (radius=2, nbits=128)
+6-fold nested-cv RMSE, MAE and R^2 for RF fingerprints 0.7263 0.5425 0.7421
+Fingerprint: DRFP (radius=2, nbits=128)
+6-fold nested-cv RMSE, MAE and R^2 for XGBoost fingerprints 1.0900 0.8709 0.4233
+Fingerprint: Morgan (radius=2, nbits=128)
+6-fold nested-cv RMSE, MAE and R^2 for XGBoost fingerprints 0.8646 0.7000 0.6330
+Fingerprint: DRFP (radius=3, nbits=128)
+6-fold nested-cv RMSE, MAE and R^2 for k-NN fingerprints 0.8511 0.6586 0.6515
+Fingerprint: Morgan (radius=3, nbits=128)
+6-fold nested-cv RMSE, MAE and R^2 for k-NN fingerprints 0.8588 0.6089 0.6393
+Fingerprint: DRFP (radius=3, nbits=128)
+6-fold nested-cv RMSE, MAE and R^2 for RF fingerprints 0.9173 0.7510 0.5948
+Fingerprint: Morgan (radius=3, nbits=128)
+6-fold nested-cv RMSE, MAE and R^2 for RF fingerprints 0.8331 0.6407 0.6632
+Fingerprint: DRFP (radius=3, nbits=128)
+6-fold nested-cv RMSE, MAE and R^2 for XGBoost fingerprints 1.0221 0.8386 0.4978
+Fingerprint: Morgan (radius=3, nbits=128)
+6-fold nested-cv RMSE, MAE and R^2 for XGBoost fingerprints 0.9648 0.7644 0.5501
+Fingerprint: DRFP (radius=1, nbits=256)
+6-fold nested-cv RMSE, MAE and R^2 for k-NN fingerprints 0.8037 0.5869 0.6816
+Fingerprint: Morgan (radius=1, nbits=256)
+6-fold nested-cv RMSE, MAE and R^2 for k-NN fingerprints 0.9181 0.6820 0.5801
+Fingerprint: DRFP (radius=1, nbits=256)
+6-fold nested-cv RMSE, MAE and R^2 for RF fingerprints 0.8374 0.6163 0.6611
+Fingerprint: Morgan (radius=1, nbits=256)
+6-fold nested-cv RMSE, MAE and R^2 for RF fingerprints 0.7309 0.5387 0.7371
+Fingerprint: DRFP (radius=1, nbits=256)
+6-fold nested-cv RMSE, MAE and R^2 for XGBoost fingerprints 1.0181 0.8376 0.4984
+Fingerprint: Morgan (radius=1, nbits=256)
+6-fold nested-cv RMSE, MAE and R^2 for XGBoost fingerprints 0.8757 0.7307 0.6230
+Fingerprint: DRFP (radius=2, nbits=256)
+6-fold nested-cv RMSE, MAE and R^2 for k-NN fingerprints 0.8600 0.6515 0.6286
+Fingerprint: Morgan (radius=2, nbits=256)
+6-fold nested-cv RMSE, MAE and R^2 for k-NN fingerprints 0.8521 0.6282 0.6413
+Fingerprint: DRFP (radius=2, nbits=256)
+6-fold nested-cv RMSE, MAE and R^2 for RF fingerprints 0.8367 0.6428 0.6438
+Fingerprint: Morgan (radius=2, nbits=256)
+6-fold nested-cv RMSE, MAE and R^2 for RF fingerprints 0.7533 0.5793 0.7244
+Fingerprint: DRFP (radius=2, nbits=256)
+6-fold nested-cv RMSE, MAE and R^2 for XGBoost fingerprints 1.0552 0.8456 0.4521
+Fingerprint: Morgan (radius=2, nbits=256)
+6-fold nested-cv RMSE, MAE and R^2 for XGBoost fingerprints 0.9078 0.7201 0.6011
+Fingerprint: DRFP (radius=3, nbits=256)
+6-fold nested-cv RMSE, MAE and R^2 for k-NN fingerprints 0.8994 0.6851 0.6067
+Fingerprint: Morgan (radius=3, nbits=256)
+6-fold nested-cv RMSE, MAE and R^2 for k-NN fingerprints 0.8177 0.5797 0.6752
+Fingerprint: DRFP (radius=3, nbits=256)
+6-fold nested-cv RMSE, MAE and R^2 for RF fingerprints 0.9431 0.7387 0.5704
+Fingerprint: Morgan (radius=3, nbits=256)
+6-fold nested-cv RMSE, MAE and R^2 for RF fingerprints 0.7611 0.5989 0.7228
+Fingerprint: DRFP (radius=3, nbits=256)
+6-fold nested-cv RMSE, MAE and R^2 for XGBoost fingerprints 1.0960 0.8808 0.4192
+Fingerprint: Morgan (radius=3, nbits=256)
+6-fold nested-cv RMSE, MAE and R^2 for XGBoost fingerprints 0.8951 0.7270 0.6093
+Fingerprint: DRFP (radius=1, nbits=512)
+6-fold nested-cv RMSE, MAE and R^2 for k-NN fingerprints 0.7966 0.5708 0.6877
+Fingerprint: Morgan (radius=1, nbits=512)
+6-fold nested-cv RMSE, MAE and R^2 for k-NN fingerprints 0.8882 0.6555 0.5899
+Fingerprint: DRFP (radius=1, nbits=512)
+6-fold nested-cv RMSE, MAE and R^2 for RF fingerprints 0.7387 0.5513 0.7331
+Fingerprint: Morgan (radius=1, nbits=512)
+6-fold nested-cv RMSE, MAE and R^2 for RF fingerprints 0.6729 0.5170 0.7795
+Fingerprint: DRFP (radius=1, nbits=512)
+6-fold nested-cv RMSE, MAE and R^2 for XGBoost fingerprints 0.9759 0.7998 0.5317
+Fingerprint: Morgan (radius=1, nbits=512)
+6-fold nested-cv RMSE, MAE and R^2 for XGBoost fingerprints 0.8716 0.7209 0.6288
+Fingerprint: DRFP (radius=2, nbits=512)
+6-fold nested-cv RMSE, MAE and R^2 for k-NN fingerprints 0.8927 0.6820 0.5852
+Fingerprint: Morgan (radius=2, nbits=512)
+6-fold nested-cv RMSE, MAE and R^2 for k-NN fingerprints 0.8833 0.6312 0.6185
+Fingerprint: DRFP (radius=2, nbits=512)
+6-fold nested-cv RMSE, MAE and R^2 for RF fingerprints 0.7232 0.5345 0.7384
+Fingerprint: Morgan (radius=2, nbits=512)
+6-fold nested-cv RMSE, MAE and R^2 for RF fingerprints 0.7100 0.5327 0.7515
+Fingerprint: DRFP (radius=2, nbits=512)
+6-fold nested-cv RMSE, MAE and R^2 for XGBoost fingerprints 0.8703 0.7223 0.6273
+Fingerprint: Morgan (radius=2, nbits=512)
+6-fold nested-cv RMSE, MAE and R^2 for XGBoost fingerprints 0.9013 0.7346 0.6031
+Fingerprint: DRFP (radius=3, nbits=512)
+6-fold nested-cv RMSE, MAE and R^2 for k-NN fingerprints 0.8660 0.6467 0.6372
+Fingerprint: Morgan (radius=3, nbits=512)
+6-fold nested-cv RMSE, MAE and R^2 for k-NN fingerprints 0.8509 0.6084 0.6371
+Fingerprint: DRFP (radius=3, nbits=512)
+6-fold nested-cv RMSE, MAE and R^2 for RF fingerprints 0.8766 0.6631 0.6061
+Fingerprint: Morgan (radius=3, nbits=512)
+6-fold nested-cv RMSE, MAE and R^2 for RF fingerprints 0.8347 0.6018 0.6501
+Fingerprint: DRFP (radius=3, nbits=512)
+6-fold nested-cv RMSE, MAE and R^2 for XGBoost fingerprints 1.0514 0.8251 0.4545
+Fingerprint: Morgan (radius=3, nbits=512)
+6-fold nested-cv RMSE, MAE and R^2 for XGBoost fingerprints 0.9428 0.7371 0.5637
+Fingerprint: DRFP (radius=1, nbits=1024)
+6-fold nested-cv RMSE, MAE and R^2 for k-NN fingerprints 0.8004 0.5682 0.6865
+Fingerprint: Morgan (radius=1, nbits=1024)
+6-fold nested-cv RMSE, MAE and R^2 for k-NN fingerprints 0.8649 0.6257 0.6167
+Fingerprint: DRFP (radius=1, nbits=1024)
+6-fold nested-cv RMSE, MAE and R^2 for RF fingerprints 0.6692 0.5021 0.7820
+Fingerprint: Morgan (radius=1, nbits=1024)
+6-fold nested-cv RMSE, MAE and R^2 for RF fingerprints 0.6571 0.5172 0.7855
+Fingerprint: DRFP (radius=1, nbits=1024)
+6-fold nested-cv RMSE, MAE and R^2 for XGBoost fingerprints 0.9692 0.7961 0.5369
+Fingerprint: Morgan (radius=1, nbits=1024)
+6-fold nested-cv RMSE, MAE and R^2 for XGBoost fingerprints 0.8864 0.7530 0.6070
+Fingerprint: DRFP (radius=2, nbits=1024)
+6-fold nested-cv RMSE, MAE and R^2 for k-NN fingerprints 0.8114 0.6144 0.6699
+Fingerprint: Morgan (radius=2, nbits=1024)
+6-fold nested-cv RMSE, MAE and R^2 for k-NN fingerprints 0.8772 0.6271 0.6070
+Fingerprint: DRFP (radius=2, nbits=1024)
+6-fold nested-cv RMSE, MAE and R^2 for RF fingerprints 0.6652 0.5116 0.7823
+Fingerprint: Morgan (radius=2, nbits=1024)
+6-fold nested-cv RMSE, MAE and R^2 for RF fingerprints 0.7004 0.5412 0.7600
+Fingerprint: DRFP (radius=2, nbits=1024)
+6-fold nested-cv RMSE, MAE and R^2 for XGBoost fingerprints 0.8521 0.7090 0.6449
+Fingerprint: Morgan (radius=2, nbits=1024)
+6-fold nested-cv RMSE, MAE and R^2 for XGBoost fingerprints 0.8783 0.7279 0.6166
+Fingerprint: DRFP (radius=3, nbits=1024)
+6-fold nested-cv RMSE, MAE and R^2 for k-NN fingerprints 0.8601 0.6445 0.6441
+Fingerprint: Morgan (radius=3, nbits=1024)
+6-fold nested-cv RMSE, MAE and R^2 for k-NN fingerprints 0.8500 0.6236 0.6481
+Fingerprint: DRFP (radius=3, nbits=1024)
+6-fold nested-cv RMSE, MAE and R^2 for RF fingerprints 0.7634 0.5906 0.7146
+Fingerprint: Morgan (radius=3, nbits=1024)
+6-fold nested-cv RMSE, MAE and R^2 for RF fingerprints 0.7244 0.5520 0.7449
+Fingerprint: DRFP (radius=3, nbits=1024)
+6-fold nested-cv RMSE, MAE and R^2 for XGBoost fingerprints 1.0655 0.8443 0.4418
+Fingerprint: Morgan (radius=3, nbits=1024)
+6-fold nested-cv RMSE, MAE and R^2 for XGBoost fingerprints 0.9394 0.7433 0.5655
+Fingerprint: DRFP (radius=1, nbits=2048)
+6-fold nested-cv RMSE, MAE and R^2 for k-NN fingerprints 0.7936 0.5630 0.6913
+Fingerprint: Morgan (radius=1, nbits=2048)
+6-fold nested-cv RMSE, MAE and R^2 for k-NN fingerprints 0.8691 0.6066 0.6100
+Fingerprint: DRFP (radius=1, nbits=2048)
+6-fold nested-cv RMSE, MAE and R^2 for RF fingerprints 0.6840 0.5144 0.7732
+Fingerprint: Morgan (radius=1, nbits=2048)
+6-fold nested-cv RMSE, MAE and R^2 for RF fingerprints 0.6517 0.5083 0.7928
+Fingerprint: DRFP (radius=1, nbits=2048)
+6-fold nested-cv RMSE, MAE and R^2 for XGBoost fingerprints 0.9705 0.8011 0.5327
+Fingerprint: Morgan (radius=1, nbits=2048)
+6-fold nested-cv RMSE, MAE and R^2 for XGBoost fingerprints 0.8758 0.7387 0.6203
+Fingerprint: DRFP (radius=2, nbits=2048)
+6-fold nested-cv RMSE, MAE and R^2 for k-NN fingerprints 0.7650 0.5780 0.7085
+Fingerprint: Morgan (radius=2, nbits=2048)
+6-fold nested-cv RMSE, MAE and R^2 for k-NN fingerprints 0.8624 0.6241 0.6370
+Fingerprint: DRFP (radius=2, nbits=2048)
+6-fold nested-cv RMSE, MAE and R^2 for RF fingerprints 0.6711 0.5197 0.7778
+Fingerprint: Morgan (radius=2, nbits=2048)
+6-fold nested-cv RMSE, MAE and R^2 for RF fingerprints 0.6468 0.4995 0.7948
+Fingerprint: DRFP (radius=2, nbits=2048)
+6-fold nested-cv RMSE, MAE and R^2 for XGBoost fingerprints 0.8497 0.6996 0.6489
+Fingerprint: Morgan (radius=2, nbits=2048)
+6-fold nested-cv RMSE, MAE and R^2 for XGBoost fingerprints 0.8970 0.7438 0.6068
+Fingerprint: DRFP (radius=3, nbits=2048)
+6-fold nested-cv RMSE, MAE and R^2 for k-NN fingerprints 0.9370 0.7131 0.5820
+Fingerprint: Morgan (radius=3, nbits=2048)
+6-fold nested-cv RMSE, MAE and R^2 for k-NN fingerprints 0.8700 0.6372 0.6343
+Fingerprint: DRFP (radius=3, nbits=2048)
+6-fold nested-cv RMSE, MAE and R^2 for RF fingerprints 0.7553 0.5829 0.7184
+Fingerprint: Morgan (radius=3, nbits=2048)
+6-fold nested-cv RMSE, MAE and R^2 for RF fingerprints 0.6918 0.5430 0.7650
+Fingerprint: DRFP (radius=3, nbits=2048)
+6-fold nested-cv RMSE, MAE and R^2 for XGBoost fingerprints 0.9681 0.7857 0.5373
+Fingerprint: Morgan (radius=3, nbits=2048)
+6-fold nested-cv RMSE, MAE and R^2 for XGBoost fingerprints 0.8729 0.7301 0.6258
