@@ -5,7 +5,7 @@ This repository contains the code and auxiliary data associated with the "Improv
 in, DFT functional benchmarking through active learning" project. Code is provided "as-is". Minor edits may be required 
 to tailor the scripts for different computational systems.
 
-![](toc.png)
+![](docs/toc.png)
 
 ### Conda environment
 To set up the conda environment:
