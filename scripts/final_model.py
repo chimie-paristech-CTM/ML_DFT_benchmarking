@@ -99,7 +99,6 @@ if __name__ == "__main__":
     columns_drop = [column for column in df_pool.columns if column not in ['Type', 'rxn_smiles']]
     df_pool.drop(columns=columns_drop, inplace=True)
     df_pool.to_csv(f'../data/hypothetical_chemical_space_iter_{args.iteration}.csv')
-    df_preds.to_csv(f'Prediction_iter_{args.iteration}.csv', sep=';')
     t1 = time.time()
     logger.info(f"time of execution: {t1 - t0} seconds")
 

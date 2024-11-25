@@ -66,12 +66,14 @@ final_model.py [-h] [--train_file TRAIN_FILE] [--pool_file POOL_FILE] [--new_dat
 
 ## Reproducibility
 
-To reproduce the acquired reaction each round as well the mean absolute error of each set, a bash script is provided. 
+To reproduce the acquired reaction each round as well the mean absolute error of each set and the plots, a bash script is provided. 
 Execution as follows:
 
 ````
 bash reproducibility.sh
 ````
+
+An example of the autodE input can be found in `data/autode_input_8`. 
 
 ## References
 

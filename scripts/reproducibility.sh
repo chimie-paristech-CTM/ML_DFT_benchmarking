@@ -40,3 +40,7 @@ python baseline_models.py --final_cv --input_file ../data/final_overview_data.cs
 python final_model.py --iteration 8 --beta 1 --seed 18 --cutoff 0.75 --final_dir ../data/autode_input_8 --new_data 30 --pool_file ../data/hypothetical_chemical_space_iter_7.csv --train_file ../data/data_smiles_curated.csv --new_data_file ../data/data_augmentation.csv
 python analyze_data.py --iter 8 --raw_data ../data/raw_data_round_8  --pool_file ../data/hypothetical_chemical_space.csv
 python baseline_models.py --final_cv --input_file ../data/final_overview_data.csv --csv_file ../data/data_smiles_curated_8.csv
+
+# Plots
+
+python reproduce_plots.py
