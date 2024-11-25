@@ -1,0 +1,275 @@
+Iteration: 1, beta: 1.8
+Argument beta: 1.8
+Argument conda_env: 'autode'
+Argument cutoff: 0.75
+Argument final_dir: '../data/autode_input_1'
+Argument iteration: 1
+Argument new_data: 10
+Argument new_data_file: '../data/data_augmentation.csv'
+Argument pool_file: '../data/hypothetical_chemical_space.csv'
+Argument seed: 10
+Argument selective_sampling: None
+Argument selective_sampling_data: 5
+Argument train_file: '../data/data_smiles_curated.csv'
+seeds: [1533, 8026, 8906, 1243, 4376]
+All the reactions are above 0.75.
+Next reactions:
+                    Type                                                                                                                rxn_smiles  prediction 8906  variance 8906   ucb 8906
+365          Diels-Alder                    C=CC(F)=CC(C)(C)C.O=C1C=CC(=O)c2c(O)cccc21>>CC(C)(C)[C@@H]1C(F)=CC[C@@H]2C(=O)c3cccc(O)c3C(=O)[C@@H]21         6.505495       4.497859  10.322963
+1814         Diels-Alder                                                    C=C.COC(=O)C1=CC(=O)C(=O)C=C1F>>COC(=O)C1=C(F)[C@H]2CC[C@@H]1C(=O)C2=O         5.607605       5.488774   9.824669
+1093         Diels-Alder                COC(=O)C=C(C(=O)OC)C(C)(C)C.COC(=O)c1ccoc1>>COC(=O)C1=C[C@@H]2O[C@H]1[C@](C(=O)OC)(C(C)(C)C)[C@@H]2C(=O)OC         5.588314       5.455354   9.792519
+853          Diels-Alder                                          C(=Cc1ccccc1)c1ccccc1.c1ccoc1>>C1=C[C@H]2O[C@@H]1[C@@H](c1ccccc1)[C@@H]2c1ccccc1         5.462206       5.436042   9.658964
+2012         Diels-Alder                                           C=COC(C)=O.O=CC1=CC(=O)C(=O)C=C1>>CC(=O)O[C@@H]1C[C@H]2C=C(C=O)[C@@H]1C(=O)C2=O         5.647460       4.620456   9.516604
+8182  [3+2]cycloaddition  O=C(C/C(O)=[N+]1\N[C@H]2CC[C@@H]1C2)OC(=CO)c1ccccc1>>O=C1C[C@]2(O)N3[C@@H]4CC[C@@H](C4)[NH+]3[C@@H](O)[C@@]2(c2ccccc2)O1         5.098734       5.789597   9.429819
+8942  [3+2]cycloaddition                            COC(=O)C(=C=O)C(CCCCC/C(=[NH+]/[O-])C(C)C)C(=O)OC>>COC(=O)C1=C2ON[C@](C(C)C)(CCCCCC1C(=O)OC)O2         5.051519       5.866448   9.411255
+5534  [3,3]rearrangement                                                                                  C#CCC(F)C1=CCCCC1>>C=C=C[C@@H]1CCCCC1=CF         5.164730       5.513346   9.391223
+7236  [3+2]cycloaddition                                          C[N+]([O-])=CC(CC=CC(C)(C)C)C(C)(C)C>>CN1O[C@@H](C(C)(C)C)C2CC(C(C)(C)C)[C@@H]21         4.417239       6.630535   9.052207
+5972  [3,3]rearrangement                           C=C(O[C@@H]1C=C(C(C)(C)C)C=C[C@@H]1C#N)C(C)(C)C>>CC(C)(C)C(=O)C[C@]1(C(C)(C)C)C=C[C@H](C#N)C=C1         4.956984       4.335078   8.704737
+time of execution: 2364.3463311195374 seconds
+Iteration: 2, beta: 1.8
+Argument beta: 1.8
+Argument conda_env: 'autode'
+Argument cutoff: 0.8
+Argument final_dir: '../data/autode_input_2'
+Argument iteration: 2
+Argument new_data: 15
+Argument new_data_file: '../data/data_augmentation.csv'
+Argument pool_file: '../data/hypothetical_chemical_space_iter_1.csv'
+Argument seed: 7
+Argument selective_sampling: '[3+2]cycloaddition'
+Argument selective_sampling_data: 5
+Argument train_file: '../data/data_smiles_curated.csv'
+seeds: [6305, 3471, 7468, 1791, 2186]
+All the reactions are above 0.8.
+All the reactions are above 0.8.
+Next reactions:
+                    Type                                                                                                                           rxn_smiles  prediction 3471  variance 3471   ucb 3471
+3483  [3+2]cycloaddition                                       C(=Cc1ccccc1)c1ccccc1.C[N+]([O-])=Cc1ccccc1>>CN1O[C@H](c2ccccc2)[C@H](c2ccccc2)[C@@H]1c1ccccc1         5.321263       5.386959   9.499031
+6612  [3+2]cycloaddition                                             FC=CC/C(F)=[N+]1\N[C@H]2CC[C@@H]1C2>>F[C@H]1[C@@H]2C[C@]2(F)N2[C@@H]3CC[C@@H](C3)[NH+]12         4.802988       5.756086   9.121520
+8520  [3+2]cycloaddition                                         COC(=O)C(=C=O)C(CCCC/C(=[NH+]/[O-])C(C)C)C(=O)OC>>COC(=O)C1=C2ON[C@](C(C)C)(CCCCC1C(=O)OC)O2         4.711073       5.643211   8.987053
+7696  [3+2]cycloaddition                                                                CC(C)/C(C(=O)C(=O)C=C=O)=[N+](\[O-])O>>CC(C)[C@]12OC(=CC(=O)C1=O)ON2O         4.172343       4.865149   8.142618
+4392  [3+2]cycloaddition                                                            CC(=C=O)c1ccccc1.N#CC=[N+]([O-])C=O>>C/C(=C1/O[C@H](C#N)N(C=O)O1)c1ccccc1         4.102131       4.430705   7.890994
+1424         Diels-Alder                                   COC(=O)C(=CC=O)C(C)(C)C.COC(=O)c1ccoc1>>COC(=O)C1=C[C@@H]2O[C@H]1[C@](C(=O)OC)(C(C)(C)C)[C@@H]2C=O         6.380402       5.542224  10.617949
+33           Diels-Alder  COC(=O)C=C(C=COC(C)=O)C(=O)OC.O=C1C=CC(=O)c2c(O)cccc21>>COC(=O)C1=C[C@@H](OC(C)=O)[C@@H]2C(=O)c3cccc(O)c3C(=O)[C@@H]2[C@@H]1C(=O)OC         6.001668       4.855507   9.968007
+1708         Diels-Alder                                          C=Cc1ccccc1.CC(C)(C)C1=CC(=O)C(=O)C=C1>>CC(C)(C)C1=C[C@@H]2C[C@@H](c3ccccc3)[C@H]1C(=O)C2=O         5.875818       4.526154   9.705274
+1285         Diels-Alder                                                                                 C=COC(C)=O.c1ccoc1>>CC(=O)O[C@H]1C[C@@H]2C=C[C@H]1O2         5.127996       4.763401   9.056535
+5245  [3,3]rearrangement                                                             N#CC(C=O)(CC#Cc1ccccc1)C1=CCCCC1>>C=C=C(c1ccccc1)[C@@H]1CCCCC1=C(C#N)C=O         4.904911       4.586524   8.759822
+7836         Diels-Alder                                                                 COC(=O)C1=CCC(=O)OC=CCC(=O)OC=C1>>COC(=O)C1=CC2OC(=O)CC2C2OC(=O)CC12         4.746038       4.858564   8.713625
+6105  [3,3]rearrangement                              C=C(O[C@@H]1C=C(C(C)(C)C)C=C[C@@H]1C(=O)OC)C(C)(C)C>>COC(=O)[C@H]1C=C[C@](CC(=O)C(C)(C)C)(C(C)(C)C)C=C1         4.833506       4.500045   8.651902
+7911         Diels-Alder                                                             C=CCC(=O)OC=C(C(=C)C(=O)OC)C(C)(C)C>>COC(=O)C1=C(C(C)(C)C)C2OC(=O)CC2CC1         4.456082       5.164964   8.546863
+6322         Diels-Alder                                                                                         CC(=O)OC1=CCC=CCC=C1>>CC(=O)OC1=CC2CC2C2CC12         4.613765       4.685359   8.509989
+2482         Diels-Alder                                                   COC(=O)C1=CCCC1.[O-][s+]1cccc1>>COC(=O)[C@@]12CCC[C@@H]1[C@@H]1C=C[C@H]2[S@+]1[O-]         4.632273       4.632783   8.506575
+time of execution: 2363.5483899116516 seconds
+Iteration: 3, beta: 1.8
+Argument beta: 1.8
+Argument conda_env: 'autode'
+Argument cutoff: 0.8
+Argument final_dir: '../data/autode_input_3'
+Argument iteration: 3
+Argument new_data: 15
+Argument new_data_file: '../data/data_augmentation.csv'
+Argument pool_file: '../data/hypothetical_chemical_space_iter_2.csv'
+Argument seed: 2
+Argument selective_sampling: None
+Argument selective_sampling_data: 5
+Argument train_file: '../data/data_smiles_curated.csv'
+seeds: [1926, 2500, 2390, 6915, 3770]
+All the reactions are above 0.8.
+Next reactions:
+                    Type                                                                                                                             rxn_smiles  prediction 3770  variance 3770   ucb 3770
+1017         Diels-Alder                             COC(=O)C(=COC(C)=O)C(C)(C)C.COC(=O)c1ccoc1>>COC(=O)C1=C[C@@H]2O[C@H]1[C@](C(=O)OC)(C(C)(C)C)[C@@H]2OC(C)=O         6.973582       4.633303  10.848101
+177          Diels-Alder  COC(=O)C=C(C=Cc1ccccc1)C(=O)OC.O=C1C=CC(=O)c2c(O)cccc21>>COC(=O)C1=C[C@@H](c2ccccc2)[C@@H]2C(=O)c3cccc(O)c3C(=O)[C@@H]2[C@@H]1C(=O)OC         6.626378       4.806642  10.572708
+3225  [3+2]cycloaddition                                          C(=Cc1ccccc1)c1ccccc1.CC(=O)OC=[N+](C)[O-]>>CC(=O)O[C@H]1[C@@H](c2ccccc2)[C@@H](c2ccccc2)ON1C         6.047770       5.202254  10.153291
+2334         Diels-Alder                                          COC(=O)C1=CC(F)CC1.[O-][s+]1cccc1>>COC(=O)[C@@]12CC[C@@H](F)[C@@H]1[C@@H]1C=C[C@H]2[S@+]1[O-]         5.508756       5.076995   9.564550
+2211         Diels-Alder                                                           C=CF.CC(C)(C)C1=CC(=O)C(=O)C=C1>>CC(C)(C)C1=C[C@@H]2C(=O)C(=O)[C@H]1C[C@H]2F         5.604032       4.653667   9.487056
+5596  [3,3]rearrangement                                        C=C(O[C@@H]1C=C(C(C)(C)C)C=C[C@@H]1C=O)C(C)(C)C>>CC(C)(C)C(=O)C[C@]1(C(C)(C)C)C=C[C@H](C=O)C=C1         5.274086       4.511177   9.097202
+5751  [3,3]rearrangement                                                      C=CO[C@@H]1C=C(C(=O)OC)C=C[C@@H]1C(=O)OC>>COC(=O)[C@H]1C=C[C@](CC=O)(C(=O)OC)C=C1         5.094472       4.782848   9.031022
+1466         Diels-Alder                                           C1#Cc2ccccc2CCc2ccccc21.COC(=O)c1nncnn1>>COC(=O)[C@]12N=N[C@H](N=N1)C1=C2c2ccccc2CCc2ccccc21         4.893173       5.164442   8.983746
+6583  [3+2]cycloaddition        COC(=O)C=C(C/C(C(=O)OC)=[N+]1\N[C@H]2CC[C@@H]1C2)OC(C)=O>>COC(=O)[C@@H]1[NH+]2[C@H]3CC[C@H](C3)N2[C@@]2(C(=O)OC)C[C@@]12OC(C)=O         4.655257       5.636125   8.928552
+5374  [3,3]rearrangement                                                                         N#CC#CCC(C#N)(C=O)C1=CCCCC1>>C=C=C(C#N)[C@@H]1CCCCC1=C(C#N)C=O         5.112746       4.448265   8.909110
+8556  [3+2]cycloaddition                                           CC(=O)OC(=C=O)C(CCCC/C(=[NH+]/[O-])C(C)C)OC(C)=O>>CC(=O)OC1=C2ON[C@](C(C)C)(CCCCC1OC(C)=O)O2         4.422450       5.656225   8.703358
+5635  [3,3]rearrangement                                                                                          C=C(C=O)O[C@@H]1C=CC=CC1>>O=CC(=O)CC1C=CCC=C1         4.770263       4.681771   8.664995
+7842         Diels-Alder                                                               COC(=O)C1=COC(=O)CC=COC(=O)CC=C1F>>COC(=O)C1=C(F)C2CC(=O)OC2C2CC(=O)OC12         4.556607       5.064290   8.607323
+2310         Diels-Alder                                         CC(C)(C)C1=CCCC1.O=Cc1cc[s+]([O-])c1>>CC(C)(C)[C@@]12CCC[C@@H]1[C@@H]1C(C=O)=C[C@H]2[S@+]1[O-]         4.576390       4.917003   8.567766
+1024         Diels-Alder                                                                                   C=CC(=O)OC.c1ccoc1>>COC(=O)[C@H]1C[C@H]2C=C[C@@H]1O2         4.646440       4.663371   8.533511
+time of execution: 2385.638736009598 seconds
+Iteration: 4, beta: 1.8
+Argument beta: 1.8
+Argument conda_env: 'autode'
+Argument cutoff: 0.75
+Argument final_dir: '../data/autode_input_4'
+Argument iteration: 4
+Argument new_data: 15
+Argument new_data_file: '../data/data_augmentation.csv'
+Argument pool_file: '../data/hypothetical_chemical_space_iter_3.csv'
+Argument seed: 9
+Argument selective_sampling: None
+Argument selective_sampling_data: 5
+Argument train_file: '../data/data_smiles_curated.csv'
+seeds: [8585, 7116, 5376, 3269, 4049]
+All the reactions are above 0.75.
+Next reactions:
+                    Type                                                                                                                           rxn_smiles  prediction 7116  variance 7116   ucb 7116
+1441         Diels-Alder                                       COC(=O)C(=CF)C(C)(C)C.COC(=O)c1ccoc1>>COC(=O)C1=C[C@@H]2O[C@H]1[C@](C(=O)OC)(C(C)(C)C)[C@@H]2F         7.101350       4.501442  10.920338
+632          Diels-Alder  COC(=O)C(C=COC(C)=O)=COC(C)=O.O=C1C=CC(=O)c2c(O)cccc21>>COC(=O)C1=C[C@@H](OC(C)=O)[C@@H]2C(=O)c3cccc(O)c3C(=O)[C@@H]2[C@@H]1OC(C)=O         6.420018       5.498680  10.640886
+2530         Diels-Alder                              COC(=O)C1=CC(C(=O)OC)CC1.[O-][s+]1cccc1>>COC(=O)[C@@H]1CC[C@]2(C(=O)OC)[C@H]1[C@@H]1C=C[C@H]2[S@+]1[O-]         5.916631       4.938409   9.916687
+3536  [3+2]cycloaddition                                                 C(=Cc1ccccc1)c1ccccc1.C[N+]([O-])=CC=O>>CN1O[C@H](c2ccccc2)[C@H](c2ccccc2)[C@@H]1C=O         5.670014       5.130787   9.747237
+1479         Diels-Alder                      C1#Cc2ccccc2CCc2ccccc21.COC(=O)c1nnc(C(C)(C)C)nn1>>COC(=O)[C@]12N=N[C@](C(C)(C)C)(N=N1)C1=C2c2ccccc2CCc2ccccc21         5.482937       5.294616   9.624743
+4581  [3+2]cycloaddition    C(=Cc1ccccc1)c1ccccc1.CC(C)(C)C=[N+]1N[C@H]2CC[C@@H]1C2>>CC(C)(C)[C@@H]1[C@H](c2ccccc2)[C@@H](c2ccccc2)[NH+]2[C@H]3CC[C@H](C3)N12         5.206169       5.850059   9.559811
+1779         Diels-Alder                                           C=Cc1ccccc1.O=C1C=CC(c2ccccc2)=CC1=O>>O=C1C(=O)[C@@H]2C=C(c3ccccc3)[C@H]1[C@H](c1ccccc1)C2         5.382209       4.887383   9.361545
+2890         Diels-Alder                                                 N#CC1=CCCC1.O=Cc1cc[s+]([O-])c1>>N#C[C@@]12CCC[C@@H]1[C@@H]1C(C=O)=C[C@H]2[S@+]1[O-]         5.259520       5.039290   9.300225
+6226  [3,3]rearrangement                                               C=C(C=O)O[C@@H]1C=C(C(C)(C)C)C=C[C@@H]1C#N>>CC(C)(C)[C@]1(CC(=O)C=O)C=C[C@@H](C#N)C=C1         5.351549       4.648820   9.232551
+6205  [3,3]rearrangement                                                           C=CO[C@@H]1C=C(C(=O)OC)C=C[C@@H]1C=O>>COC(=O)[C@]1(CC=O)C=C[C@@H](C=O)C=C1         5.190904       4.705073   9.095316
+1394         Diels-Alder                                                                     CC(=O)OC=CC=O.c1ccoc1>>CC(=O)O[C@H]1[C@H](C=O)[C@H]2C=C[C@@H]1O2         4.942369       5.265732   9.072862
+5345  [3,3]rearrangement                                                   N#CC(CC#Cc1ccccc1)(C1=CCCCC1)c1ccccc1>>C=C=C(c1ccccc1)[C@@H]1CCCCC1=C(C#N)c1ccccc1         5.045484       4.615280   8.912461
+1181         Diels-Alder                                                                                 C=CC=O.O=Cc1ccoc1>>O=CC1=C[C@H]2C[C@H](C=O)[C@@H]1O2         4.823066       5.018065   8.855253
+5956  [3,3]rearrangement                             C=C(O[C@@H]1C=C(OC(C)=O)C=C[C@@H]1C(C)(C)C)C(C)(C)C>>CC(=O)O[C@]1(CC(=O)C(C)(C)C)C=C[C@@H](C(C)(C)C)C=C1         4.833337       4.938785   8.833545
+7846         Diels-Alder                                                         COC(=O)C1=COC(=O)CC=COC(=O)CC=C1C=O>>COC(=O)C1=C(C=O)C2CC(=O)OC2C2CC(=O)OC12         4.726179       5.185342   8.825022
+time of execution: 2470.2275133132935 seconds
+Iteration: 5, beta: 1.8
+Argument beta: 1.8
+Argument conda_env: 'autode'
+Argument cutoff: 0.7
+Argument final_dir: '../data/autode_input_5'
+Argument iteration: 5
+Argument new_data: 15
+Argument new_data_file: '../data/data_augmentation.csv'
+Argument pool_file: '../data/hypothetical_chemical_space_iter_4.csv'
+Argument seed: 20
+Argument selective_sampling: None
+Argument selective_sampling_data: 5
+Argument train_file: '../data/data_smiles_curated.csv'
+seeds: [3477, 5257, 2663, 6364, 3775]
+All the reactions are above 0.7.
+Next reactions:
+                    Type                                                                                                                       rxn_smiles  prediction 3477  variance 3477   ucb 3477
+216          Diels-Alder          COC(=O)C(C=COC(C)=O)=CO.O=C1C=CC(=O)c2c(O)cccc21>>COC(=O)C1=C[C@@H](OC(C)=O)[C@@H]2C(=O)c3cccc(O)c3C(=O)[C@@H]2[C@@H]1O         7.294723       4.803070  11.239587
+1248         Diels-Alder                               COC(=O)C(=CC#N)C(C)(C)C.COC(=O)c1ccoc1>>COC(=O)C1=C[C@@H]2O[C@H]1[C@](C(=O)OC)(C(C)(C)C)[C@@H]2C#N         6.934168       4.585766  10.788761
+5129  [3+2]cycloaddition  C(=Cc1ccccc1)c1ccccc1.COC(=O)C=[N+]1N[C@H]2CC[C@@H]1C2>>COC(=O)[C@@H]1[C@H](c2ccccc2)[C@@H](c2ccccc2)[NH+]2[C@H]3CC[C@H](C3)N12         6.249316       6.057229  10.679375
+1463         Diels-Alder                                C1#Cc2ccccc2CCc2ccccc21.COC(=O)c1nnc(F)nn1>>COC(=O)[C@]12N=N[C@](F)(N=N1)C1=C2c2ccccc2CCc2ccccc21         6.463255       4.855263  10.429494
+2270         Diels-Alder                COC(=O)C1=CC(C(=O)OC)CC1.O=Cc1cc[s+]([O-])c1>>COC(=O)[C@@H]1CC[C@]2(C(=O)OC)[C@H]1[C@@H]1C(C=O)=C[C@H]2[S@+]1[O-]         6.193574       5.143695  10.275923
+721          Diels-Alder                                  C=CC(C=O)=CC#N.O=C1C=CC(=O)c2c(O)cccc21>>N#C[C@@H]1C(C=O)=CC[C@@H]2C(=O)c3cccc(O)c3C(=O)[C@H]12         6.031257       4.996259  10.054673
+2972  [3+2]cycloaddition                                   C(=Cc1ccccc1)c1ccccc1.C[N+]([O-])=CC(C)(C)C>>CN1O[C@H](c2ccccc2)[C@H](c2ccccc2)[C@@H]1C(C)(C)C         5.919506       4.936063   9.918612
+6178  [3,3]rearrangement                         C=C(O[C@@H]1C=C(C(=O)OC)C=C[C@@H]1C(C)(C)C)C(C)(C)C>>COC(=O)[C@]1(CC(=O)C(C)(C)C)C=C[C@@H](C(C)(C)C)C=C1         5.604708       4.868559   9.576373
+1536         Diels-Alder                                        C=Cc1ccccc1.COC(=O)C1=CC(=O)C(=O)C=C1>>COC(=O)C1=C[C@@H]2C[C@@H](c3ccccc3)[C@H]1C(=O)C2=O         5.608505       4.605617   9.471431
+6180  [3,3]rearrangement                                           C=C(C=O)O[C@@H]1C=C(C(C)(C)C)C=C[C@@H]1C=O>>CC(C)(C)[C@]1(CC(=O)C=O)C=C[C@@H](C=O)C=C1         5.487898       4.857215   9.454934
+2517         Diels-Alder                             CC(C)(C)C1=CCCC1.COC(=O)c1cc[s+]([O-])c1>>COC(=O)C1=C[C@H]2[S@+]([O-])[C@@H]1[C@H]1CCC[C@]12C(C)(C)C         5.300948       4.997282   9.324776
+971          Diels-Alder                                                                     CC(=O)OC=CO.c1ccoc1>>CC(=O)O[C@H]1[C@H](O)[C@H]2C=C[C@@H]1O2         5.281306       5.004953   9.308221
+769          Diels-Alder                                    CC(=O)OC=C(C=O)c1ccccc1.O=Cc1ccoc1>>CC(=O)O[C@@H]1[C@@H]2C=C(C=O)[C@@H](O2)[C@]1(C=O)c1ccccc1         5.082291       5.418713   9.272354
+6410  [3+2]cycloaddition                                                        COC(=O)C=CCC(C(=O)OC)=[N+](C)[O-]>>COC(=O)[C@@H]1ON(C)[C@@]2(C(=O)OC)CC12         4.915258       5.658447   9.197006
+2645         Diels-Alder                                            N#CC1=CC(F)CC1.[O-][s+]1cccc1>>N#C[C@@]12CC[C@@H](F)[C@@H]1[C@@H]1C=C[C@H]2[S@+]1[O-]         5.029302       5.267566   9.160514
+time of execution: 2381.329338788986 seconds
+Iteration: 6, beta: 1.8
+Argument beta: 1.8
+Argument conda_env: 'autode'
+Argument cutoff: 0.75
+Argument final_dir: '../data/autode_input_6'
+Argument iteration: 6
+Argument new_data: 15
+Argument new_data_file: '../data/data_augmentation.csv'
+Argument pool_file: '../data/hypothetical_chemical_space_iter_5.csv'
+Argument seed: 5
+Argument selective_sampling: None
+Argument selective_sampling_data: 5
+Argument train_file: '../data/data_smiles_curated.csv'
+seeds: [5185, 6874, 9684, 1475, 8628]
+All the reactions are above 0.75.
+Next reactions:
+                    Type                                                                                                                       rxn_smiles  prediction 8628  variance 8628   ucb 8628
+53           Diels-Alder      COC(=O)C(C=CC#N)=COC(C)=O.O=C1C=CC(=O)c2c(O)cccc21>>COC(=O)C1=C[C@@H](C#N)[C@@H]2C(=O)c3cccc(O)c3C(=O)[C@@H]2[C@@H]1OC(C)=O         7.396373       4.990318  11.417397
+2672         Diels-Alder                      COC(=O)C1=CC(C#N)CC1.O=Cc1cc[s+]([O-])c1>>COC(=O)[C@@]12CC[C@@H](C#N)[C@@H]1[C@@H]1C(C=O)=C[C@H]2[S@+]1[O-]         7.023356       4.942876  11.025220
+1000         Diels-Alder                                   COC(=O)C(=CO)C(C)(C)C.COC(=O)c1ccoc1>>COC(=O)C1=C[C@@H]2O[C@H]1[C@](C(=O)OC)(C(C)(C)C)[C@@H]2O         6.995841       4.637331  10.872044
+1480         Diels-Alder                 C1#Cc2ccccc2CCc2ccccc21.COC(=O)c1nnc(-c2ccccc2)nn1>>COC(=O)[C@]12N=N[C@](c3ccccc3)(N=N1)C1=C2c2ccccc2CCc2ccccc21         6.497488       4.846200  10.460024
+4652  [3+2]cycloaddition  C(=Cc1ccccc1)c1ccccc1.CC(=O)OC=[N+]1N[C@H]2CC[C@@H]1C2>>CC(=O)O[C@@H]1[C@H](c2ccccc2)[C@@H](c2ccccc2)[NH+]2[C@H]3CC[C@H](C3)N12         6.146796       5.090590  10.208017
+5854  [3,3]rearrangement                            C=C(O[C@@H]1C=C(C(=O)OC)C=C[C@@H]1C(C)(C)C)C(=O)OC>>COC(=O)C(=O)C[C@]1(C(=O)OC)C=C[C@H](C(C)(C)C)C=C1         5.869836       4.892786   9.851371
+2468         Diels-Alder                                             CC(C)(C)C1=CCCC1.[O-][s+]1cccc1>>CC(C)(C)[C@@]12CCC[C@@H]1[C@@H]1C=C[C@H]2[S@+]1[O-]         5.605307       5.158395   9.693485
+1919         Diels-Alder                                                     C=Cc1ccccc1.O=C1C=CC(F)=CC1=O>>O=C1C(=O)[C@@H]2C=C(F)[C@H]1[C@H](c1ccccc1)C2         5.633342       4.589166   9.489363
+5756  [3,3]rearrangement                                                        C=C(O[C@@H]1C=C(OC(C)=O)C=CC1)C(C)(C)C>>CC(=O)OC1(CC(=O)C(C)(C)C)C=CCC=C1         5.472333       4.841050   9.432763
+2720         Diels-Alder                  C1=CC(c2ccccc2)CC1.COC(=O)c1cc[s+]([O-])c1>>COC(=O)C1=C[C@@H]2[C@@H]3CC[C@@H](c4ccccc4)[C@@H]3[C@H]1[S@@+]2[O-]         5.126207       5.639989   9.400966
+5432  [3,3]rearrangement                                                           CC(=O)OC#CCC(C#N)(C=O)C1=CCCCC1>>C=C=C(OC(C)=O)[C@@H]1CCCCC1=C(C#N)C=O         5.367480       4.879078   9.343435
+745          Diels-Alder                                                       O=CC=Cc1ccccc1.O=Cc1ccoc1>>O=CC1=C[C@@H]2O[C@H]1[C@@H](C=O)[C@@H]2c1ccccc1         5.233771       5.189733   9.334349
+5590  [3,3]rearrangement                                           C=C(C#N)O[C@@H]1C=C(C(C)(C)C)C=C[C@@H]1C#N>>CC(C)(C)[C@]1(CC(=O)C#N)C=C[C@@H](C#N)C=C1         5.268142       4.627662   9.140302
+8962  [3+2]cycloaddition                                   CC(=O)OC(=C=O)C(CCCCC/C(=[NH+]/[O-])C(C)C)OC(C)=O>>CC(=O)OC1=C2ON[C@](C(C)C)(CCCCCC1OC(C)=O)O2         4.723780       5.973641   9.123166
+3759  [3+2]cycloaddition                                                  CC(=C=O)C#N.CC(=O)OC=[N+]([O-])c1ccccc1>>CC(=O)O[C@H]1O/C(=C(/C)C#N)ON1c1ccccc1         4.669943       5.865446   9.029306
+time of execution: 2403.9511988162994 seconds
+Iteration: 7, beta: 1.8
+Argument beta: 1.8
+Argument conda_env: 'autode'
+Argument cutoff: 0.8
+Argument final_dir: '../data/autode_input_7'
+Argument iteration: 7
+Argument new_data: 15
+Argument new_data_file: '../data/data_augmentation.csv'
+Argument pool_file: '../data/hypothetical_chemical_space_iter_6.csv'
+Argument seed: 11
+Argument selective_sampling: None
+Argument selective_sampling_data: 5
+Argument train_file: '../data/data_smiles_curated.csv'
+seeds: [8411, 8629, 8402, 9320, 4111]
+All the reactions are above 0.8.
+Next reactions:
+                    Type                                                                                                                             rxn_smiles  prediction 8411  variance 8411   ucb 8411
+310          Diels-Alder            COC(=O)C(C=COC(C)=O)=CC=O.O=C1C=CC(=O)c2c(O)cccc21>>COC(=O)C1=C[C@@H](OC(C)=O)[C@@H]2C(=O)c3cccc(O)c3C(=O)[C@@H]2[C@@H]1C=O         7.445696       4.872752  11.419072
+2260         Diels-Alder                  COC(=O)C1=CC(C(C)(C)C)CC1.O=Cc1cc[s+]([O-])c1>>COC(=O)[C@@]12CC[C@@H](C(C)(C)C)[C@@H]1[C@@H]1C(C=O)=C[C@H]2[S@+]1[O-]         7.037648       4.820190  10.989536
+751          Diels-Alder                                      COC(=O)C=C(C=O)C(=O)OC.COC(=O)c1ccoc1>>COC(=O)C1=C[C@@H]2O[C@H]1[C@@](C=O)(C(=O)OC)[C@@H]2C(=O)OC         6.861022       5.028305  10.897321
+1495         Diels-Alder                          C1#Cc2ccccc2CCc2ccccc21.COC(=O)c1nnc(C(=O)OC)nn1>>COC(=O)[C@]12N=N[C@](C(=O)OC)(N=N1)C1=C2c2ccccc2CCc2ccccc21         6.845703       4.813382  10.794799
+4937  [3+2]cycloaddition  C(=Cc1ccccc1)c1ccccc1.C(c1ccccc1)=[N+]1N[C@H]2CC[C@@H]1C2>>c1ccc([C@H]2[C@@H](c3ccccc3)N3[C@@H]4CC[C@@H](C4)[NH+]3[C@@H]2c2ccccc2)cc1         6.202694       4.961274  10.211999
+2760         Diels-Alder                        C1=CC(c2ccccc2)CC1.CC(=O)Oc1cc[s+]([O-])c1>>CC(=O)OC1=C[C@@H]2[C@@H]3CC[C@@H](c4ccccc4)[C@@H]3[C@H]1[S@@+]2[O-]         5.701270       5.903345  10.074694
+2676         Diels-Alder                                                                 OC1=CCCC1.[O-][s+]1cccc1>>[O-][S@+]1[C@H]2C=C[C@@H]1[C@]1(O)CCC[C@H]21         5.782873       5.313541   9.932074
+5612  [3,3]rearrangement                                 C=C(O[C@@H]1C=C(C(=O)OC)C=C[C@@H]1OC(C)=O)C(C)(C)C>>COC(=O)[C@]1(CC(=O)C(C)(C)C)C=C[C@@H](OC(C)=O)C=C1         5.835544       4.929871   9.832141
+1886         Diels-Alder                                            C=CC(C)(C)C.CC(C)(C)C1=CC(=O)C(=O)C=C1>>CC(C)(C)C1=C[C@@H]2C[C@@H](C(C)(C)C)[C@H]1C(=O)C2=O         5.366914       4.978835   9.383309
+7838         Diels-Alder                                                                   COC(=O)C1=COC(=O)CC=COC(=O)CC=C1>>COC(=O)C1=CC2CC(=O)OC2C2CC(=O)OC12         5.126885       5.521273   9.356415
+3198  [3+2]cycloaddition                                               CC(=O)OC=[N+](C)[O-].COC(=O)C=Cc1ccccc1>>COC(=O)[C@H]1[C@@H](c2ccccc2)ON(C)[C@H]1OC(C)=O         4.872201       5.662143   9.155347
+7326  [3+2]cycloaddition                                              CC(=O)OC(=C=O)CC(OC(C)=O)/C(=[NH+]/[O-])C(C)C>>CC(=O)OC1=C2ON[C@@](C(C)C)(O2)C(OC(C)=O)C1         4.780063       5.690912   9.074076
+5653  [3,3]rearrangement                                                  C=CO[C@@H]1C=C(c2ccccc2)C=C[C@@H]1C(C)(C)C>>CC(C)(C)[C@H]1C=C[C@](CC=O)(c2ccccc2)C=C1         4.989117       5.047307   9.033035
+5506  [3,3]rearrangement                                                       COC(=O)C(C#N)(CC#Cc1ccccc1)C1=CCCCC1>>C=C=C(c1ccccc1)[C@@H]1CCCCC1=C(C#N)C(=O)OC         5.077924       4.717091   8.987319
+8339         Diels-Alder                                                                                   C=CC(O)CCCCC=C(O)C(=C)C=O>>O=CC1=C(O)C2CCCCC(O)C2CC1         4.610626       5.523464   8.840995
+time of execution: 2379.954856157303 seconds
+Iteration: 8, beta: 1.0
+Argument beta: 1.0
+Argument conda_env: 'autode'
+Argument cutoff: 0.75
+Argument final_dir: '../data/autode_input_8'
+Argument iteration: 8
+Argument new_data: 30
+Argument new_data_file: '../data/data_augmentation.csv'
+Argument pool_file: '../data/hypothetical_chemical_space_iter_7.csv'
+Argument seed: 18
+Argument selective_sampling: None
+Argument selective_sampling_data: 5
+Argument train_file: '../data/data_smiles_curated.csv'
+seeds: [3969, 3012, 8353, 6481, 4923]
+All the reactions are above 0.75.
+Next reactions:
+                    Type                                                                                                                 rxn_smiles  prediction 3012  variance 3012  ucb 3012
+83           Diels-Alder    COC(=O)C(C=CO)=COC(C)=O.O=C1C=CC(=O)c2c(O)cccc21>>COC(=O)C1=C[C@@H](O)[C@@H]2C(=O)c3cccc(O)c3C(=O)[C@@H]2[C@@H]1OC(C)=O         7.467151       4.817670  9.662071
+1469         Diels-Alder                      C1#Cc2ccccc2CCc2ccccc21.COC(=O)c1nnc(C#N)nn1>>COC(=O)[C@]12N=N[C@](C#N)(N=N1)C1=C2c2ccccc2CCc2ccccc21         7.147779       4.785438  9.335343
+2759         Diels-Alder  CC(=O)Oc1cc[s+]([O-])c1.COC(=O)C1=CC(C(=O)OC)CC1>>COC(=O)[C@@H]1CC[C@]2(C(=O)OC)[C@H]1[C@@H]1C(OC(C)=O)=C[C@H]2[S@+]1[O-]         6.954616       5.245870  9.245002
+1011         Diels-Alder               COC(=O)C(=CC(C)(C)C)C(C)(C)C.COC(=O)c1ccoc1>>COC(=O)C1=C[C@@H]2O[C@H]1[C@](C(=O)OC)(C(C)(C)C)[C@@H]2C(C)(C)C         6.916387       4.813361  9.110325
+2473         Diels-Alder              CC(C)(C)C1C=CCC1.COC(=O)c1cc[s+]([O-])c1>>COC(=O)C1=C[C@@H]2[C@@H]3CC[C@@H](C(C)(C)C)[C@@H]3[C@H]1[S@@+]2[O-]         6.644698       5.540438  8.998511
+5047  [3+2]cycloaddition        C(=Cc1ccccc1)c1ccccc1.OC=[N+]1N[C@H]2CC[C@@H]1C2>>O[C@@H]1[C@H](c2ccccc2)[C@@H](c2ccccc2)[NH+]2[C@H]3CC[C@H](C3)N12         6.357048       5.099487  8.615253
+2326         Diels-Alder                        CC(C)(C)C1=CC(C#N)CC1.[O-][s+]1cccc1>>CC(C)(C)[C@@]12CC[C@@H](C#N)[C@@H]1[C@@H]1C=C[C@H]2[S@+]1[O-]         6.078654       5.138550  8.345491
+5581  [3,3]rearrangement                                 C=C(O[C@@H]1C=C(C(=O)OC)C=C[C@@H]1O)C(C)(C)C>>COC(=O)[C@]1(CC(=O)C(C)(C)C)C=C[C@@H](O)C=C1         5.956744       4.913507  8.173387
+1606         Diels-Alder                                  C=CC(=O)OC.CC(C)(C)C1=CC(=O)C(=O)C=C1>>COC(=O)[C@@H]1C[C@H]2C=C(C(C)(C)C)[C@@H]1C(=O)C2=O         5.672053       4.835015  7.870920
+5748  [3,3]rearrangement                              C=C(OC(C)=O)O[C@@H]1C=C(C#N)C=C[C@@H]1C(C)(C)C>>CC(=O)OC(=O)C[C@]1(C#N)C=C[C@H](C(C)(C)C)C=C1         5.303455       4.800819  7.494532
+7857         Diels-Alder                                                   O=C1CC=CC(c2ccccc2)=COC(=O)CC=CO1>>O=C1CC2C(O1)C(c1ccccc1)=CC1CC(=O)OC12         5.154982       5.466052  7.492941
+6261  [3,3]rearrangement                                          C=CO[C@@H]1C=C(OC(C)=O)C=C[C@@H]1C(=O)OC>>COC(=O)[C@H]1C=C[C@](CC=O)(OC(C)=O)C=C1         5.135439       5.029293  7.378048
+5616  [3,3]rearrangement                                                  C=C(O[C@@H]1C=C(C(C)(C)C)C=CC1)C(=O)OC>>COC(=O)C(=O)CC1(C(C)(C)C)C=CCC=C1         5.134646       4.838183  7.334233
+5191  [3,3]rearrangement                                   CC(=O)OC(CC#Cc1ccccc1)(OC(C)=O)C1=CCCCC1>>C=C=C(c1ccccc1)[C@@H]1CCCCC1=C(OC(C)=O)OC(C)=O         5.125340       4.875960  7.333498
+839          Diels-Alder                                                           CC(=O)OC=CC#N.c1ccoc1>>CC(=O)O[C@H]1[C@H](C#N)[C@H]2C=C[C@@H]1O2         5.031011       5.073032  7.283351
+5582  [3,3]rearrangement                                      C=C(C#N)O[C@@H]1C=C(c2ccccc2)C=C[C@@H]1C=O>>N#CC(=O)C[C@]1(c2ccccc2)C=C[C@H](C=O)C=C1         5.068029       4.814793  7.262293
+8294         Diels-Alder                           COC(=O)C1=CCCCCC(C(=O)OC)C=CCCCCC(C(=O)OC)C=C1>>COC(=O)C1=CC2C(C(=O)OC)CCCCC2C2C(C(=O)OC)CCCCC12         4.876728       5.643439  7.252321
+4123  [3+2]cycloaddition                                                                      CC(=O)OC=[NH+][O-].CC=C=O>>C/C=C1\ON[C@@H](OC(C)=O)O1         4.800916       5.706535  7.189751
+1225         Diels-Alder                                                     COC(=O)C=CC=O.O=Cc1ccoc1>>COC(=O)[C@H]1[C@H](C=O)[C@@H]2O[C@H]1C=C2C=O         4.874534       5.352108  7.187997
+3030  [3+2]cycloaddition                                   CC(=O)OC=[N+](C)[O-].COC(=O)C=Cc1ccccc1>>COC(=O)[C@H]1ON(C)[C@@H](OC(C)=O)[C@H]1c1ccccc1         4.894828       5.257800  7.187817
+1801         Diels-Alder                                               C=C.O=CC1=CC(=O)C(=O)C=C1c1ccccc1>>O=CC1=C(c2ccccc2)[C@H]2CC[C@@H]1C(=O)C2=O         4.818559       5.504463  7.164719
+6317         Diels-Alder                                                                                       O=CC1=CCC=CCC=C1>>O=CC1=CC2CC2C2CC12         4.670246       4.908702  6.885805
+8551  [3+2]cycloaddition                      CC(=O)OC(=C=O)C(CCCC/C(C(C)C)=[N+](/[O-])C#N)OC(C)=O>>CC(=O)OC1=C2ON(C#N)[C@](C(C)C)(CCCCC1OC(C)=O)O2         4.507735       5.595652  6.873248
+5861  [3,3]rearrangement                                                        C=C(C=O)O[C@@H]1C=CC=C[C@@H]1C#N>>N#C[C@H]1C=C[C@@H](CC(=O)C=O)C=C1         4.574045       5.166572  6.847055
+5998  [3,3]rearrangement                                                                                        C=CO[C@@H]1C=CC=CC1>>O=CCC1C=CCC=C1         4.603910       4.816473  6.798556
+7614  [3+2]cycloaddition                                            COC(=O)C(C(=O)C(=O)C=CC=O)=[N+](C)[O-]>>COC(=O)[C@]12C(=O)C(=O)C1[C@H](C=O)ON2C         4.201167       6.605516  6.771287
+942          Diels-Alder                                                  C=C(F)OC(C)=O.CC(=O)Oc1ccoc1>>CC(=O)OC1=C[C@H]2C[C@](F)(OC(C)=O)[C@@H]1O2         4.492198       5.187137  6.769727
+3781  [3+2]cycloaddition                                                                  C=[N+]([O-])c1ccccc1.CC(F)=C=O>>C/C(F)=C1/OCN(c2ccccc2)O1         4.399251       5.298942  6.701194
+8396         Diels-Alder                                                         C=CC(=CCCCCC(C=C)C(=O)OC)C(=O)OC>>COC(=O)C1=CCCC2C(C(=O)OC)CCCCC12         4.142532       5.537068  6.495630
+7955         Diels-Alder                                                                                   C=CCC(=O)OC=CC(=C)O>>O=C1CC2CCC(O)=CC2O1         4.209794       5.212500  6.492884
+time of execution: 2363.98876619339 seconds

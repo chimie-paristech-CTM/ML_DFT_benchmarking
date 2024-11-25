@@ -1,0 +1,48 @@
+Argument csv_file: '../data/data_smiles_curated.csv'
+Argument final_cv: True
+Argument input_file: '../data/final_overview_data.csv'
+Argument n_fold: 6
+Optimal parameters for RF -- fingerprints: {'max_features': 0.4, 'min_samples_leaf': 1, 'n_estimators': 100}
+6-fold CV RMSE, MAE and R^2  for RF -- fingerprints: 0.6611028288625352 0.5147344500198238 0.7857833130961479
+Argument csv_file: '../data/data_smiles_curated_2.csv'
+Argument final_cv: True
+Argument input_file: '../data/final_overview_data.csv'
+Argument n_fold: 6
+Optimal parameters for RF -- fingerprints: {'max_features': 0.5, 'min_samples_leaf': 1, 'n_estimators': 10}
+6-fold CV RMSE, MAE and R^2  for RF -- fingerprints: 0.7678715676886805 0.5870366682565946 0.7023337963949517
+Argument csv_file: '../data/data_smiles_curated_3.csv'
+Argument final_cv: True
+Argument input_file: '../data/final_overview_data.csv'
+Argument n_fold: 6
+Optimal parameters for RF -- fingerprints: {'max_features': 0.6000000000000001, 'min_samples_leaf': 1, 'n_estimators': 100}
+6-fold CV RMSE, MAE and R^2  for RF -- fingerprints: 0.694565708195794 0.5328528424073885 0.7819614525923257
+Argument csv_file: '../data/data_smiles_curated_4.csv'
+Argument final_cv: True
+Argument input_file: '../data/final_overview_data.csv'
+Argument n_fold: 6
+Optimal parameters for RF -- fingerprints: {'max_features': 0.5, 'min_samples_leaf': 1, 'n_estimators': 50}
+6-fold CV RMSE, MAE and R^2  for RF -- fingerprints: 0.7311567361192175 0.550619589284067 0.7528409225438475
+Argument csv_file: '../data/data_smiles_curated_5.csv'
+Argument final_cv: True
+Argument input_file: '../data/final_overview_data.csv'
+Argument n_fold: 6
+Optimal parameters for RF -- fingerprints: {'max_features': 0.4, 'min_samples_leaf': 1, 'n_estimators': 100}
+6-fold CV RMSE, MAE and R^2  for RF -- fingerprints: 0.7371035532396021 0.5645579655813457 0.7576772292778564
+Argument csv_file: '../data/data_smiles_curated_6.csv'
+Argument final_cv: True
+Argument input_file: '../data/final_overview_data.csv'
+Argument n_fold: 6
+Optimal parameters for RF -- fingerprints: {'max_features': 0.5, 'min_samples_leaf': 1, 'n_estimators': 30}
+6-fold CV RMSE, MAE and R^2  for RF -- fingerprints: 0.7054849542598262 0.5412291561006034 0.79851383270448
+Argument csv_file: '../data/data_smiles_curated_7.csv'
+Argument final_cv: True
+Argument input_file: '../data/final_overview_data.csv'
+Argument n_fold: 6
+Optimal parameters for RF -- fingerprints: {'max_features': 0.1, 'min_samples_leaf': 1, 'n_estimators': 300}
+6-fold CV RMSE, MAE and R^2  for RF -- fingerprints: 0.6957510477554677 0.5351145421954588 0.8029863089401017
+Argument csv_file: '../data/data_smiles_curated_8.csv'
+Argument final_cv: True
+Argument input_file: '../data/final_overview_data.csv'
+Argument n_fold: 6
+Optimal parameters for RF -- fingerprints: {'max_features': 0.4, 'min_samples_leaf': 1, 'n_estimators': 600}
+6-fold CV RMSE, MAE and R^2  for RF -- fingerprints: 0.6575560648095786 0.5108446446143308 0.8296511063762025
