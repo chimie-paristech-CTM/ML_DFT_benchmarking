@@ -1,0 +1,1 @@
+COC(=O)C(C=CO)=COC(C)=O.O=C1C=CC(=O)c2c(O)cccc21>>COC(=O)C1=C[C@@H](O)[C@@H]2C(=O)c3cccc(O)c3C(=O)[C@@H]2[C@@H]1OC(C)=O
