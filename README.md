@@ -86,20 +86,3 @@ If (parts of) this workflow are used as part of a publication please cite the as
   journal = {ChemRxiv}
 }
 ```
-
-Additionally, since the workflow makes heavy use of autodE, please also cite the paper in which this code was originally
-presented:
-```
-@article{autodE,
-  doi = {10.1002/anie.202011941},
-  url = {https://doi.org/10.1002/anie.202011941},
-  year = {2021},
-  publisher = {Wiley},
-  volume = {60},
-  number = {8},
-  pages = {4266--4274},
-  author = {Tom A. Young and Joseph J. Silcock and Alistair J. Sterling and Fernanda Duarte},
-  title = {{autodE}: Automated Calculation of Reaction Energy Profiles -- Application to Organic and Organometallic Reactions},
-  journal = {Angewandte Chemie International Edition}
-}
-```
