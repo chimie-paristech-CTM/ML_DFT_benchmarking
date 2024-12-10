@@ -2,6 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 
 
 def line_plot_fps_esi(log_file):
@@ -149,7 +150,7 @@ def histogram_2b(csv_file_path):
     df = pd.DataFrame(dict_low_sorted, columns=['Functional', 'MAE low STD'])
     df['MAE high STD'] = df['Functional'].apply(lambda x: dict_high[x])
 
-    df.to_csv('mae_per_functional.csv')
+    df.to_csv('mae_per_functional_BH9_DA.csv')
 
 
 def plot_error_cv_prediction_bo(csv_file_path):
@@ -296,10 +297,9 @@ def extract_max_values(df):
 def final_histogram(reference_file, final_bo_file, initial_data_file):
 
     df_ref = pd.read_csv(reference_file, sep="\s+")
-
     df_fx = pd.read_csv(final_bo_file)
 
-    df_fx_rxn = df_fx.loc[df_fx['Name'].isin(df_ref['rxn'])]
+    df_fx_rxn = df_fx.loc[df_fx['Name'].isin(df_ref['R_ID'])]
     df_fx_rxn.reset_index(inplace=True)
     df_fx_rxn = df_fx_rxn.drop(columns=['index', 'Unnamed: 0'])
 
@@ -308,11 +308,11 @@ def final_histogram(reference_file, final_bo_file, initial_data_file):
     for column in df_fx_rxn.columns[1:-10]:
 
         if 'forward' in column:
-            reference_column = 'forward'
+            reference_column = 'FORWARD'
         elif 'reverse' in column:
-            reference_column = 'reverse'
+            reference_column = 'REVERSE'
         else:
-            reference_column = 'reaction'
+            reference_column = 'REACTION'
         df_fx_rxn[f"{column}-DELTA"] = abs(df_fx_rxn[column] - df_fx_rxn[reference_column])
 
     columns = [column for column in df_fx_rxn.columns if 'DELTA' in column]
@@ -339,10 +339,11 @@ def final_histogram(reference_file, final_bo_file, initial_data_file):
 
     df_fx_bh9.sort_values(by=['MAE forward'], inplace=True)
 
-    df_fx_bh9['Subset'] = ['BH9 dataset'] * len(df_fx_bh9)
-    df_bo['Subset'] = ['Act. learning dataset'] * len(df_bo)
+    df_fx_bh9['Subset'] = ['BH9 subset'] * len(df_fx_bh9)
+    df_bo['Subset'] = ['Active learning dataset'] * len(df_bo)
 
     df_fx_bh9.reset_index(inplace=True)
+    df_fx_bh9.to_csv('mae_functional_BH9.csv')
     df_bo.reset_index(inplace=True)
 
     df_pics = pd.concat([df_fx_bh9, df_bo], ignore_index=True)
@@ -363,6 +364,125 @@ def final_histogram(reference_file, final_bo_file, initial_data_file):
 
     plt.tight_layout()
     plt.savefig('fig_4.pdf', dpi=300)
+
+
+def comparison_d3bj(reference_file, d3bj_file, d3bj_bh9_file, mae_fx_BH9_DA):
+
+    df_bh9 = get_mae_d3bj_bh9_DA(d3bj_bh9_file, mae_fx_BH9_DA)
+
+    df_ref = pd.read_csv(reference_file, sep="\s+")
+    df_d3bj = pd.read_csv(d3bj_file)
+
+    df_fx_rxn = df_d3bj.loc[df_d3bj['Name'].isin(df_ref['R_ID'])]
+    df_fx_rxn.reset_index(inplace=True)
+    df_fx_rxn = df_fx_rxn.drop(columns=['index', 'Unnamed: 0'])
+
+    df_fx_rxn = pd.concat([df_fx_rxn, df_ref], axis=1)
+
+    for column in df_fx_rxn.columns[1:-10]:
+
+        if 'forward' in column:
+            reference_column = 'FORWARD'
+        elif 'reverse' in column:
+            reference_column = 'REVERSE'
+        else:
+            reference_column = 'REACTION'
+        df_fx_rxn[f"{column}-DELTA"] = abs(df_fx_rxn[column] - df_fx_rxn[reference_column])
+
+    columns = [column for column in df_fx_rxn.columns if 'DELTA' in column]
+
+    dict_fx = {}
+
+    for column in columns:
+
+        if 'forward' in column:
+            functional = column[:-18]
+        elif 'reverse' in column:
+            functional = column[:-18]
+        else:
+            functional = column[:-19]
+
+        mae = df_fx_rxn[column].mean()
+        dict_fx[functional] = dict_fx.get(functional, []) + [mae]
+
+    df = pd.DataFrame.from_dict(dict_fx, orient='index', columns=['MAE forward', 'MAE reverse', 'MAE reaction'])
+    df.reset_index(inplace=True)
+    df.rename(columns={'index': 'Functional'}, inplace=True)
+
+    df["D3BJ"] = df["Functional"].apply(lambda x: "Yes" if "d3bj" in x else "No")
+    df["Functional"] = df["Functional"].str.replace("-d3bj", "")
+    df_sorted = df.sort_values(by="MAE forward", ascending=True)
+    df_sorted.to_csv('d3bj_comparision.csv')
+
+    fig, axes = plt.subplots(1, 3, figsize=(18, 6))
+    sns.set(style="white")
+    plot = sns.barplot(x='Functional', y='MAE forward', hue='D3BJ', data=df_sorted, palette='dark', width=0.5, ax=axes[0])
+    plot.set_title('')
+    axes[0].set_xticklabels(['B3LYP', 'CAM-B3LYP', 'BLYP', 'BHandHLYP'], rotation=30)
+
+    plot = sns.barplot(x='Functional', y='MAE low STD', hue='D3BJ', data=df_bh9, palette='dark', width=0.5,
+                       ax=axes[1])
+    plot.set_title('')
+    axes[1].set_xticklabels(['CAM-B3LYP', 'B3LYP', 'BHandHLYP', 'BLYP'], rotation=30)
+
+    plot = sns.barplot(x='Functional', y='MAE high STD', hue='D3BJ', data=df_bh9, palette='dark', width=0.5,
+                       ax=axes[2])
+    plot.set_title('')
+    axes[2].set_xticklabels(['CAM-B3LYP', 'B3LYP', 'BHandHLYP', 'BLYP'], rotation=30)
+
+    for i, ax in enumerate(axes):
+        if i != 2:
+            ax.get_legend().remove()
+        if i == 0:
+            ax.set_ylabel('MAE (kcal/mol)', fontsize=14)
+        else:
+            ax.set_ylabel(' ')
+        ax.set_xlabel(' ')
+
+    plt.legend(title='D3BJ', bbox_to_anchor=(1.05, 1), loc='upper left')
+    fig.text(0.5, 0.02, 'Functional', ha='center', fontsize=14)
+    plt.tight_layout()
+    plt.savefig('fig_d3bj.pdf', dpi=300)
+
+
+def get_mae_d3bj_bh9_DA(d3bj_bh9_file, mae_fx_BH9_DA):
+
+    df_original = pd.read_csv(d3bj_bh9_file)
+    df_DA = df_original.loc[df_original['Type'] == 'Diels-Alder']
+
+    idx_lower_std = ['02_5', '02_18', '02_21', '02_22', '02_24', '02_33', '02_34', '02_35', '02_36', '02_37',
+                     '02_47', '02_6']
+    df_lower_std = df_DA.loc[df_DA['Name'].isin(idx_lower_std)]
+    df_higher_std = df_DA.loc[~df_DA['Name'].isin(idx_lower_std)]
+
+    columns = [column for column in df_DA.columns if 'DELTA-forward' in column]
+
+    dict_low = {}
+    dict_high = {}
+
+    for column in columns:
+        functional = column[:-14]
+        mae_lower = df_lower_std[column].abs().mean()
+        dict_low[functional] = dict_low.get(functional, 0) + mae_lower
+
+        mae_higher = df_higher_std[column].abs().mean()
+        dict_high[functional] = dict_high.get(functional, 0) + mae_higher
+
+    dict_low_sorted = sorted(dict_low.items(), key=lambda x: x[1])
+
+    df = pd.DataFrame(dict_low_sorted, columns=['Functional', 'MAE low STD'])
+    df['MAE high STD'] = df['Functional'].apply(lambda x: dict_high[x])
+    df["D3BJ"] = df["Functional"].apply(lambda x: "Yes" if "d3bj" in x else "No")
+    df["Functional"] = df["Functional"].str.replace("-d3bj", "")
+
+    df_initial = pd.read_csv(mae_fx_BH9_DA, index_col=0)
+    df_initial = df_initial.loc[df_initial['Functional'].isin(['blyp', 'b3lyp', 'cam-b3lyp', 'bhandhlyp'])]
+    df_initial["D3BJ"] = df_initial["Functional"].apply(lambda x: "Yes" if "d3bj" in x else "No")
+    df_initial["Functional"] = df_initial["Functional"].str.replace("-d3bj", "")
+
+    df = pd.concat([df, df_initial], axis=0, ignore_index=True)
+
+    return df
 
 
 def get_mae_full_data(initial_data_file):
@@ -395,6 +515,8 @@ if __name__ == '__main__':
     distribution_2a('../data/data_smiles_curated.csv')
     histogram_2b('../data/final_overview_data.csv')
     plot_error_cv_prediction_bo('../data/file_visualization.csv')
-    final_histogram('../data/nrg23_mod.txt', '../data/raw_data_round_8/final_overview_data_8.csv',
+    final_histogram('../data/reference_values/dlpno-ccsdt-23.dat', '../data/raw_data_round_8/final_overview_data_8.csv',
                     '../data/final_overview_data.csv')
+    comparison_d3bj('../data/reference_values/dlpno-ccsdt-23.dat', '../data/comparison_d3bj/active_learning_dataset/final_overview_data_d3bj.csv',
+                    '../data/comparison_d3bj/BH9/final_overview_data_bh9_d3bj.csv', '../data/mae_per_functional_BH9_DA.csv')
 

@@ -15,30 +15,6 @@ parser.add_argument('--pool_file', type=str, default=None,
                     help='path to the input file')
 
 
-def preprocess_dat_file(dat_file_path):
-    # Read the content of the file
-    with open(dat_file_path, 'r') as file:
-        lines = file.readlines()
-
-    # Identify lines where [3+2] cycloaddition needs to be treated as a single field
-    modified_lines = []
-    for line in lines:
-        # Replace only the problematic part with a quoted version
-        line = re.sub(r'\[(\d[\+\d]+)\] (\w+)', r'[\1]\2', line)
-        line = re.sub(r'\[(\d[\,\d]+)\] (\w+)', r'[\1]\2', line)
-        modified_lines.append(line)
-
-    # Write the modified content back to the file
-    with open(dat_file_path, 'w') as file:
-        file.writelines(modified_lines)
-
-
-def remove_vert_line(entry):
-    if str(entry)[-1] == '|':
-        return entry[:-1]
-    else:
-        return entry
-
 def combine_and_compute_std(folder_path, iter, pool_file = None):
     all_dfs = []
     # Loop through all .csv files in the folder
