@@ -80,16 +80,21 @@ def distribution_2a(csv_file_path):
                     '[3,3]rearrangement': '[3,3] rearrangement', '[6+4]intramolecular': '[4+6] intramolecular'}
     df_rxn_smiles_filtered = df_rxn_smiles_filtered.replace(dict_replace)
 
+    colors = ['#377eb8', '#e41a1c','#4daf4a','#984ea3','#ff7f00','#f781bf', '#ffd92f','#666666']
+    unique_types = df_rxn_smiles_filtered["Type"].unique()
+    palette = dict(zip(unique_types, colors[:len(unique_types)]))
     fig, axs = plt.subplots(nrows=1, ncols=1, figsize=(10, 4))
-    g_1 = sns.kdeplot(data=df_rxn_smiles_filtered, x="Std_DFT_forward", hue="Type", fill=True)
+    g_1 = sns.kdeplot(data=df_rxn_smiles_filtered, x="Std_DFT_forward", hue="Type", fill=True, palette=palette)
 
-    axs.set_ylabel('Density', fontsize=14)
+    axs.set_ylabel('Density')
     axs.margins(x=0, y=0)
     axs.set_xlim(0.0, 8.5)
     axs.set_ylim(0.0, 0.12)
 
-    axs.set_xlabel('$\sigma$ ($\Delta$E$^{\ddag}$) forward (kcal/mol)', fontsize=14)
+    axs.set_xlabel('$\sigma$ ($\Delta$E$^{\ddag}$) (kcal/mol)')
     sns.move_legend(g_1, loc='upper left')
+
+    axs.tick_params(axis='both', which='both', length=0)
 
     axs.text(0.790, 0.88,
                 f"Mean: {df_rxn_smiles_filtered['Std_DFT_forward'].mean():.3f} kcal/mol\n      $\sigma$: {df_rxn_smiles_filtered['Std_DFT_forward'].std():.3f} kcal/mol",
