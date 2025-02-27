@@ -1,4 +1,5 @@
 [![license](https://img.shields.io/github/license/DAVFoundation/captain-n3m0.svg?style=flat-square)](https://github.com/chimie-paristech-CTM/ML_DFT_benchmarking/master/LICENSE)
+[![DOI](http://img.shields.io/badge/DOI-10.1039/D4DD00043A-008000.svg)](https://doi.org/10.1021/acs.jctc.4c01729)
 
 # Improving the reliability of, and confidence in, DFT functional benchmarking through active learning
 This repository contains the code and auxiliary data associated with the "Improving the reliability of, and confidence 
