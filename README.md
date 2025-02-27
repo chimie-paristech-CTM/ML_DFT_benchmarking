@@ -80,9 +80,13 @@ An example of the autodE input can be found in `data/autode_input_8`.
 If (parts of) this workflow are used as part of a publication please cite the associated paper:
 ```
 @article{ml_functional,
-  year = {2024},
-  author = {Javier E. Alfonso Ramos and Carlo Adamo and Eric Bremond and Thijs Stuyver},
-  title = {Improving the reliability of, and confidence in, DFT functional benchmarking through active learning},
-  journal = {ChemRxiv}
+  author = {Alfonso-Ramos, Javier E. and Adamo, Carlo and Br{\'e}mond, {\'E}ric and Stuyver, Thijs},
+  title = {Improving the Reliability of, and Confidence in, {DFT} Functional Benchmarking through Active Learning},
+  journal = {J. Chem. Theory Comput.},
+  volume = {21},
+  number = {4},
+  pages = {1752-1761},
+  year = {2025},
+  doi = {10.1021/acs.jctc.4c01729},
 }
 ```
